@@ -1,5 +1,5 @@
-import { ChatHeader } from '@/components/ChatContent/ChatHeader';
-import { Footer } from '@/components/Footer/';
+import { ChatHeader } from './ChatHeader';
+import { Footer } from '@/app/_components';
 import type { JSX, ReactNode } from 'react';
 
 type Props = {

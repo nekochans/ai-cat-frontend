@@ -1,6 +1,6 @@
-import { CatChatMessage } from '@/components/ChatContent/CatChatMessage';
-import { CatLoadingMessage } from '@/components/ChatContent/CatLoadingMessage';
-import { UserChatMessage } from '@/components/ChatContent/UserChatMessage';
+import { CatChatMessage } from './CatChatMessage';
+import { CatLoadingMessage } from './CatLoadingMessage';
+import { UserChatMessage } from './UserChatMessage';
 import { useEffect, useRef, type JSX } from 'react';
 
 type ChatMessage = {
