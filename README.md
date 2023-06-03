@@ -1,5 +1,6 @@
 # ai-cat-frontend
-ねこの人格を持ったAIとお話できるサービスのWebフロントエンド
+
+ねこの人格を持った AI とお話できるサービスの Web フロントエンド
 
 ## 以下は `npx create-next-app@latest` が生成した結果をマージしたもの
 

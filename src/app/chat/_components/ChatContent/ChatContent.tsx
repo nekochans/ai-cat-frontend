@@ -3,8 +3,8 @@
 import { type ChatMessages, ChatMessagesList } from './ChatMessagesList';
 import {
   type FormEvent,
-  type KeyboardEvent,
   type JSX,
+  type KeyboardEvent,
   useRef,
   useState,
 } from 'react';

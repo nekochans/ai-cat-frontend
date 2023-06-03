@@ -1,7 +1,7 @@
 import { CatChatMessage } from './CatChatMessage';
 import { CatLoadingMessage } from './CatLoadingMessage';
 import { UserChatMessage } from './UserChatMessage';
-import { useEffect, useRef, type JSX } from 'react';
+import { type JSX, useEffect, useRef } from 'react';
 
 type ChatMessage = {
   role: 'user' | 'cat';
@@ -17,7 +17,10 @@ type Props = {
   isLoading: boolean;
 };
 
-export const ChatMessagesList = ({ chatMessages, isLoading }: Props): JSX.Element => {
+export const ChatMessagesList = ({
+  chatMessages,
+  isLoading,
+}: Props): JSX.Element => {
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {

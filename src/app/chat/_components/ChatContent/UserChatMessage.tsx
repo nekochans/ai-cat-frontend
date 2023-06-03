@@ -7,7 +7,11 @@ type Props = {
   name: string;
 };
 
-export const UserChatMessage = ({ message, avatarUrl, name }: Props): JSX.Element => {
+export const UserChatMessage = ({
+  message,
+  avatarUrl,
+  name,
+}: Props): JSX.Element => {
   return (
     <div className="flex items-end justify-end">
       <div className="order-1 mx-2 flex max-w-xs flex-col items-end space-y-2 text-xs">
