@@ -2,7 +2,5 @@
   "singleQuote": true,
   "endOfLine": "auto",
   "importOrderSeparation": true,
-  "importOrderSortSpecifiers": true,
-  "plugins": ["prettier-plugin-tailwindcss"],
-  "pluginSearchDirs": false
+  "importOrderSortSpecifiers": true
 }
