@@ -1,6 +1,6 @@
-import { ChatHeader } from './ChatHeader';
 import { Footer } from '@/app/_components';
 import type { JSX, ReactNode } from 'react';
+import { ChatHeader } from './ChatHeader';
 
 type Props = {
   children: ReactNode;

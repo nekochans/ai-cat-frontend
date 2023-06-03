@@ -1,6 +1,5 @@
 {
   "singleQuote": true,
   "endOfLine": "auto",
-  "importOrderSeparation": true,
-  "importOrderSortSpecifiers": true
+  "importOrderTypeScriptVersion": "5.0.4"
 }

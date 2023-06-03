@@ -1,7 +1,7 @@
+import { useEffect, useRef, type JSX } from 'react';
 import { CatChatMessage } from './CatChatMessage';
 import { CatLoadingMessage } from './CatLoadingMessage';
 import { UserChatMessage } from './UserChatMessage';
-import { type JSX, useEffect, useRef } from 'react';
 
 type ChatMessage = {
   role: 'user' | 'cat';
