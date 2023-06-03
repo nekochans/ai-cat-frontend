@@ -1,6 +1,6 @@
-import './globals.css'
+import './globals.css';
 import { Noto_Sans_JP } from 'next/font/google';
-import type { ReactNode, JSX } from 'react';
+import type { JSX, ReactNode } from 'react';
 
 const font = Noto_Sans_JP({
   weight: '400',
@@ -11,7 +11,7 @@ const font = Noto_Sans_JP({
 export const metadata = {
   title: 'AI Cat🐱',
   description: 'ねこのAIとお話しよう🐱',
-}
+};
 
 type Props = {
   children: ReactNode;
@@ -20,9 +20,9 @@ type Props = {
 const RootLayout = ({ children }: Props): JSX.Element => {
   return (
     <html lang="ja">
-    <body className={font.className}>{children}</body>
+      <body className={font.className}>{children}</body>
     </html>
-  )
+  );
 };
 
 export default RootLayout;

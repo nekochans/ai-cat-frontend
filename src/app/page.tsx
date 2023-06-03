@@ -1,4 +1,6 @@
-import Image from 'next/image'
+/* eslint-disable */
+// TODO トップページを正式に実装するまでは eslint-disable で対応
+import Image from 'next/image';
 
 export default function Home() {
   return (
@@ -109,5 +111,5 @@ export default function Home() {
         </a>
       </div>
     </main>
-  )
+  );
 }

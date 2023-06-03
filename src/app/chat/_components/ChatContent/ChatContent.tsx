@@ -1,13 +1,13 @@
 'use client';
 
-import { type ChatMessages, ChatMessagesList } from './ChatMessagesList';
 import {
-  type FormEvent,
-  type KeyboardEvent,
-  type JSX,
   useRef,
   useState,
+  type FormEvent,
+  type JSX,
+  type KeyboardEvent,
 } from 'react';
+import { ChatMessagesList, type ChatMessages } from './ChatMessagesList';
 
 type ResponseBody = {
   message: string;

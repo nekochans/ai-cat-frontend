@@ -1,0 +1,6 @@
+package.json
+.next/
+build/
+coverage/
+storybook-static/
+public/mockServiceWorker.js
