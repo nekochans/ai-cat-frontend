@@ -1,0 +1,9 @@
+node_modules/
+.next/
+build/
+coverage/
+.eslintrc.json
+next-env.d.ts
+*.config.js
+storybook-static/
+public/mockServiceWorker.js

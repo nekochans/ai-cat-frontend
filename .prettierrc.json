@@ -1,0 +1,9 @@
+{
+  "singleQuote": true,
+  "endOfLine": "auto",
+  "importOrderSeparation": true,
+  "importOrderSortSpecifiers": true,
+  "plugins": [
+    "prettier-plugin-tailwindcss"
+  ]
+}
