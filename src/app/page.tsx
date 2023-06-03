@@ -1,3 +1,5 @@
+/* eslint-disable */
+// TODO トップページを正式に実装するまでは eslint-disable で対応
 import Image from 'next/image';
 
 export default function Home() {
