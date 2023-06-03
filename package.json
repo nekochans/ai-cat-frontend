@@ -6,7 +6,13 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint:prettier": "prettier --cache --check .",
+    "fix:prettier": "npm run lint:prettier -- --write",
+    "lint:eslint": "eslint --cache .",
+    "fix:eslint": "npm run lint:eslint -- --fix",
+    "lint:next": "next lint",
+    "lint": "run-s lint:*",
+    "format": "run-s fix:*"
   },
   "dependencies": {
     "@types/node": "20.2.1",
