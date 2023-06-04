@@ -1,0 +1,1 @@
+export { mockPost } from './mockPost';

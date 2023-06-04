@@ -1,4 +1,6 @@
+import { mockPost } from '@/mocks/api';
 import type { Meta, StoryObj } from '@storybook/react';
+import { rest } from 'msw';
 import { type JSX } from 'react';
 import { ChatContent, type Props } from './ChatContent';
 import { ChatContentLayout } from './ChatContentLayout';
@@ -141,5 +143,10 @@ const chatMessages = [
 export const Default: Story = {
   args: {
     initChatMessages: chatMessages,
+  },
+  parameters: {
+    msw: {
+      handlers: [rest.post('/api/cats', mockPost)],
+    },
   },
 };
