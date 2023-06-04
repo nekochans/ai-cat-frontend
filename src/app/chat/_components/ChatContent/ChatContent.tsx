@@ -13,7 +13,7 @@ type ResponseBody = {
   message: string;
 };
 
-type Props = {
+export type Props = {
   initChatMessages: ChatMessages;
 };
 
