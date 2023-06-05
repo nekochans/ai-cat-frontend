@@ -4,7 +4,7 @@ import {
   type restContext,
 } from 'msw';
 
-export const mockPost: ResponseResolver<
+export const mockPostCats: ResponseResolver<
   MockedRequest,
   typeof restContext
 > = async (req, res, ctx) =>

@@ -1,1 +1,1 @@
-export { mockPost } from './mockPost';
+export { mockPostCats } from './mockPostCats';
