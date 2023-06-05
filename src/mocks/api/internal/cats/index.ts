@@ -1,0 +1,1 @@
+export { mockPostCats } from './mockPostCats';
