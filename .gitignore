@@ -39,3 +39,6 @@ next-env.d.ts
 
 # Storybook
 build-storybook.log
+
+# direnv
+.envrc
