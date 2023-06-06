@@ -1,5 +1,7 @@
 # ai-cat-frontend
 
+[![chromatic](https://github.com/nekochans/ai-cat-frontend/actions/workflows/chromatic.yml/badge.svg)](https://github.com/nekochans/ai-cat-frontend/actions/workflows/chromatic.yml)
+
 ねこの人格を持った AI とお話できるサービスの Web フロントエンド
 
 ## 以下は `npx create-next-app@latest` が生成した結果をマージしたもの
