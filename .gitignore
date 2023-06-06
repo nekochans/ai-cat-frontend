@@ -36,3 +36,9 @@ next-env.d.ts
 
 # ESLint
 .eslintcache
+
+# Storybook
+build-storybook.log
+
+# direnv
+.envrc
