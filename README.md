@@ -1,5 +1,6 @@
 # ai-cat-frontend
 
+[![ci](https://github.com/nekochans/ai-cat-frontend/actions/workflows/ci.yml/badge.svg)](https://github.com/nekochans/ai-cat-frontend/actions/workflows/ci.yml)
 [![chromatic](https://github.com/nekochans/ai-cat-frontend/actions/workflows/chromatic.yml/badge.svg)](https://github.com/nekochans/ai-cat-frontend/actions/workflows/chromatic.yml)
 
 ねこの人格を持った AI とお話できるサービスの Web フロントエンド
