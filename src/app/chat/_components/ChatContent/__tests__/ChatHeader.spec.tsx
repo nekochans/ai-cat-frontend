@@ -3,13 +3,17 @@ import { render, screen } from '@testing-library/react';
 
 describe('src/app/chat/_components/ChatContent/ChatHeader.tsx TestCases', () => {
   it('should display ChatHeader', () => {
-    const expected = 'もこちゃん';
+    const expectedCatName = 'もこちゃん';
+    const expectedCatType = 'チンチラシルバー';
 
     render(<ChatHeader />);
 
-    expect(screen.getByRole('img', { name: expected })).toHaveAttribute(
+    expect(screen.getByRole('img', { name: expectedCatName })).toHaveAttribute(
       'alt',
-      expected
+      expectedCatName
     );
+
+    expect(screen.getByText(expectedCatName)).toBeInTheDocument();
+    expect(screen.getByText(expectedCatType)).toBeInTheDocument();
   });
 });
