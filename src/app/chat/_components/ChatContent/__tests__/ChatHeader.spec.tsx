@@ -7,6 +7,9 @@ describe('src/app/chat/_components/ChatContent/ChatHeader.tsx TestCases', () => 
 
     render(<ChatHeader />);
 
-    expect(screen.getByText(expected)).toBeTruthy();
+    expect(screen.getByRole('img', { name: expected })).toHaveAttribute(
+      'alt',
+      expected
+    );
   });
 });
