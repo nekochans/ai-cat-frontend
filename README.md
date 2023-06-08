@@ -1,6 +1,7 @@
 # ai-cat-frontend
 
 [![ci](https://github.com/nekochans/ai-cat-frontend/actions/workflows/ci.yml/badge.svg)](https://github.com/nekochans/ai-cat-frontend/actions/workflows/ci.yml)
+[![codecov](https://codecov.io/gh/nekochans/ai-cat-frontend/branch/main/graph/badge.svg?token=FDxy2OqaIf)](https://codecov.io/gh/nekochans/ai-cat-frontend)
 [![chromatic](https://github.com/nekochans/ai-cat-frontend/actions/workflows/chromatic.yml/badge.svg)](https://github.com/nekochans/ai-cat-frontend/actions/workflows/chromatic.yml)
 
 ねこの人格を持った AI とお話できるサービスの Web フロントエンド
