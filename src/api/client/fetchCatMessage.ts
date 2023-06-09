@@ -1,4 +1,4 @@
-import { InvalidResponseBodyError } from '@/errors';
+import { InvalidResponseBodyError } from '../errors';
 import { type FetchCatMessage, type FetchCatMessageResponse } from '@/features';
 import { z } from 'zod';
 
