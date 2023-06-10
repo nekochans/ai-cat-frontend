@@ -1,6 +1,6 @@
-import { InvalidResponseBodyError } from '../errors';
 import { type FetchCatMessage, type FetchCatMessageResponse } from '@/features';
 import { z } from 'zod';
+import { InvalidResponseBodyError } from '../errors';
 
 const fetchCatMessageResponseSchema = z.object({
   message: z.string().min(1),
