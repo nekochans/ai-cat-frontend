@@ -1,13 +1,13 @@
 import { fetchCatMessage } from '@/api/client/fetchCatMessage';
 import { InvalidResponseBodyError } from '@/api/errors';
 import {
+  mockFetchCatMessage,
   mockFetchCatMessageUnexpectedResponseBody,
-  mockPostCats,
 } from '@/mocks';
 import { rest } from 'msw';
 import { setupServer } from 'msw/node';
 
-const mockHandlers = [rest.post('/api/cats', mockPostCats)];
+const mockHandlers = [rest.post('/api/cats', mockFetchCatMessage)];
 
 const mockServer = setupServer(...mockHandlers);
 

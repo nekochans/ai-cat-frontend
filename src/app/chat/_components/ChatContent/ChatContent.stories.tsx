@@ -1,4 +1,4 @@
-import { mockPostCats } from '@/mocks/api';
+import { mockFetchCatMessage } from '@/mocks/api';
 import type { Meta, StoryObj } from '@storybook/react';
 import { rest } from 'msw';
 import { type JSX } from 'react';
@@ -146,7 +146,7 @@ export const Default: Story = {
   },
   parameters: {
     msw: {
-      handlers: [rest.post('/api/cats', mockPostCats)],
+      handlers: [rest.post('/api/cats', mockFetchCatMessage)],
     },
   },
 };
