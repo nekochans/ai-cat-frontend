@@ -31,7 +31,8 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "tailwindcss": "3.3.2",
-    "typescript": "5.0.4"
+    "typescript": "5.0.4",
+    "zod": "^3.21.4"
   },
   "devDependencies": {
     "@ianvs/prettier-plugin-sort-imports": "^4.0.2",
@@ -65,7 +66,8 @@
     "msw-storybook-addon": "^1.8.0",
     "npm-run-all": "^4.1.5",
     "prettier": "^2.8.8",
-    "storybook": "^7.0.18"
+    "storybook": "^7.0.18",
+    "whatwg-fetch": "^3.6.2"
   },
   "msw": {
     "workerDirectory": "public"

@@ -1,5 +1,6 @@
 'use client';
 
+import { fetchCatMessage } from '@/api/client/fetchCatMessage';
 import {
   useRef,
   useState,
@@ -8,10 +9,6 @@ import {
   type KeyboardEvent,
 } from 'react';
 import { ChatMessagesList, type ChatMessages } from './ChatMessagesList';
-
-type ResponseBody = {
-  message: string;
-};
 
 export type Props = {
   initChatMessages: ChatMessages;
@@ -50,19 +47,15 @@ export const ChatContent = ({ initChatMessages }: Props): JSX.Element => {
       setIsLoading(true);
 
       try {
-        const response = await fetch(`/api/cats`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ catName: 'moko', message }),
+        const fetchCatMessageResponse = await fetchCatMessage({
+          catName: 'moko',
+          message,
         });
-        const body = (await response.json()) as ResponseBody;
 
         const newCatMessage = {
           role: 'cat',
           name: 'もこちゃん',
-          message: body.message,
+          message: fetchCatMessageResponse.message,
           avatarUrl:
             'https://lgtm-images.lgtmeow.com/2022/03/23/10/9738095a-f426-48e4-be8d-93f933c42917.webp',
         } as const;
