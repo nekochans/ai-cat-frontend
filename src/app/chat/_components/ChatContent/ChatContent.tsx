@@ -11,10 +11,14 @@ import {
 import { ChatMessagesList, type ChatMessages } from './ChatMessagesList';
 
 export type Props = {
+  userId: string;
   initChatMessages: ChatMessages;
 };
 
-export const ChatContent = ({ initChatMessages }: Props): JSX.Element => {
+export const ChatContent = ({
+  userId,
+  initChatMessages,
+}: Props): JSX.Element => {
   const [isLoading, setIsLoading] = useState(false);
 
   const [chatMessages, setChatMessages] =
@@ -49,6 +53,7 @@ export const ChatContent = ({ initChatMessages }: Props): JSX.Element => {
       try {
         const fetchCatMessageResponse = await fetchCatMessage({
           catName: 'moko',
+          userId,
           message,
         });
 

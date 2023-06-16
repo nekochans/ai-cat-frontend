@@ -12,8 +12,13 @@ export const fetchCatMessage: FetchCatMessage = async (dto) => {
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ catName: dto.catName, message: dto.message }),
+    body: JSON.stringify({
+      catName: dto.catName,
+      userId: dto.userId,
+      message: dto.message,
+    }),
   });
+
   const responseBody = (await response.json()) as FetchCatMessageResponse;
 
   const parseResult = fetchCatMessageResponseSchema.safeParse(responseBody);

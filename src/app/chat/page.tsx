@@ -1,5 +1,6 @@
 import { ChatContent, ChatContentLayout } from '@/app/chat/_components';
 import type { NextPage } from 'next';
+import { v4 } from 'uuid';
 
 const chatMessages = [
   {
@@ -121,9 +122,11 @@ const chatMessages = [
 ];
 
 const ChatPage: NextPage = () => {
+  const anonymousUserId = v4();
+
   return (
     <ChatContentLayout>
-      <ChatContent initChatMessages={chatMessages} />
+      <ChatContent userId={anonymousUserId} initChatMessages={chatMessages} />
     </ChatContentLayout>
   );
 };
