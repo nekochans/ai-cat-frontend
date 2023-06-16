@@ -4,6 +4,7 @@ import { NextResponse, type NextRequest } from 'next/server';
 
 type RequestBody = {
   catName: string;
+  userId: string;
   message: string;
 };
 
@@ -53,7 +54,10 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
           process.env.API_BASIC_AUTH_CREDENTIALS
         )}`,
       },
-      body: JSON.stringify({ message: requestBody.message }),
+      body: JSON.stringify({
+        userId: requestBody.userId,
+        message: requestBody.message,
+      }),
     }
   );
   const responseBody = (await response.json()) as ResponseBody;

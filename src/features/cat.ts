@@ -1,5 +1,6 @@
 export type FetchCatMessageDto = {
   catName: 'moko';
+  userId: string;
   message: string;
 };
 
