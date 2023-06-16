@@ -8,7 +8,10 @@ import { ChatContentLayout } from './ChatContentLayout';
 const ChatContentWithLayout = ({ initChatMessages }: Props): JSX.Element => {
   return (
     <ChatContentLayout>
-      <ChatContent userId="userId1234567890" initChatMessages={initChatMessages} />
+      <ChatContent
+        userId="userId1234567890"
+        initChatMessages={initChatMessages}
+      />
     </ChatContentLayout>
   );
 };
