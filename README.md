@@ -87,6 +87,10 @@ vercel env pull .env.local
 npm run dev
 ```
 
+以下の URL でアクセスが可能です。
+
+http://localhost:22222
+
 ### デプロイについて
 
 GitHub 上にコミットが行われる度に Preview 環境の URL が発行されます。
