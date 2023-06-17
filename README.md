@@ -6,39 +6,89 @@
 
 ねこの人格を持った AI とお話できるサービスの Web フロントエンド
 
-## 以下は `npx create-next-app@latest` が生成した結果をマージしたもの
-
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
-
 ## Getting Started
 
-First, run the development server:
+### Node.js のインストール（既に終わっている場合は省略）
+
+18 系の最新安定版を利用する。
+
+[asdf](https://asdf-vm.com/) などを使ってバージョン管理を出来るようにするのがオススメ。
+
+参考までに Mac に [asdf](https://asdf-vm.com/) をインストールして Node.js のバージョン管理をしていた時の記録を貼っておく。
+
+- https://zenn.dev/link/comments/d59945cdd21652
+- https://zenn.dev/link/comments/370bba4287f86a
+
+### Vercel CLI の導入
+
+以下を参考に導入する。
+
+https://vercel.com/docs/cli
+
+以下でコマンドをインストールする。（グローバルインストールで良い）
+
+```bash
+npm i -g vercel
+```
+
+インストール環境後に `vercel` を実行する。
+
+以下のような選択肢が出るので認証方法を選択してログインを行う。（GitHub で登録しているケースが多いと思う）
+
+```
+? Log in to Vercel
+● Continue with GitHub
+○ Continue with GitLab
+○ Continue with Bitbucket
+○ Continue with Email
+○ Continue with SAML Single Sign-On
+  ─────────────────────────────────
+○ Cancel
+```
+
+正常にログインが終わるとセットアップしてデプロイを行うかを聞かれるので以下のように回答しながら初期化する。
+
+```
+> Success! GitHub authentication complete for keita@exmple.com
+? Set up and deploy “~/gitrepos/ai-cat-frontend”? [Y/n] y
+? Which scope do you want to deploy to? nekochans
+? Found project “nekochans/ai-cat-frontend”. Link to it? [Y/n] y
+```
+
+デプロイが開始される。（Preview 環境が作られる）
+
+デプロイが正常に完了すれば Vercel CLI のセットアップは完了。
+
+### 環境変数の取得
+
+ローカル環境で動作させる為に必要な環境変数を取得する。
+
+以下のコマンドを実行。
+
+```bash
+vercel env pull .env.local
+```
+
+ローカル環境に `.env.local` が存在する場合は以下のようなメッセージが出る事があるが上書きしてしまって問題ない。
+
+```
+? Found existing file ".env.local". Do you want to overwrite? [y/N] y
+```
+
+これで開発に必要な環境変数が `.env.local` に展開される。
+
+環境変数が増える度にこのコマンドの実行が必要になるので開発環境が正常に動作しない場合はこの手順を再度実行してみると良い。
+
+### 開発環境の起動
+
+以下を実行する。
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### デプロイについて
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+GitHub 上にコミットが行われる度に Preview 環境の URL が発行されます。
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+本番環境に関しては `main` ブランチにマージされる事でデプロイが実施されます。
