@@ -5,9 +5,9 @@
   "scripts": {
     "test": "jest",
     "test:ci": "jest --collect-coverage",
-    "dev": "next dev",
+    "dev": "next dev -p 22222",
     "build": "next build",
-    "start": "next start",
+    "start": "next start -p 22222",
     "lint:prettier": "prettier --cache --check .",
     "fix:prettier": "npm run lint:prettier -- --write",
     "lint:eslint": "eslint --cache .",
