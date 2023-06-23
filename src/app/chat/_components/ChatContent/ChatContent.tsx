@@ -33,7 +33,7 @@ export const ChatContent = ({
       return;
     }
 
-    if (ref.current?.value != null) {
+    if (ref.current?.value != null && ref.current?.value !== '') {
       const message = ref.current.value;
 
       ref.current.value = '';
