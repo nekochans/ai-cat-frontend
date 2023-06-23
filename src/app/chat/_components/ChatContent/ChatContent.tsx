@@ -84,7 +84,7 @@ export const ChatContent = ({
       return;
     }
 
-    if (event.shiftKey && event.key === 'Enter') {
+    if (event.key === 'Enter' && (event.ctrlKey || event.metaKey)) {
       const submitEvent = new Event('submit', {
         bubbles: true,
         cancelable: true,
