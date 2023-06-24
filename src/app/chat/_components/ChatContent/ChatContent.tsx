@@ -84,7 +84,7 @@ export const ChatContent = ({
       return;
     }
 
-    if (event.shiftKey && event.key === 'Enter') {
+    if (event.key === 'Enter' && (event.ctrlKey || event.metaKey)) {
       const submitEvent = new Event('submit', {
         bubbles: true,
         cancelable: true,
@@ -115,7 +115,7 @@ export const ChatContent = ({
             <textarea
               id="message-input"
               name="message-input"
-              placeholder="Type your message here. Press Enter + Shift to send."
+              placeholder="Type your message here. Press Command + Enter or Control + Enter to send."
               className="w-full rounded-md py-3 pl-4 text-gray-600 placeholder:text-gray-600  focus:outline-none focus:placeholder:text-gray-400"
               ref={ref}
               onKeyDown={handleKeyDown}
