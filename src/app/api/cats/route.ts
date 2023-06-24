@@ -27,9 +27,9 @@ const rateLimit = new Ratelimit({
 export const runtime = 'edge';
 
 export async function POST(request: NextRequest): Promise<NextResponse> {
-  const { success } = await rateLimit.limit(
-    request.ip != null ? request.ip : 'anonymous'
-  );
+  const requestIp = request.ip != null ? request.ip : 'anonymous';
+
+  const { success } = await rateLimit.limit(requestIp);
 
   if (!success) {
     const responseBody = {
@@ -55,11 +55,15 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
         )}`,
       },
       body: JSON.stringify({
-        userId: requestBody.userId,
+        // TODO ログイン機能が完成したら userId の設定をちゃんと行う
+        userId: requestIp === 'anonymous' ? requestBody.userId : requestIp,
         message: requestBody.message,
       }),
     }
   );
+
+  console.log(response);
+
   const responseBody = (await response.json()) as ResponseBody;
 
   return NextResponse.json(responseBody, { status: 201 });
