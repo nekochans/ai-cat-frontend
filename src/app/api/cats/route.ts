@@ -62,8 +62,6 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
     }
   );
 
-  console.log(response);
-
   const responseBody = (await response.json()) as ResponseBody;
 
   return NextResponse.json(responseBody, { status: 201 });
