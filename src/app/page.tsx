@@ -9,7 +9,6 @@ import Link from 'next/link';
 import { useState } from 'react';
 
 const navigation = [
-  { name: 'chat', href: '/chat' },
   { name: 'terms', href: '/terms' },
   { name: 'privacy', href: '/privacy' },
 ];
