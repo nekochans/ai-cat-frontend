@@ -6,7 +6,7 @@ import Link from 'next/link';
 const IndexPage: NextPage = () => {
   return (
     <main className="flex min-h-screen flex-col bg-yellow-100">
-      <Header />
+      <Header enableLoginLink={false} />
       <div className="relative isolate pt-14">
         <div className="py-24 sm:py-32 lg:pb-40">
           <div className="mx-auto max-w-7xl px-6 lg:px-8">

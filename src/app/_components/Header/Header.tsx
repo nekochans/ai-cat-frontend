@@ -10,7 +10,11 @@ const navigation = [
   { name: 'privacy', href: '/privacy' },
 ];
 
-export const Header = (): JSX.Element => {
+type Props = {
+  enableLoginLink: boolean;
+};
+
+export const Header = ({ enableLoginLink }: Props): JSX.Element => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
@@ -55,13 +59,17 @@ export const Header = (): JSX.Element => {
           ))}
         </div>
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-          <Link
-            href="/login"
-            prefetch={false}
-            className="text-sm font-semibold leading-6 text-gray-900"
-          >
-            Log in <span aria-hidden="true">&rarr;</span>
-          </Link>
+          {enableLoginLink ? (
+            <Link
+              href="/login"
+              prefetch={false}
+              className="text-sm font-semibold leading-6 text-gray-900"
+            >
+              Log in <span aria-hidden="true">&rarr;</span>
+            </Link>
+          ) : (
+            ''
+          )}
         </div>
       </nav>
       <Dialog
@@ -107,15 +115,19 @@ export const Header = (): JSX.Element => {
                   </Link>
                 ))}
               </div>
-              <div className="py-6">
-                <Link
-                  href="/login"
-                  prefetch={false}
-                  className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-                >
-                  Log in
-                </Link>
-              </div>
+              {enableLoginLink ? (
+                <div className="py-6">
+                  <Link
+                    href="/login"
+                    prefetch={false}
+                    className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                  >
+                    Log in
+                  </Link>
+                </div>
+              ) : (
+                ''
+              )}
             </div>
           </div>
         </Dialog.Panel>

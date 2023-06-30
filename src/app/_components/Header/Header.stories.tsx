@@ -9,4 +9,14 @@ export default meta;
 
 type Story = StoryObj<typeof Header>;
 
-export const Default: Story = {};
+export const Default: Story = {
+  args: {
+    enableLoginLink: true,
+  },
+};
+
+export const WithoutEnableLoginLink: Story = {
+  args: {
+    enableLoginLink: false,
+  },
+};
