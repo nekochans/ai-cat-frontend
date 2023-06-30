@@ -109,7 +109,7 @@ export const Header = ({ enableLoginLink }: Props): JSX.Element => {
                     key={item.name}
                     href={item.href}
                     prefetch={false}
-                    className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                    className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-yellow-50"
                   >
                     {item.name}
                   </Link>
@@ -120,7 +120,7 @@ export const Header = ({ enableLoginLink }: Props): JSX.Element => {
                   <Link
                     href="/login"
                     prefetch={false}
-                    className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                    className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-yellow-50"
                   >
                     Log in
                   </Link>
