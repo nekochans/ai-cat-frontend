@@ -11,7 +11,7 @@ export const Footer = (): JSX.Element => {
               AI Cat（仮）
             </span>
           </Link>
-          <ul className="mb-6 flex flex-wrap items-center text-sm font-medium text-gray-500 dark:text-gray-400 sm:mb-0">
+          <ul className="mb-6 flex flex-wrap items-center text-sm font-medium text-gray-900 dark:text-gray-800 sm:mb-0">
             <li>
               <Link
                 href="/"
@@ -42,7 +42,7 @@ export const Footer = (): JSX.Element => {
           </ul>
         </div>
         <hr className="my-6 border-amber-200 dark:border-gray-700 sm:mx-auto lg:my-8" />
-        <span className="block text-sm text-gray-500 dark:text-gray-400 sm:text-center">
+        <span className="block text-sm text-gray-900 dark:text-gray-800 sm:text-center">
           Copyright (c){' '}
           <a href="https://github.com/nekochans" className="hover:underline">
             nekochans

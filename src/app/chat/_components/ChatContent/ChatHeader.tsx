@@ -17,9 +17,9 @@ export const ChatHeader = (): JSX.Element => {
         </div>
         <div className="flex flex-col leading-tight">
           <div className="mt-1 flex items-center text-2xl">
-            <span className="mr-3 text-gray-700">もこちゃん</span>
+            <span className="mr-3 text-gray-900">もこちゃん</span>
           </div>
-          <span className="text-lg text-gray-600">チンチラシルバー</span>
+          <span className="text-lg text-gray-800">チンチラシルバー</span>
         </div>
       </div>
       <div className="flex items-center space-x-2">
