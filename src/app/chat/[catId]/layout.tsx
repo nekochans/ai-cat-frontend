@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+import type { Metadata, ResolvingMetadata } from 'next';
 import { Noto_Sans_JP } from 'next/font/google';
 import type { JSX, ReactNode } from 'react';
 
@@ -8,13 +8,21 @@ const font = Noto_Sans_JP({
   subsets: ['cyrillic'],
 });
 
-export const metadata: Metadata = {
-  title: 'AI Cat もこちゃん🐱',
-  description: 'ねこのAI（もこちゃん）とお話しよう🐱',
+type Props = {
+  params: { catId: string };
+  children: ReactNode;
 };
 
-type Props = {
-  children: ReactNode;
+export const generateMetadata = async (
+  // eslint-disable-next-line
+  { params }: Props,
+  // eslint-disable-next-line
+  parent: ResolvingMetadata
+): Promise<Metadata> => {
+  return {
+    title: 'AI Cat もこちゃん🐱',
+    description: 'ねこのAI（もこちゃん）とお話しよう🐱',
+  };
 };
 
 const ChatLayout = ({ children }: Props): JSX.Element => {
