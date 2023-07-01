@@ -1,4 +1,5 @@
 export type {
+  CatId,
   FetchCatMessageDto,
   FetchCatMessageResponse,
   FetchCatMessage,

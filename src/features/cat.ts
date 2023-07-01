@@ -1,5 +1,7 @@
+export type CatId = 'moko';
+
 export type FetchCatMessageDto = {
-  catName: 'moko';
+  catId: CatId;
   userId: string;
   message: string;
 };

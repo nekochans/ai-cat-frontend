@@ -1,3 +1,4 @@
+import type { CatId } from '@/features';
 import type { Metadata, ResolvingMetadata } from 'next';
 import { Noto_Sans_JP } from 'next/font/google';
 import type { JSX, ReactNode } from 'react';
@@ -9,7 +10,7 @@ const font = Noto_Sans_JP({
 });
 
 type Props = {
-  params: { catId: string };
+  params: { catId: CatId };
   children: ReactNode;
 };
 

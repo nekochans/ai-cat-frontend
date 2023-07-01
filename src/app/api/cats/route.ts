@@ -3,7 +3,7 @@ import { Redis } from '@upstash/redis';
 import { NextResponse, type NextRequest } from 'next/server';
 
 type RequestBody = {
-  catName: string;
+  catId: string;
   userId: string;
   message: string;
 };
@@ -45,7 +45,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
   const requestBody = (await request.json()) as RequestBody;
 
   const response = await fetch(
-    `${String(process.env.API_BASE_URL)}/cats/${requestBody.catName}/messages`,
+    `${String(process.env.API_BASE_URL)}/cats/${requestBody.catId}/messages`,
     {
       method: 'POST',
       headers: {
