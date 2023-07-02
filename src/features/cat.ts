@@ -1,4 +1,12 @@
-export type CatId = 'moko';
+import { ExhaustiveError } from '@/utils';
+
+const catIds = ['moko'] as const;
+
+export type CatId = (typeof catIds)[number];
+
+const catNames = ['もこ'] as const;
+
+type CatName = (typeof catNames)[number];
 
 export type FetchCatMessageDto = {
   catId: CatId;
@@ -13,3 +21,12 @@ export type FetchCatMessageResponse = {
 export type FetchCatMessage = (
   dto: FetchCatMessageDto
 ) => Promise<FetchCatMessageResponse>;
+
+export const extractCatNameById = (catId: CatId): CatName => {
+  switch (catId) {
+    case 'moko':
+      return 'もこ';
+    default:
+      throw new ExhaustiveError(catId);
+  }
+};

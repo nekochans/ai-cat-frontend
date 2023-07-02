@@ -1,4 +1,4 @@
-import type { CatId } from '@/features';
+import { extractCatNameById, type CatId } from '@/features';
 import type { Metadata, ResolvingMetadata } from 'next';
 import { Noto_Sans_JP } from 'next/font/google';
 import type { JSX, ReactNode } from 'react';
@@ -21,8 +21,10 @@ export const generateMetadata = async (
   parent: ResolvingMetadata
 ): Promise<Metadata> => {
   return {
-    title: 'AI Cat もこちゃん🐱',
-    description: 'ねこのAI（もこちゃん）とお話しよう🐱',
+    title: `AI Cat ${extractCatNameById(params.catId)}ちゃん🐱`,
+    description: `ねこのAI（${extractCatNameById(
+      params.catId
+    )}）とお話しよう🐱`,
   };
 };
 
