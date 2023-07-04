@@ -1,2 +1,2 @@
 export { sleep } from './sleep';
-export { ExhaustiveError } from './ExhaustiveError';
+export { ExhaustiveError } from './errors';
