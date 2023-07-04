@@ -3,7 +3,6 @@ import { isCatId, type CatId } from '@/features';
 describe('src/features/cat.ts isCatId TestCases', () => {
   type TestTable = {
     catId: CatId;
-    expected: boolean;
   };
 
   it.each`
