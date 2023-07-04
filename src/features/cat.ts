@@ -30,3 +30,9 @@ export const extractCatNameById = (catId: CatId): CatName => {
       throw new ExhaustiveError(catId);
   }
 };
+
+export const isCatId = (value: unknown): value is CatId => {
+  const result = catIds.find((element) => element === value);
+
+  return result !== undefined;
+};
