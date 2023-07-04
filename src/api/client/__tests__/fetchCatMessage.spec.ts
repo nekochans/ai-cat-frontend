@@ -26,7 +26,7 @@ describe('src/api/client/fetchCatMessage.ts fetchCatMessage TestCases', () => {
 
   it('should be able to fetch a CatMessage', async () => {
     const fetchedResponse = await fetchCatMessage({
-      catName: 'moko',
+      catId: 'moko',
       userId: 'userId1234567890',
       message: 'こんにちは！',
     });
@@ -45,7 +45,7 @@ describe('src/api/client/fetchCatMessage.ts fetchCatMessage TestCases', () => {
     );
 
     const dto = {
-      catName: 'moko',
+      catId: 'moko',
       userId: 'userId1234567890',
       message: 'ねこ！',
     } as const;

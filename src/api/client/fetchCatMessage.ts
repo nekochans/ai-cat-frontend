@@ -13,7 +13,7 @@ export const fetchCatMessage: FetchCatMessage = async (dto) => {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      catName: dto.catName,
+      catId: dto.catId,
       userId: dto.userId,
       message: dto.message,
     }),

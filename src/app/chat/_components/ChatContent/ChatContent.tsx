@@ -52,7 +52,7 @@ export const ChatContent = ({
 
       try {
         const fetchCatMessageResponse = await fetchCatMessage({
-          catName: 'moko',
+          catId: 'moko',
           userId,
           message,
         });
