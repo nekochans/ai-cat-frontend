@@ -6,7 +6,7 @@ export type CatId = (typeof catIds)[number];
 
 const catNames = ['もこ'] as const;
 
-type CatName = (typeof catNames)[number];
+export type CatName = (typeof catNames)[number];
 
 export type FetchCatMessageDto = {
   catId: CatId;

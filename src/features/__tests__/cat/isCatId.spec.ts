@@ -1,4 +1,3 @@
-/* eslint-disable no-magic-numbers */
 import { isCatId, type CatId } from '@/features';
 
 describe('src/features/cat.ts isCatId TestCases', () => {
