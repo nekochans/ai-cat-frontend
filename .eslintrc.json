@@ -11,7 +11,6 @@
     "plugin:jsx-a11y/recommended",
     "plugin:react/recommended",
     "plugin:react/jsx-runtime",
-    "plugin:react-hooks/recommended",
     "plugin:jest/recommended",
     "plugin:storybook/recommended",
     "plugin:tailwindcss/recommended",
@@ -24,7 +23,7 @@
     "project": ["./tsconfig.json"],
     "sourceType": "module"
   },
-  "plugins": ["@typescript-eslint", "jsx-a11y", "react", "react-hooks"],
+  "plugins": ["@typescript-eslint", "jsx-a11y", "react"],
   "rules": {
     "padding-line-between-statements": [
       "error",
