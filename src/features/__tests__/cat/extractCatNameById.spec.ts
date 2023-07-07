@@ -15,7 +15,7 @@ describe('src/features/cat.ts extractCatNameById TestCases', () => {
     'should return catName. catId: $catId',
     ({ catId, expected }: TestTable) => {
       expect(extractCatNameById(catId)).toStrictEqual(expected);
-    }
+    },
   );
 
   it.each`

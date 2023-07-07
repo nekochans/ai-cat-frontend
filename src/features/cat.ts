@@ -19,7 +19,7 @@ export type FetchCatMessageResponse = {
 };
 
 export type FetchCatMessage = (
-  dto: FetchCatMessageDto
+  dto: FetchCatMessageDto,
 ) => Promise<FetchCatMessageResponse>;
 
 export const extractCatNameById = (catId: CatId): CatName => {

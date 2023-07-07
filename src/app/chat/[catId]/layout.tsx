@@ -19,7 +19,7 @@ export const generateMetadata = async (
   // eslint-disable-next-line
   { params }: Props,
   // eslint-disable-next-line
-  parent: ResolvingMetadata
+  parent: ResolvingMetadata,
 ): Promise<Metadata> => {
   if (!isCatId(params.catId)) {
     notFound();
@@ -28,7 +28,7 @@ export const generateMetadata = async (
   return {
     title: `AI Cat ${extractCatNameById(params.catId)}ちゃん🐱`,
     description: `ねこのAI（${extractCatNameById(
-      params.catId
+      params.catId,
     )}）とお話しよう🐱`,
   };
 };
