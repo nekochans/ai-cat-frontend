@@ -16,6 +16,6 @@ export const mockFetchCatMessageUnexpectedResponseBody: ResponseResolver<
     ctx.json({
       catMessageText:
         'こんにちは🐱もことお話しようにゃん🐱お名前を教えてほしいにゃん🐱',
-    })
+    }),
   );
 };

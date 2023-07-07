@@ -10,7 +10,7 @@ describe('src/app/chat/_components/ChatContent/ChatHeader.tsx TestCases', () => 
 
     expect(screen.getByRole('img', { name: expectedCatName })).toHaveAttribute(
       'alt',
-      expectedCatName
+      expectedCatName,
     );
 
     expect(screen.getByText(expectedCatName)).toBeInTheDocument();

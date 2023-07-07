@@ -41,7 +41,7 @@ describe('src/api/client/fetchCatMessage.ts fetchCatMessage TestCases', () => {
 
   it('should InvalidResponseBodyError Throw, because unexpected response body', async () => {
     mockServer.use(
-      rest.post('/api/cats', mockFetchCatMessageUnexpectedResponseBody)
+      rest.post('/api/cats', mockFetchCatMessageUnexpectedResponseBody),
     );
 
     const dto = {
@@ -51,7 +51,7 @@ describe('src/api/client/fetchCatMessage.ts fetchCatMessage TestCases', () => {
     } as const;
 
     await expect(fetchCatMessage(dto)).rejects.toThrow(
-      InvalidResponseBodyError
+      InvalidResponseBodyError,
     );
   });
 });

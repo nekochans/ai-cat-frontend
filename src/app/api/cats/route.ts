@@ -28,7 +28,7 @@ export const runtime = 'edge';
 
 export async function POST(request: NextRequest): Promise<NextResponse> {
   const { success } = await rateLimit.limit(
-    request.ip != null ? request.ip : 'anonymous'
+    request.ip != null ? request.ip : 'anonymous',
   );
 
   if (!success) {
@@ -51,14 +51,14 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Basic ${String(
-          process.env.API_BASIC_AUTH_CREDENTIALS
+          process.env.API_BASIC_AUTH_CREDENTIALS,
         )}`,
       },
       body: JSON.stringify({
         userId: requestBody.userId,
         message: requestBody.message,
       }),
-    }
+    },
   );
   const responseBody = (await response.json()) as ResponseBody;
 
