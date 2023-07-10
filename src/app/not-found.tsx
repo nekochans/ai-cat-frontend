@@ -1,4 +1,5 @@
 import { Footer, Header } from '@/app/_components';
+import Image from 'next/image';
 import Link from 'next/link';
 import type { JSX } from 'react';
 
@@ -11,6 +12,13 @@ const NotFound = (): JSX.Element => {
           <p className="text-base font-semibold leading-8 text-indigo-600">
             404
           </p>
+          <Image
+            src="/404.webp"
+            width={300}
+            height={300}
+            alt=""
+            className="mx-auto"
+          />
           <h1 className="mt-4 text-3xl font-bold tracking-tight text-gray-900 sm:text-5xl">
             This page does not exist
           </h1>
