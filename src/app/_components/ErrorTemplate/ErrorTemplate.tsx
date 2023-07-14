@@ -51,7 +51,7 @@ const showErrorMessage = (errorCode: ErrorCode): string => {
   }
 };
 
-const showErrorDiscription = (errorCode: ErrorCode) => {
+const showErrorDescription = (errorCode: ErrorCode) => {
   switch (errorCode) {
     case 404:
       return 'Sorry, we couldn’t find the page you’re looking for😿';
@@ -80,7 +80,7 @@ export const ErrorTemplate = ({
             {showErrorMessage(errorCode)}
           </h1>
           <p className="mt-4 text-base leading-7 text-gray-600 sm:mt-6 sm:text-lg sm:leading-8">
-            {showErrorDiscription(errorCode)}
+            {showErrorDescription(errorCode)}
           </p>
         </div>
         <div className="mx-auto mt-16 flow-root max-w-lg sm:mt-20">
