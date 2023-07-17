@@ -1,6 +1,7 @@
 'use client';
 
 import { fetchCatMessage } from '@/api/client/fetchCatMessage';
+import { isCatId, type CatId } from '@/features';
 import {
   useRef,
   useState,
@@ -8,11 +9,32 @@ import {
   type JSX,
   type KeyboardEvent,
 } from 'react';
+import { z } from 'zod';
 import { ChatMessagesList, type ChatMessages } from './ChatMessagesList';
 
 export type Props = {
   userId: string;
   initChatMessages: ChatMessages;
+};
+
+const fetchCatMessageResponseSchema = z.object({
+  requestId: z.string().min(36).max(36),
+  userId: z.string().min(36).max(36),
+  catId: z.string().refine((value) => isCatId(value)),
+  message: z.string().min(1),
+});
+
+type FetchCatMessageResponse = {
+  requestId: string;
+  userId: string;
+  catId: CatId;
+  message: string;
+};
+
+const isFetchCatMessageResponse = (
+  value: unknown,
+): value is FetchCatMessageResponse => {
+  return fetchCatMessageResponseSchema.safeParse(value).success;
 };
 
 export const ChatContent = ({
@@ -51,6 +73,62 @@ export const ChatContent = ({
       setIsLoading(true);
 
       try {
+        const response = await fetch('/api/cats/streaming', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            catId: 'moko',
+            userId,
+            message,
+          }),
+        });
+
+        const data = response.body;
+        if (data === null) {
+          throw new Error('後でちゃんとしたエラーを書く');
+        }
+
+        const reader = data.getReader();
+        const decoder = new TextDecoder();
+
+        const readStream = async (): Promise<undefined> => {
+          const { done, value } = await reader.read();
+          if (done) {
+            return;
+          }
+
+          const objects = decoder
+            .decode(value)
+            .split('\n\n')
+            .map((line) => {
+              const jsonString = line.trim().split('data: ')[1];
+              try {
+                const parsedJson = JSON.parse(jsonString) as unknown;
+
+                return isFetchCatMessageResponse(parsedJson)
+                  ? parsedJson
+                  : null;
+              } catch {
+                return null;
+              }
+            })
+            .filter(Boolean) as FetchCatMessageResponse[];
+
+          for (const object of objects) {
+            const responseMessage = object.message ?? '';
+
+            console.log(responseMessage);
+          }
+
+          await readStream();
+        };
+
+        await readStream();
+
+        reader.releaseLock();
+
         const fetchCatMessageResponse = await fetchCatMessage({
           catId: 'moko',
           userId,
