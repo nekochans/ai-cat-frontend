@@ -1,6 +1,5 @@
 'use client';
 
-import { fetchCatMessage } from '@/api/client/fetchCatMessage';
 import { isCatId, type CatId } from '@/features';
 import {
   useRef,
@@ -11,6 +10,7 @@ import {
 } from 'react';
 import { z } from 'zod';
 import { ChatMessagesList, type ChatMessages } from './ChatMessagesList';
+import { StreamingCatMessage } from './StreamingCatMessage';
 
 export type Props = {
   userId: string;
@@ -46,6 +46,8 @@ export const ChatContent = ({
   const [chatMessages, setChatMessages] =
     useState<ChatMessages>(initChatMessages);
 
+  const [streamingMessage, setStreamingMessage] = useState<string>('');
+
   const ref = useRef<HTMLTextAreaElement>(null);
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
@@ -71,6 +73,8 @@ export const ChatContent = ({
       setChatMessages(newChatMessages);
 
       setIsLoading(true);
+
+      let newResponseMessage = '';
 
       try {
         const response = await fetch('/api/cats/streaming', {
@@ -119,7 +123,8 @@ export const ChatContent = ({
           for (const object of objects) {
             const responseMessage = object.message ?? '';
 
-            console.log(responseMessage);
+            newResponseMessage += responseMessage;
+            setStreamingMessage(newResponseMessage);
           }
 
           await readStream();
@@ -129,16 +134,10 @@ export const ChatContent = ({
 
         reader.releaseLock();
 
-        const fetchCatMessageResponse = await fetchCatMessage({
-          catId: 'moko',
-          userId,
-          message,
-        });
-
         const newCatMessage = {
           role: 'cat',
           name: 'もこちゃん',
-          message: fetchCatMessageResponse.message,
+          message: newResponseMessage,
           avatarUrl:
             'https://lgtm-images.lgtmeow.com/2022/03/23/10/9738095a-f426-48e4-be8d-93f933c42917.webp',
         } as const;
@@ -148,6 +147,8 @@ export const ChatContent = ({
           ...[newCatMessage],
         ];
         setChatMessages(newCatReplyContainedChatMessage);
+        newResponseMessage = '';
+        setStreamingMessage('');
       } catch (error) {
         // TODO 後でちゃんとしたエラー処理をする
         console.error(error);
@@ -181,6 +182,15 @@ export const ChatContent = ({
   return (
     <>
       <ChatMessagesList chatMessages={chatMessages} isLoading={isLoading} />
+      {streamingMessage !== '' ? (
+        <StreamingCatMessage
+          catName="もこちゃん"
+          catAvatarUrl="https://lgtm-images.lgtmeow.com/2022/03/23/10/9738095a-f426-48e4-be8d-93f933c42917.webp"
+          streamingMessage={streamingMessage}
+        />
+      ) : (
+        ''
+      )}
       <div className="mb-2 border-t-2 border-amber-200 bg-yellow-100 px-4 pt-4 sm:mb-0">
         <form
           id="send-message"
