@@ -12,7 +12,11 @@ import {
   type KeyboardEvent,
 } from 'react';
 import { z } from 'zod';
-import { ChatErrorMessage, type ErrorType } from './ChatErrorMessage';
+import {
+  ChatErrorMessage,
+  isChatErrorType,
+  type ChatErrorType,
+} from './ChatErrorMessage';
 import { ChatMessagesList, type ChatMessages } from './ChatMessagesList';
 import { StreamingCatMessage } from './StreamingCatMessage';
 
@@ -52,7 +56,9 @@ export const ChatContent = ({
 
   const [streamingMessage, setStreamingMessage] = useState<string>('');
 
-  const [errorType, setErrorType] = useState<ErrorType | string>('');
+  const [chatErrorType, setChatChatErrorType] = useState<
+    ChatErrorType | string
+  >('');
 
   const ref = useRef<HTMLTextAreaElement>(null);
 
@@ -79,7 +85,7 @@ export const ChatContent = ({
       setChatMessages(newChatMessages);
 
       setIsLoading(true);
-      setErrorType('');
+      setChatChatErrorType('');
 
       let newResponseMessage = '';
 
@@ -152,12 +158,12 @@ export const ChatContent = ({
         setChatMessages(newCatReplyContainedChatMessage);
       } catch (error) {
         if (error instanceof TooManyRequestsError) {
-          setErrorType('TOO_MANY_REQUESTS');
+          setChatChatErrorType('TOO_MANY_REQUESTS');
 
           return;
         }
 
-        setErrorType('INTERNAL_SERVER_ERROR');
+        setChatChatErrorType('INTERNAL_SERVER_ERROR');
       } finally {
         setIsLoading(false);
         newResponseMessage = '';
@@ -199,7 +205,11 @@ export const ChatContent = ({
       ) : (
         ''
       )}
-      {errorType !== '' ? <ChatErrorMessage type={errorType} /> : ''}
+      {isChatErrorType(chatErrorType) ? (
+        <ChatErrorMessage type={chatErrorType} />
+      ) : (
+        ''
+      )}
       <div className="mb-2 border-t-2 border-amber-200 bg-yellow-100 px-4 pt-4 sm:mb-0">
         <form
           id="send-message"

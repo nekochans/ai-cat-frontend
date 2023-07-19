@@ -1,13 +1,26 @@
 import { ExhaustiveError } from '@/utils';
 import Image from 'next/image';
 
-export type ErrorType = 'TOO_MANY_REQUESTS' | 'INTERNAL_SERVER_ERROR' | string;
+const chatErrorTypeList = [
+  'TOO_MANY_REQUESTS',
+  'INTERNAL_SERVER_ERROR',
+] as const;
 
-type Props = {
-  type: ErrorType;
+export type ChatErrorType = (typeof chatErrorTypeList)[number];
+
+export const isChatErrorType = (value: unknown): value is ChatErrorType => {
+  if (typeof value !== 'string') {
+    return false;
+  }
+
+  return chatErrorTypeList.includes(value as ChatErrorType);
 };
 
-const getErrorMessage = (type: ErrorType) => {
+type Props = {
+  type: ChatErrorType;
+};
+
+const getErrorMessage = (type: ChatErrorType) => {
   switch (type) {
     case 'TOO_MANY_REQUESTS':
       return 'Too many requests from this IP. Please try again after some time😿';
