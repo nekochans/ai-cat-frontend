@@ -1,6 +1,6 @@
 import { Ratelimit } from '@upstash/ratelimit';
 import { Redis } from '@upstash/redis';
-import { type NextRequest } from 'next/server';
+import { NextResponse, type NextRequest } from 'next/server';
 
 type RequestBody = {
   catId: string;
@@ -22,7 +22,9 @@ const rateLimit = new Ratelimit({
 
 export const runtime = 'edge';
 
-export async function POST(request: NextRequest): Promise<Response> {
+export async function POST(
+  request: NextRequest,
+): Promise<Response | NextResponse> {
   const { success } = await rateLimit.limit(
     request.ip != null ? request.ip : 'anonymous',
   );
@@ -43,10 +45,7 @@ export async function POST(request: NextRequest): Promise<Response> {
 
     const status = 429;
 
-    return new Response(`data: ${JSON.stringify(responseBody)}`, {
-      headers,
-      status,
-    });
+    return NextResponse.json(responseBody, { status });
   }
 
   const requestBody = (await request.json()) as RequestBody;
