@@ -192,9 +192,9 @@ export const ChatContent = ({
       <ChatMessagesList chatMessages={chatMessages} isLoading={isLoading} />
       {streamingMessage !== '' ? (
         <StreamingCatMessage
-          catName="もこちゃん"
-          catAvatarUrl="https://lgtm-images.lgtmeow.com/2022/03/23/10/9738095a-f426-48e4-be8d-93f933c42917.webp"
-          streamingMessage={streamingMessage}
+          name="もこちゃん"
+          avatarUrl="https://lgtm-images.lgtmeow.com/2022/03/23/10/9738095a-f426-48e4-be8d-93f933c42917.webp"
+          message={streamingMessage}
         />
       ) : (
         ''

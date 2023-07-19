@@ -1,26 +1,19 @@
 import { CatChatMessage } from './CatChatMessage';
 
 type Props = {
-  catName: string;
-  catAvatarUrl: string;
-  streamingMessage: string;
+  name: string;
+  avatarUrl: string;
+  message: string;
 };
 
 export const StreamingCatMessage = ({
-  catName,
-  catAvatarUrl,
-  streamingMessage,
+  name,
+  avatarUrl,
+  message,
 }: Props): JSX.Element => {
   return (
-    <div
-      id="streaming-cat-message"
-      className="flex flex-col space-y-4 p-3"
-    >
-      <CatChatMessage
-        name={catName}
-        message={streamingMessage}
-        avatarUrl={catAvatarUrl}
-      />
+    <div id="streaming-cat-message" className="flex flex-col space-y-4 p-3">
+      <CatChatMessage name={name} message={message} avatarUrl={avatarUrl} />
     </div>
   );
 };
