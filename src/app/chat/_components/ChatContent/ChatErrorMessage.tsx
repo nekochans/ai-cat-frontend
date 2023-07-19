@@ -20,10 +20,7 @@ const getErrorMessage = (type: ErrorType) => {
 
 export const ChatErrorMessage = ({ type }: Props): JSX.Element => {
   return (
-    <div
-      id="streaming-cat-message"
-      className="flex flex-col space-y-4 bg-yellow-100 p-3"
-    >
+    <div id="streaming-cat-message" className="flex flex-col space-y-4 p-3">
       <div className="flex items-end">
         <div className="order-2 mx-2 flex max-w-xs flex-col items-start space-y-2 text-xs">
           <div>
