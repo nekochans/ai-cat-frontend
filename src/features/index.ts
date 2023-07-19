@@ -5,4 +5,4 @@ export type {
   FetchCatMessage,
 } from './cat';
 
-export { extractCatNameById, isCatId } from './cat';
+export { extractCatNameById, isCatId, isFetchCatMessageResponse } from './cat';

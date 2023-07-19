@@ -1,10 +1,5 @@
-import { type FetchCatMessage, type FetchCatMessageResponse } from '@/features';
-import { z } from 'zod';
-import { InvalidResponseBodyError } from '../errors';
-
-const fetchCatMessageResponseSchema = z.object({
-  message: z.string().min(1),
-});
+import { TooManyRequestsError } from '@/api/errors';
+import { type FetchCatMessage } from '@/features';
 
 export const fetchCatMessage: FetchCatMessage = async (dto) => {
   const response = await fetch('/api/cats', {
@@ -19,14 +14,9 @@ export const fetchCatMessage: FetchCatMessage = async (dto) => {
     }),
   });
 
-  const responseBody = (await response.json()) as FetchCatMessageResponse;
-
-  const parseResult = fetchCatMessageResponseSchema.safeParse(responseBody);
-  if (!parseResult.success) {
-    throw new InvalidResponseBodyError('src/api/client/fetchCatMessage.ts', {
-      cause: parseResult.error,
-    });
+  if (response.status === 429) {
+    throw new TooManyRequestsError('src/api/client/fetchCatMessage.ts');
   }
 
-  return responseBody;
+  return response;
 };

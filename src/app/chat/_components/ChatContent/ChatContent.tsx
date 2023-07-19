@@ -1,6 +1,9 @@
 'use client';
 
 import { fetchCatMessage } from '@/api/client/fetchCatMessage';
+import { TooManyRequestsError } from '@/api/errors';
+import { InvalidResponseBodyError } from '@/errors';
+import { isCatId, type CatId } from '@/features';
 import {
   useRef,
   useState,
@@ -8,11 +11,38 @@ import {
   type JSX,
   type KeyboardEvent,
 } from 'react';
+import { z } from 'zod';
+import {
+  ChatErrorMessage,
+  isChatErrorType,
+  type ChatErrorType,
+} from './ChatErrorMessage';
 import { ChatMessagesList, type ChatMessages } from './ChatMessagesList';
+import { StreamingCatMessage } from './StreamingCatMessage';
 
 export type Props = {
   userId: string;
   initChatMessages: ChatMessages;
+};
+
+const fetchCatMessageResponseSchema = z.object({
+  requestId: z.string().min(36).max(36),
+  userId: z.string().min(36).max(36),
+  catId: z.string().refine((value) => isCatId(value)),
+  message: z.string().min(1),
+});
+
+type FetchCatMessageResponse = {
+  requestId: string;
+  userId: string;
+  catId: CatId;
+  message: string;
+};
+
+const isFetchCatMessageResponse = (
+  value: unknown,
+): value is FetchCatMessageResponse => {
+  return fetchCatMessageResponseSchema.safeParse(value).success;
 };
 
 export const ChatContent = ({
@@ -23,6 +53,12 @@ export const ChatContent = ({
 
   const [chatMessages, setChatMessages] =
     useState<ChatMessages>(initChatMessages);
+
+  const [streamingMessage, setStreamingMessage] = useState<string>('');
+
+  const [chatErrorType, setChatChatErrorType] = useState<
+    ChatErrorType | string
+  >('');
 
   const ref = useRef<HTMLTextAreaElement>(null);
 
@@ -49,18 +85,68 @@ export const ChatContent = ({
       setChatMessages(newChatMessages);
 
       setIsLoading(true);
+      setChatChatErrorType('');
+
+      let newResponseMessage = '';
 
       try {
-        const fetchCatMessageResponse = await fetchCatMessage({
+        const response = await fetchCatMessage({
           catId: 'moko',
           userId,
           message,
         });
 
+        const body = response.body;
+        if (body === null) {
+          throw new InvalidResponseBodyError(
+            'src/app/chat/_components/ChatContent/ChatContent.tsx handleSubmit',
+          );
+        }
+
+        const reader = body.getReader();
+        const decoder = new TextDecoder();
+
+        const readStream = async (): Promise<undefined> => {
+          const { done, value } = await reader.read();
+          if (done) {
+            return;
+          }
+
+          const objects = decoder
+            .decode(value)
+            .split('\n\n')
+            .map((line) => {
+              const jsonString = line.trim().split('data: ')[1];
+              try {
+                const parsedJson = JSON.parse(jsonString) as unknown;
+
+                return isFetchCatMessageResponse(parsedJson)
+                  ? parsedJson
+                  : null;
+              } catch {
+                return null;
+              }
+            })
+            .filter(Boolean) as FetchCatMessageResponse[];
+
+          for (const object of objects) {
+            const responseMessage = object.message ?? '';
+
+            newResponseMessage += responseMessage;
+            setStreamingMessage(newResponseMessage);
+          }
+
+          await readStream();
+        };
+
+        await readStream();
+
+        reader.releaseLock();
+
         const newCatMessage = {
           role: 'cat',
           name: 'もこちゃん',
-          message: fetchCatMessageResponse.message,
+          message: newResponseMessage,
           avatarUrl:
             'https://lgtm-images.lgtmeow.com/2022/03/23/10/9738095a-f426-48e4-be8d-93f933c42917.webp',
         } as const;
@@ -71,10 +157,17 @@ export const ChatContent = ({
         ];
         setChatMessages(newCatReplyContainedChatMessage);
       } catch (error) {
-        // TODO 後でちゃんとしたエラー処理をする
-        console.error(error);
+        if (error instanceof TooManyRequestsError) {
+          setChatChatErrorType('TOO_MANY_REQUESTS');
+
+          return;
+        }
+
+        setChatChatErrorType('INTERNAL_SERVER_ERROR');
       } finally {
         setIsLoading(false);
+        newResponseMessage = '';
+        setStreamingMessage('');
       }
     }
   };
@@ -103,6 +196,20 @@ export const ChatContent = ({
   return (
     <>
       <ChatMessagesList chatMessages={chatMessages} isLoading={isLoading} />
+      {streamingMessage !== '' ? (
+        <StreamingCatMessage
+          name="もこちゃん"
+          avatarUrl="https://lgtm-images.lgtmeow.com/2022/03/23/10/9738095a-f426-48e4-be8d-93f933c42917.webp"
+          message={streamingMessage}
+        />
+      ) : (
+        ''
+      )}
+      {isChatErrorType(chatErrorType) ? (
+        <ChatErrorMessage type={chatErrorType} />
+      ) : (
+        ''
+      )}
       <div className="mb-2 border-t-2 border-amber-200 bg-yellow-100 px-4 pt-4 sm:mb-0">
         <form
           id="send-message"
