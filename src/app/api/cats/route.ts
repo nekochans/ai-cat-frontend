@@ -1,14 +1,10 @@
 import { Ratelimit } from '@upstash/ratelimit';
 import { Redis } from '@upstash/redis';
-import { NextResponse, type NextRequest } from 'next/server';
+import { type NextRequest } from 'next/server';
 
 type RequestBody = {
   catId: string;
   userId: string;
-  message: string;
-};
-
-type ResponseBody = {
   message: string;
 };
 
@@ -26,10 +22,16 @@ const rateLimit = new Ratelimit({
 
 export const runtime = 'edge';
 
-export async function POST(request: NextRequest): Promise<NextResponse> {
+export async function POST(request: NextRequest): Promise<Response> {
   const { success } = await rateLimit.limit(
     request.ip != null ? request.ip : 'anonymous',
   );
+
+  const headers = {
+    Connection: 'keep-alive',
+    'Cache-Control': 'no-cache',
+    'Content-Type': 'text/event-stream; charset=utf-8',
+  };
 
   if (!success) {
     const responseBody = {
@@ -39,13 +41,20 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
         'Too many requests from this IP. Please try again after some time.',
     };
 
-    return NextResponse.json(responseBody, { status: 429 });
+    const status = 429;
+
+    return new Response(`data: ${JSON.stringify(responseBody)}`, {
+      headers,
+      status,
+    });
   }
 
   const requestBody = (await request.json()) as RequestBody;
 
   const response = await fetch(
-    `${String(process.env.API_BASE_URL)}/cats/${requestBody.catId}/messages`,
+    `${String(process.env.API_BASE_URL)}/cats/${
+      requestBody.catId
+    }/streaming-messages`,
     {
       method: 'POST',
       headers: {
@@ -60,7 +69,8 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
       }),
     },
   );
-  const responseBody = (await response.json()) as ResponseBody;
 
-  return NextResponse.json(responseBody, { status: 201 });
+  const status = 200;
+
+  return new Response(response.body, { headers, status });
 }
