@@ -1,5 +1,8 @@
 'use client';
 
+import { fetchCatMessage } from '@/api/client/fetchCatMessage';
+import { TooManyRequestsError } from '@/api/errors';
+import { InvalidResponseBodyError } from '@/errors';
 import { isCatId, type CatId } from '@/features';
 import {
   useRef,
@@ -9,6 +12,7 @@ import {
   type KeyboardEvent,
 } from 'react';
 import { z } from 'zod';
+import { ChatErrorMessage, type ErrorType } from './ChatErrorMessage';
 import { ChatMessagesList, type ChatMessages } from './ChatMessagesList';
 import { StreamingCatMessage } from './StreamingCatMessage';
 
@@ -48,6 +52,8 @@ export const ChatContent = ({
 
   const [streamingMessage, setStreamingMessage] = useState<string>('');
 
+  const [errorType, setErrorType] = useState<ErrorType | string>('');
+
   const ref = useRef<HTMLTextAreaElement>(null);
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
@@ -73,28 +79,25 @@ export const ChatContent = ({
       setChatMessages(newChatMessages);
 
       setIsLoading(true);
+      setErrorType('');
 
       let newResponseMessage = '';
 
       try {
-        const response = await fetch('/api/cats/streaming', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            catId: 'moko',
-            userId,
-            message,
-          }),
+        const response = await fetchCatMessage({
+          catId: 'moko',
+          userId,
+          message,
         });
 
-        const data = response.body;
-        if (data === null) {
-          throw new Error('後でちゃんとしたエラーを書く');
+        const body = response.body;
+        if (body === null) {
+          throw new InvalidResponseBodyError(
+            'src/app/chat/_components/ChatContent/ChatContent.tsx handleSubmit',
+          );
         }
 
-        const reader = data.getReader();
+        const reader = body.getReader();
         const decoder = new TextDecoder();
 
         const readStream = async (): Promise<undefined> => {
@@ -147,13 +150,18 @@ export const ChatContent = ({
           ...[newCatMessage],
         ];
         setChatMessages(newCatReplyContainedChatMessage);
-        newResponseMessage = '';
-        setStreamingMessage('');
       } catch (error) {
-        // TODO 後でちゃんとしたエラー処理をする
-        console.error(error);
+        if (error instanceof TooManyRequestsError) {
+          setErrorType('TOO_MANY_REQUESTS');
+
+          return;
+        }
+
+        setErrorType('INTERNAL_SERVER_ERROR');
       } finally {
         setIsLoading(false);
+        newResponseMessage = '';
+        setStreamingMessage('');
       }
     }
   };
@@ -191,6 +199,7 @@ export const ChatContent = ({
       ) : (
         ''
       )}
+      {errorType !== '' ? <ChatErrorMessage type={errorType} /> : ''}
       <div className="mb-2 border-t-2 border-amber-200 bg-yellow-100 px-4 pt-4 sm:mb-0">
         <form
           id="send-message"
