@@ -14,7 +14,7 @@ export const StreamingCatMessage = ({
   return (
     <div
       id="streaming-cat-message"
-      className="flex flex-col space-y-4 bg-yellow-100 p-3"
+      className="flex flex-col space-y-4 p-3"
     >
       <CatChatMessage
         name={catName}
