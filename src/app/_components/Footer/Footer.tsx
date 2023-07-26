@@ -8,7 +8,7 @@ export const Footer = (): JSX.Element => {
         <div className="sm:flex sm:items-center sm:justify-between">
           <Link href="/" className="mb-4 flex items-center sm:mb-0">
             <span className="self-center whitespace-nowrap text-2xl font-semibold dark:text-white">
-              AI Cat（仮）
+              AI Meow Cat
             </span>
           </Link>
           <ul className="mb-6 flex flex-wrap items-center text-sm font-medium text-gray-900 dark:text-gray-800 sm:mb-0">
