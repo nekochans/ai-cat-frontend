@@ -6,6 +6,7 @@ type RequestBody = {
   catId: string;
   userId: string;
   message: string;
+  conversationId?: string;
 };
 
 const redis = new Redis({
@@ -50,6 +51,18 @@ export async function POST(
 
   const requestBody = (await request.json()) as RequestBody;
 
+  const sendRequestBody =
+    requestBody.conversationId != null
+      ? {
+          userId: requestBody.userId,
+          message: requestBody.message,
+          conversationId: requestBody.conversationId,
+        }
+      : {
+          userId: requestBody.userId,
+          message: requestBody.message,
+        };
+
   const response = await fetch(
     `${String(process.env.API_BASE_URL)}/cats/${
       requestBody.catId
@@ -62,10 +75,7 @@ export async function POST(
           process.env.API_BASIC_AUTH_CREDENTIALS,
         )}`,
       },
-      body: JSON.stringify({
-        userId: requestBody.userId,
-        message: requestBody.message,
-      }),
+      body: JSON.stringify(sendRequestBody),
     },
   );
 

@@ -26,14 +26,14 @@ export type Props = {
 };
 
 const fetchCatMessageResponseSchema = z.object({
-  requestId: z.string().min(36).max(36),
+  conversationId: z.string().min(36).max(36),
   userId: z.string().min(36).max(36),
   catId: z.string().refine((value) => isCatId(value)),
   message: z.string().min(1),
 });
 
 type FetchCatMessageResponse = {
-  requestId: string;
+  conversationId: string;
   userId: string;
   catId: CatId;
   message: string;
@@ -59,6 +59,8 @@ export const ChatContent = ({
   const [chatErrorType, setChatChatErrorType] = useState<
     ChatErrorType | string
   >('');
+
+  const [conversationId, setConversationId] = useState<string>('');
 
   const ref = useRef<HTMLTextAreaElement>(null);
 
@@ -90,11 +92,21 @@ export const ChatContent = ({
       let newResponseMessage = '';
 
       try {
-        const response = await fetchCatMessage({
-          catId: 'moko',
-          userId,
-          message,
-        });
+        const fetchCatMessageRequest =
+          conversationId === ''
+            ? ({
+                catId: 'moko',
+                userId,
+                message,
+              } as const)
+            : ({
+                catId: 'moko',
+                userId,
+                message,
+                conversationId,
+              } as const);
+
+        const response = await fetchCatMessage(fetchCatMessageRequest);
 
         const body = response.body;
         if (body === null) {
@@ -131,6 +143,9 @@ export const ChatContent = ({
 
           for (const object of objects) {
             const responseMessage = object.message ?? '';
+            if (conversationId === '') {
+              setConversationId(object.conversationId);
+            }
 
             newResponseMessage += responseMessage;
             setStreamingMessage(newResponseMessage);
