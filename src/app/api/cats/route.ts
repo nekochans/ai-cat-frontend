@@ -66,7 +66,7 @@ export async function POST(
   const response = await fetch(
     `${String(process.env.API_BASE_URL)}/cats/${
       requestBody.catId
-    }/streaming-messages`,
+    }/messages-for-guest-users`,
     {
       method: 'POST',
       headers: {
