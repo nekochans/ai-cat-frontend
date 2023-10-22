@@ -52,6 +52,7 @@ export const ChatContent = ({
   const [streamingMessage, setStreamingMessage] = useState<string>('');
 
   const [chatErrorType, setChatChatErrorType] = useState<
+    // eslint-disable-next-line @typescript-eslint/no-redundant-type-constituents
     ChatErrorType | string
   >('');
 
