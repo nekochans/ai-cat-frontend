@@ -84,9 +84,7 @@ export const ErrorTemplate = ({
           </p>
         </div>
         <div className="mx-auto mt-16 flow-root max-w-lg sm:mt-20">
-          <div className="flex justify-center">
-            {children != null ? children : ''}
-          </div>
+          <div className="flex justify-center">{children ?? ''}</div>
           <div className="mt-10 flex justify-center">
             {errorCode === 404 ? <BackToTopLink /> : ''}
             {errorCode === 500 && resetFunc != null ? (

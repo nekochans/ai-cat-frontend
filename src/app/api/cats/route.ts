@@ -26,9 +26,7 @@ export const runtime = 'edge';
 export async function POST(
   request: NextRequest,
 ): Promise<Response | NextResponse> {
-  const { success } = await rateLimit.limit(
-    request.ip != null ? request.ip : 'anonymous',
-  );
+  const { success } = await rateLimit.limit(request.ip ?? 'anonymous');
 
   const headers = {
     Connection: 'keep-alive',
