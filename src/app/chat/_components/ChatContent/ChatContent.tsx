@@ -4,13 +4,16 @@ import { fetchCatMessage } from '@/api/client/fetchCatMessage';
 import { TooManyRequestsError } from '@/api/errors';
 import { InvalidResponseBodyError } from '@/errors';
 import {
+  isFetchCatMessageResponse,
+  type FetchCatMessageResponse,
+} from '@/features';
+import {
   useRef,
   useState,
   type FormEvent,
   type JSX,
   type KeyboardEvent,
 } from 'react';
-import { z } from 'zod';
 import {
   ChatErrorMessage,
   isChatErrorType,
@@ -22,22 +25,6 @@ import { StreamingCatMessage } from './StreamingCatMessage';
 export type Props = {
   userId: string;
   initChatMessages: ChatMessages;
-};
-
-const fetchCatMessageResponseSchema = z.object({
-  conversationId: z.string().min(36).max(36),
-  message: z.string().min(1),
-});
-
-type FetchCatMessageResponse = {
-  conversationId: string;
-  message: string;
-};
-
-const isFetchCatMessageResponse = (
-  value: unknown,
-): value is FetchCatMessageResponse => {
-  return fetchCatMessageResponseSchema.safeParse(value).success;
 };
 
 export const ChatContent = ({

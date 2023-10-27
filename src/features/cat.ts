@@ -33,15 +33,11 @@ export type FetchCatMessageDto = {
 
 const fetchCatMessageResponseSchema = z.object({
   conversationId: z.string().min(36).max(36),
-  userId: z.string().min(36).max(36),
-  catId: z.string().refine((value) => isCatId(value)),
   message: z.string().min(1),
 });
 
 export type FetchCatMessageResponse = {
   conversationId: string;
-  userId: string;
-  catId: CatId;
   message: string;
 };
 
