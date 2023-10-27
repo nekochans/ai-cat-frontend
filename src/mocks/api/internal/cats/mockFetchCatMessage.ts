@@ -1,11 +1,8 @@
-import { sleep } from '@/utils';
 import { HttpResponse, type ResponseResolver } from 'msw';
 
 const encoder = new TextEncoder();
 
 export const mockFetchCatMessage: ResponseResolver = async () => {
-  await sleep();
-
   const stream = new ReadableStream({
     start(controller) {
       controller.enqueue(
