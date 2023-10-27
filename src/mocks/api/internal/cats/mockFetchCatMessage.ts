@@ -1,21 +1,40 @@
 import { sleep } from '@/utils';
-import {
-  type MockedRequest,
-  type ResponseResolver,
-  type restContext,
-} from 'msw';
+import { HttpResponse, type ResponseResolver } from 'msw';
 
-export const mockFetchCatMessage: ResponseResolver<
-  MockedRequest,
-  typeof restContext
-> = async (req, res, ctx) => {
+const encoder = new TextEncoder();
+
+export const mockFetchCatMessage: ResponseResolver = async () => {
   await sleep();
 
-  return await res(
-    ctx.status(201),
-    ctx.json({
-      message:
-        'こんにちは🐱もことお話しようにゃん🐱お名前を教えてほしいにゃん🐱',
-    }),
-  );
+  const stream = new ReadableStream({
+    start(controller) {
+      controller.enqueue(
+        encoder.encode(
+          'data: {"conversationId": "7fe730ac-5ea9-d01d-0629-568b21f72982", "message": "こんにちは🐱"}',
+        ),
+      );
+      controller.enqueue(
+        encoder.encode(
+          'data: {"conversationId": "7fe730ac-5ea9-d01d-0629-568b21f72982", "message": "もこだにゃん🐱"}',
+        ),
+      );
+      controller.enqueue(
+        encoder.encode(
+          'data: {"conversationId": "7fe730ac-5ea9-d01d-0629-568b21f72982", "message": "お話しようにゃん🐱"}',
+        ),
+      );
+      controller.enqueue(
+        encoder.encode(
+          'data: {"conversationId": "7fe730ac-5ea9-d01d-0629-568b21f72982", "message": "🐱🐱🐱"}',
+        ),
+      );
+      controller.close();
+    },
+  });
+
+  return new HttpResponse(stream, {
+    headers: {
+      'Content-Type': 'text/event-stream',
+    },
+  });
 };
