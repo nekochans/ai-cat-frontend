@@ -7,6 +7,7 @@ import {
   isFetchCatMessageResponse,
   type FetchCatMessageResponse,
 } from '@/features';
+import { type ChatMessage, type ChatMessages } from '@/features/chat';
 import {
   useRef,
   useState,
@@ -19,7 +20,7 @@ import {
   isChatErrorType,
   type ChatErrorType,
 } from './ChatErrorMessage';
-import { ChatMessagesList, type ChatMessages } from './ChatMessagesList';
+import { ChatMessagesList } from './ChatMessagesList';
 import { StreamingCatMessage } from './StreamingCatMessage';
 
 export type Props = {
@@ -64,7 +65,7 @@ export const ChatContent = ({
         name: 'User',
         message,
         avatarUrl: 'https://avatars.githubusercontent.com/u/11032365?s=96&v=4',
-      } as const;
+      } as const satisfies ChatMessage;
       const newChatMessages = [...chatMessages, ...[newUserMessage]];
 
       setChatMessages(newChatMessages);
