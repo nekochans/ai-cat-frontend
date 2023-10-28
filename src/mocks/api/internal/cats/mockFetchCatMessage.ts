@@ -6,6 +6,8 @@ const encoder = new TextEncoder();
 export const mockFetchCatMessage: ResponseResolver = () => {
   const stream = new ReadableStream({
     start: async (controller) => {
+      await sleep();
+
       controller.enqueue(
         encoder.encode(
           'data: {"conversationId": "7fe730ac-5ea9-d01d-0629-568b21f72982", "message": "こんにちは🐱"}',
