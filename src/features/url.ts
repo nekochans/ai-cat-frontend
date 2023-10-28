@@ -13,7 +13,6 @@ type InternalApiUrl =
   | `${typeof productionAppUrl}${InternalApiPath}`
   | InternalApiPath;
 
-
 export const createInternalApiUrl = (
   key: InternalApiKey,
   includeLocalHostBaseUrl: boolean = false,
