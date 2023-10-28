@@ -151,7 +151,8 @@ export const Default: Story = {
   parameters: {
     msw: {
       handlers: [
-        http.post(createInternalApiUrl('fetchCatMessage', true), mockFetchCatMessage),
+        // TODO msw-storybook-addon がまだ対応していないので対応したら修正する
+        http.post(createInternalApiUrl('fetchCatMessage'), mockFetchCatMessage),
       ],
     },
   },
