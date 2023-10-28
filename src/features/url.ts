@@ -1,3 +1,5 @@
+const productionAppUrl = 'https://www.ai-meow-cat.com';
+
 const internalApiPathList = {
   fetchCatMessage: '/api/cats',
 } as const;
@@ -8,14 +10,15 @@ type InternalApiPath =
 type InternalApiKey = keyof typeof internalApiPathList;
 
 type InternalApiUrl =
-  | `http://localhost:22222${InternalApiPath}`
+  | `${typeof productionAppUrl}${InternalApiPath}`
   | InternalApiPath;
+
 
 export const createInternalApiUrl = (
   key: InternalApiKey,
   includeLocalHostBaseUrl: boolean = false,
 ): InternalApiUrl => {
-  const baseUrl = 'http://localhost:22222';
+  const baseUrl = 'https://www.ai-meow-cat.com';
 
   if (process.env.NODE_ENV === 'test' || includeLocalHostBaseUrl) {
     return `${baseUrl}${internalApiPathList[key]}`;
