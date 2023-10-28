@@ -1,6 +1,7 @@
+import { createInternalApiUrl } from '@/features';
 import { mockFetchCatMessage } from '@/mocks/api';
 import type { Meta, StoryObj } from '@storybook/react';
-import { rest } from 'msw';
+import { http } from 'msw';
 import { type JSX } from 'react';
 import { ChatContent, type Props } from './ChatContent';
 import { ChatContentLayout } from './ChatContentLayout';
@@ -149,7 +150,9 @@ export const Default: Story = {
   },
   parameters: {
     msw: {
-      handlers: [rest.post('/api/cats', mockFetchCatMessage)],
+      handlers: [
+        http.post(createInternalApiUrl('fetchCatMessage', true), mockFetchCatMessage),
+      ],
     },
   },
 };

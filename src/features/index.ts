@@ -6,3 +6,5 @@ export type {
 } from './cat';
 
 export { extractCatNameById, isCatId, isFetchCatMessageResponse } from './cat';
+
+export { createInternalApiUrl } from './url';
