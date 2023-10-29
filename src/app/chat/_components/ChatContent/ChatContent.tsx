@@ -4,40 +4,28 @@ import { fetchCatMessage } from '@/api/client/fetchCatMessage';
 import { TooManyRequestsError } from '@/api/errors';
 import { InvalidResponseBodyError } from '@/errors';
 import {
+  isFetchCatMessageResponse,
+  type FetchCatMessageResponse,
+} from '@/features';
+import { type ChatMessage, type ChatMessages } from '@/features/chat';
+import {
   useRef,
   useState,
   type FormEvent,
   type JSX,
   type KeyboardEvent,
 } from 'react';
-import { z } from 'zod';
 import {
   ChatErrorMessage,
   isChatErrorType,
   type ChatErrorType,
 } from './ChatErrorMessage';
-import { ChatMessagesList, type ChatMessages } from './ChatMessagesList';
+import { ChatMessagesList } from './ChatMessagesList';
 import { StreamingCatMessage } from './StreamingCatMessage';
 
 export type Props = {
   userId: string;
   initChatMessages: ChatMessages;
-};
-
-const fetchCatMessageResponseSchema = z.object({
-  conversationId: z.string().min(36).max(36),
-  message: z.string().min(1),
-});
-
-type FetchCatMessageResponse = {
-  conversationId: string;
-  message: string;
-};
-
-const isFetchCatMessageResponse = (
-  value: unknown,
-): value is FetchCatMessageResponse => {
-  return fetchCatMessageResponseSchema.safeParse(value).success;
 };
 
 export const ChatContent = ({
@@ -77,7 +65,7 @@ export const ChatContent = ({
         name: 'User',
         message,
         avatarUrl: 'https://avatars.githubusercontent.com/u/11032365?s=96&v=4',
-      } as const;
+      } as const satisfies ChatMessage;
       const newChatMessages = [...chatMessages, ...[newUserMessage]];
 
       setChatMessages(newChatMessages);

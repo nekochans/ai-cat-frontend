@@ -1,5 +1,5 @@
 import { TooManyRequestsError } from '@/api/errors';
-import { type FetchCatMessage } from '@/features';
+import { createInternalApiUrl, type FetchCatMessage } from '@/features';
 
 export const fetchCatMessage: FetchCatMessage = async (dto) => {
   const requestBody =
@@ -16,7 +16,7 @@ export const fetchCatMessage: FetchCatMessage = async (dto) => {
           message: dto.message,
         };
 
-  const response = await fetch('/api/cats', {
+  const response = await fetch(createInternalApiUrl('fetchCatMessage'), {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

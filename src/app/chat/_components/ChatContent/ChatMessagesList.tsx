@@ -1,16 +1,8 @@
+import { type ChatMessages } from '@/features';
 import { useEffect, useRef, type JSX } from 'react';
 import { CatChatMessage } from './CatChatMessage';
 import { CatLoadingMessage } from './CatLoadingMessage';
 import { UserChatMessage } from './UserChatMessage';
-
-type ChatMessage = {
-  role: 'user' | 'cat';
-  name: string;
-  message: string;
-  avatarUrl: string;
-};
-
-export type ChatMessages = ChatMessage[];
 
 type Props = {
   chatMessages: ChatMessages;
