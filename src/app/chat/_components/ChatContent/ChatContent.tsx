@@ -1,11 +1,11 @@
 'use client';
 
-import { fetchCatMessage } from '@/api/client/fetchCatMessage';
+import { generateCatMessage } from '@/api/client/generateCatMessage';
 import { TooManyRequestsError } from '@/api/errors';
 import { InvalidResponseBodyError } from '@/errors';
 import {
-  isFetchCatMessageResponse,
-  type FetchCatMessageResponse,
+  isGenerateCatMessageResponse,
+  type GenerateCatMessageResponse,
 } from '@/features';
 import { type ChatMessage, type ChatMessages } from '@/features/chat';
 import {
@@ -76,7 +76,7 @@ export const ChatContent = ({
       let newResponseMessage = '';
 
       try {
-        const fetchCatMessageRequest =
+        const generateCatMessageRequest =
           conversationId === ''
             ? ({
                 catId: 'moko',
@@ -90,7 +90,7 @@ export const ChatContent = ({
                 conversationId,
               } as const);
 
-        const response = await fetchCatMessage(fetchCatMessageRequest);
+        const response = await generateCatMessage(generateCatMessageRequest);
 
         const body = response.body;
         if (body === null) {
@@ -116,14 +116,14 @@ export const ChatContent = ({
               try {
                 const parsedJson = JSON.parse(jsonString) as unknown;
 
-                return isFetchCatMessageResponse(parsedJson)
+                return isGenerateCatMessageResponse(parsedJson)
                   ? parsedJson
                   : null;
               } catch {
                 return null;
               }
             })
-            .filter(Boolean) as FetchCatMessageResponse[];
+            .filter(Boolean) as GenerateCatMessageResponse[];
 
           for (const object of objects) {
             const responseMessage = object.message ?? '';

@@ -1,28 +1,28 @@
 /**
  * @jest-environment node
  */
-import { fetchCatMessage } from '@/api/client/fetchCatMessage';
+import { generateCatMessage } from '@/api/client/generateCatMessage';
 import { TooManyRequestsError } from '@/api/errors';
 import {
-  isFetchCatMessageResponse,
-  type FetchCatMessageResponse,
+  isGenerateCatMessageResponse,
+  type GenerateCatMessageResponse,
 } from '@/features';
 import { createInternalApiUrl } from '@/features/url';
 import {
-  mockFetchCatMessage,
-  mockFetchCatMessageTooManyRequestsErrorResponseBody,
+  mockGenerateCatMessage,
+  mockGenerateCatMessageTooManyRequestsErrorResponseBody,
 } from '@/mocks';
 import { http } from 'msw';
 import { setupServer } from 'msw/node';
 
 const mockHandlers = [
-  http.post(createInternalApiUrl('fetchCatMessage'), mockFetchCatMessage),
+  http.post(createInternalApiUrl('generateCatMessage'), mockGenerateCatMessage),
 ];
 
 const mockServer = setupServer(...mockHandlers);
 
 // eslint-disable-next-line
-describe('src/api/client/fetchCatMessage.ts fetchCatMessage TestCases', () => {
+describe('src/api/client/generateCatMessage.ts generateCatMessage TestCases', () => {
   // TODO これがあるとJestが正常終了しない問題があるので解決するまでコメントアウト
   // beforeAll(() => {
   //   mockServer.listen();
@@ -36,14 +36,14 @@ describe('src/api/client/fetchCatMessage.ts fetchCatMessage TestCases', () => {
     mockServer.close();
   });
 
-  it('should be able to fetch a CatMessage', async () => {
-    const fetchedResponse = await fetchCatMessage({
+  it('should be able to generated CatMessage', async () => {
+    const generatedResponse = await generateCatMessage({
       catId: 'moko',
       userId: 'userId1234567890',
       message: 'こんにちは！',
     });
 
-    expect(fetchedResponse.body).toBeInstanceOf(ReadableStream);
+    expect(generatedResponse.body).toBeInstanceOf(ReadableStream);
 
     const expected = [
       {
@@ -65,7 +65,7 @@ describe('src/api/client/fetchCatMessage.ts fetchCatMessage TestCases', () => {
     ];
 
     const reader =
-      fetchedResponse.body?.getReader() as ReadableStreamDefaultReader<Uint8Array>;
+      generatedResponse.body?.getReader() as ReadableStreamDefaultReader<Uint8Array>;
     const decoder = new TextDecoder();
 
     let index = 0;
@@ -85,12 +85,12 @@ describe('src/api/client/fetchCatMessage.ts fetchCatMessage TestCases', () => {
           try {
             const parsedJson = JSON.parse(jsonString) as unknown;
 
-            return isFetchCatMessageResponse(parsedJson) ? parsedJson : null;
+            return isGenerateCatMessageResponse(parsedJson) ? parsedJson : null;
           } catch {
             return null;
           }
         })
-        .filter(Boolean) as FetchCatMessageResponse[];
+        .filter(Boolean) as GenerateCatMessageResponse[];
 
       for (const object of objects) {
         expect(object).toStrictEqual(expected[index]);
@@ -109,8 +109,8 @@ describe('src/api/client/fetchCatMessage.ts fetchCatMessage TestCases', () => {
   it.skip('should TooManyRequestsError Throw, because unexpected response body', async () => {
     mockServer.use(
       http.post(
-        createInternalApiUrl('fetchCatMessage'),
-        mockFetchCatMessageTooManyRequestsErrorResponseBody,
+        createInternalApiUrl('generateCatMessage'),
+        mockGenerateCatMessageTooManyRequestsErrorResponseBody,
       ),
     );
 
@@ -120,6 +120,6 @@ describe('src/api/client/fetchCatMessage.ts fetchCatMessage TestCases', () => {
       message: 'ねこ！',
     } as const;
 
-    await expect(fetchCatMessage(dto)).rejects.toThrow(TooManyRequestsError);
+    await expect(generateCatMessage(dto)).rejects.toThrow(TooManyRequestsError);
   });
 });

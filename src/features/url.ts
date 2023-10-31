@@ -1,7 +1,7 @@
 const productionAppUrl = 'https://www.ai-meow-cat.com';
 
 const internalApiPathList = {
-  fetchCatMessage: '/api/cats',
+  generateCatMessage: '/api/cats',
 } as const;
 
 type InternalApiPath =
