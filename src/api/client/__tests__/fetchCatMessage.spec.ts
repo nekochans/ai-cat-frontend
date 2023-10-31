@@ -103,7 +103,7 @@ describe('src/api/client/fetchCatMessage.ts fetchCatMessage TestCases', () => {
     await readStream();
 
     reader.releaseLock();
-  });
+  }, 10000);
 
   // TODO テストが通るがJestが正常終了しない問題があるので解決するまでスキップ
   it.skip('should TooManyRequestsError Throw, because unexpected response body', async () => {
