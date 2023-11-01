@@ -1,2 +1,2 @@
-export { mockFetchCatMessage } from './mockFetchCatMessage';
-export { mockFetchCatMessageTooManyRequestsErrorResponseBody } from './mockFetchCatMessageTooManyRequestsErrorResponseBody';
+export { mockGenerateCatMessage } from './mockGenerateCatMessage';
+export { mockGenerateCatMessageTooManyRequestsErrorResponseBody } from './mockGenerateCatMessageTooManyRequestsErrorResponseBody';

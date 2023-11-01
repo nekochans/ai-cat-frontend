@@ -3,7 +3,7 @@ import { HttpResponse, type ResponseResolver } from 'msw';
 
 const encoder = new TextEncoder();
 
-export const mockFetchCatMessage: ResponseResolver = () => {
+export const mockGenerateCatMessage: ResponseResolver = () => {
   const stream = new ReadableStream({
     start: async (controller) => {
       await sleep();

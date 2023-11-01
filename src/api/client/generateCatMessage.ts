@@ -1,7 +1,7 @@
 import { TooManyRequestsError } from '@/api/errors';
-import { createInternalApiUrl, type FetchCatMessage } from '@/features';
+import { createInternalApiUrl, type GenerateCatMessage } from '@/features';
 
-export const fetchCatMessage: FetchCatMessage = async (dto) => {
+export const generateCatMessage: GenerateCatMessage = async (dto) => {
   const requestBody =
     dto.conversationId != null
       ? {
@@ -16,7 +16,7 @@ export const fetchCatMessage: FetchCatMessage = async (dto) => {
           message: dto.message,
         };
 
-  const response = await fetch(createInternalApiUrl('fetchCatMessage'), {
+  const response = await fetch(createInternalApiUrl('generateCatMessage'), {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -25,7 +25,7 @@ export const fetchCatMessage: FetchCatMessage = async (dto) => {
   });
 
   if (response.status === 429) {
-    throw new TooManyRequestsError('src/api/client/fetchCatMessage.ts');
+    throw new TooManyRequestsError('src/api/client/generateCatMessage.ts');
   }
 
   return response;

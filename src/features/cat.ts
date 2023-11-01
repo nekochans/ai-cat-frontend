@@ -24,27 +24,29 @@ export const isCatId = (value: unknown): value is CatId => {
   return result !== undefined;
 };
 
-export type FetchCatMessageDto = {
+export type GenerateCatMessageDto = {
   catId: CatId;
   userId: string;
   message: string;
   conversationId?: string;
 };
 
-const fetchCatMessageResponseSchema = z.object({
+const generateCatMessageResponseSchema = z.object({
   conversationId: z.string().min(36).max(36),
   message: z.string().min(1),
 });
 
-export type FetchCatMessageResponse = {
+export type GenerateCatMessageResponse = {
   conversationId: string;
   message: string;
 };
 
-export const isFetchCatMessageResponse = (
+export const isGenerateCatMessageResponse = (
   value: unknown,
-): value is FetchCatMessageResponse => {
-  return fetchCatMessageResponseSchema.safeParse(value).success;
+): value is GenerateCatMessageResponse => {
+  return generateCatMessageResponseSchema.safeParse(value).success;
 };
 
-export type FetchCatMessage = (dto: FetchCatMessageDto) => Promise<Response>;
+export type GenerateCatMessage = (
+  dto: GenerateCatMessageDto,
+) => Promise<Response>;

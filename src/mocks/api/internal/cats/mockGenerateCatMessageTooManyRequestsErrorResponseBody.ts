@@ -1,6 +1,6 @@
 import { HttpResponse, type ResponseResolver } from 'msw';
 
-export const mockFetchCatMessageTooManyRequestsErrorResponseBody: ResponseResolver =
+export const mockGenerateCatMessageTooManyRequestsErrorResponseBody: ResponseResolver =
   () => {
     return HttpResponse.json(
       { type: 'TOO_MANY_REQUESTS', title: 'Too Many Requests' },

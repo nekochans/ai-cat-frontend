@@ -1,5 +1,5 @@
 import { createInternalApiUrl, type ChatMessage } from '@/features';
-import { mockFetchCatMessage } from '@/mocks/api';
+import { mockGenerateCatMessage } from '@/mocks/api';
 import type { Meta, StoryObj } from '@storybook/react';
 import { http } from 'msw';
 import { type JSX } from 'react';
@@ -151,8 +151,10 @@ export const Default: Story = {
   parameters: {
     msw: {
       handlers: [
-        // TODO msw-storybook-addon がまだ対応していないので対応したら修正する
-        http.post(createInternalApiUrl('fetchCatMessage'), mockFetchCatMessage),
+        http.post(
+          createInternalApiUrl('generateCatMessage'),
+          mockGenerateCatMessage,
+        ),
       ],
     },
   },
