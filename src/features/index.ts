@@ -7,6 +7,10 @@ export type {
 
 export type { ChatMessage, ChatMessages } from './chat';
 
-export { extractCatNameById, isCatId, isGenerateCatMessageResponse } from './cat';
+export {
+  extractCatNameById,
+  isCatId,
+  isGenerateCatMessageResponse,
+} from './cat';
 
 export { createInternalApiUrl } from './url';

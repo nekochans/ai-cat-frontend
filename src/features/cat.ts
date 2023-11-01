@@ -47,4 +47,6 @@ export const isGenerateCatMessageResponse = (
   return generateCatMessageResponseSchema.safeParse(value).success;
 };
 
-export type GenerateCatMessage = (dto: GenerateCatMessageDto) => Promise<Response>;
+export type GenerateCatMessage = (
+  dto: GenerateCatMessageDto,
+) => Promise<Response>;
