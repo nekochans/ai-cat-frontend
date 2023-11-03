@@ -23,6 +23,8 @@ const rateLimit = new Ratelimit({
 
 export const runtime = 'edge';
 
+export const maxDuration = 180;
+
 export async function POST(
   request: NextRequest,
 ): Promise<Response | NextResponse> {
