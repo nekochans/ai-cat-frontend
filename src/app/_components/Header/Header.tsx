@@ -25,12 +25,11 @@ export const Header = ({ enableLoginLink }: Props): JSX.Element => {
       >
         <div className="flex lg:flex-1">
           <Link href="/" prefetch={false} passHref className="-m-1.5 p-1.5">
-            {/* TODO 後でちゃんとしたロゴに置き換える */}
             <span className="sr-only">AI Meow Cat</span>
             <img
-              src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-              className="h-8 w-auto"
-              alt=""
+              src="/header-service-icon.svg"
+              className="h-10 w-auto"
+              alt="AI Meow Cat"
             />
           </Link>
         </div>
