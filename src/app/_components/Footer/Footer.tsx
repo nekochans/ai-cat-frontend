@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import Link from 'next/link';
 import type { JSX } from 'react';
 
@@ -7,9 +8,10 @@ export const Footer = (): JSX.Element => {
       <div className="mx-auto w-full max-w-screen-xl p-4 md:py-8">
         <div className="sm:flex sm:items-center sm:justify-between">
           <Link href="/" className="mb-4 flex items-center sm:mb-0">
-            <img
+            <Image
               src="/footer-service-icon.svg"
-              className="h-10 w-auto"
+              width={180}
+              height={40}
               alt="AI Meow Cat"
             />
           </Link>
