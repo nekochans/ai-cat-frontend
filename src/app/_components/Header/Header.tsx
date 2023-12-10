@@ -2,6 +2,7 @@
 
 import { Dialog } from '@headlessui/react';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
+import Image from 'next/image';
 import Link from 'next/link';
 import { useState, type JSX } from 'react';
 
@@ -25,12 +26,12 @@ export const Header = ({ enableLoginLink }: Props): JSX.Element => {
       >
         <div className="flex lg:flex-1">
           <Link href="/" prefetch={false} passHref className="-m-1.5 p-1.5">
-            {/* TODO 後でちゃんとしたロゴに置き換える */}
             <span className="sr-only">AI Meow Cat</span>
-            <img
-              src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-              className="h-8 w-auto"
-              alt=""
+            <Image
+              src="/header-service-icon.svg"
+              height={50}
+              width={50}
+              alt="AI Meow Cat"
             />
           </Link>
         </div>
@@ -82,12 +83,12 @@ export const Header = ({ enableLoginLink }: Props): JSX.Element => {
         <Dialog.Panel className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-yellow-100 p-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
           <div className="flex items-center justify-between">
             <Link href="/" prefetch={false} passHref className="-m-1.5 p-1.5">
-              {/* TODO 後でちゃんとしたロゴに置き換える */}
               <span className="sr-only">AI Meow Cat</span>
-              <img
-                src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-                className="h-8 w-auto"
-                alt=""
+              <Image
+                src="/header-service-icon.svg"
+                height={50}
+                width={50}
+                alt="AI Meow Cat"
               />
             </Link>
             <button

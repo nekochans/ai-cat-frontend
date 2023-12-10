@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import Link from 'next/link';
 import type { JSX } from 'react';
 
@@ -7,9 +8,12 @@ export const Footer = (): JSX.Element => {
       <div className="mx-auto w-full max-w-screen-xl p-4 md:py-8">
         <div className="sm:flex sm:items-center sm:justify-between">
           <Link href="/" className="mb-4 flex items-center sm:mb-0">
-            <span className="self-center whitespace-nowrap text-2xl font-semibold dark:text-white">
-              AI Meow Cat
-            </span>
+            <Image
+              src="/footer-service-icon.svg"
+              width={180}
+              height={40}
+              alt="AI Meow Cat"
+            />
           </Link>
           <ul className="mb-6 flex flex-wrap items-center text-sm font-medium text-gray-900 dark:text-gray-800 sm:mb-0">
             <li>
