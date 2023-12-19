@@ -1,5 +1,5 @@
 import './globals.css';
-import { GoogleTagManager, NoScriptGoogleTagManager } from '@/app/_components';
+import { GoogleTagManager } from '@/app/_components';
 import { Noto_Sans_JP } from 'next/font/google';
 import type { JSX, ReactNode } from 'react';
 
@@ -23,7 +23,6 @@ const RootLayout = ({ children }: Props): JSX.Element => {
     <html lang="ja">
       <GoogleTagManager />
       <body className={font.className}>{children}</body>
-      <NoScriptGoogleTagManager />
     </html>
   );
 };
