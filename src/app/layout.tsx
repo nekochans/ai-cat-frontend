@@ -1,4 +1,5 @@
 import './globals.css';
+import { GoogleTagManager } from '@/app/_components';
 import { Noto_Sans_JP } from 'next/font/google';
 import type { JSX, ReactNode } from 'react';
 
@@ -20,6 +21,7 @@ type Props = {
 const RootLayout = ({ children }: Props): JSX.Element => {
   return (
     <html lang="ja">
+      <GoogleTagManager />
       <body className={font.className}>{children}</body>
     </html>
   );
