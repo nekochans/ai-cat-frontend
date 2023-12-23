@@ -1,7 +1,6 @@
 /**
  * @jest-environment node
  */
-import { describe, it, expect, afterEach, afterAll } from "@jest/globals";
 import { generateCatMessage } from '@/api/client/generateCatMessage';
 import { TooManyRequestsError } from '@/api/errors';
 import {
@@ -13,6 +12,7 @@ import {
   mockGenerateCatMessage,
   mockGenerateCatMessageTooManyRequestsErrorResponseBody,
 } from '@/mocks';
+import { afterAll, afterEach, describe, expect, it } from '@jest/globals';
 import { http } from 'msw';
 import { setupServer } from 'msw/node';
 
@@ -65,8 +65,7 @@ describe('src/api/client/generateCatMessage.ts generateCatMessage TestCases', ()
       },
     ];
 
-    const reader =
-      generatedResponse.body?.getReader() as ReadableStreamDefaultReader<Uint8Array>;
+    const reader = generatedResponse.body?.getReader()!;
     const decoder = new TextDecoder();
 
     let index = 0;

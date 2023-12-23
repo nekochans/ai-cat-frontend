@@ -1,5 +1,5 @@
-import { describe, it, expect } from "@jest/globals";
 import { isCatId, type CatId } from '@/features';
+import { describe, expect, it } from '@jest/globals';
 
 describe('src/features/cat.ts isCatId TestCases', () => {
   type TestTable = {
