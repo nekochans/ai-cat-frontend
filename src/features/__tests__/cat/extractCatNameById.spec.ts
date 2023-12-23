@@ -1,3 +1,4 @@
+import { describe, it, expect } from "@jest/globals";
 import { extractCatNameById, type CatId } from '@/features';
 import { ExhaustiveError } from '@/utils';
 import type { CatName } from '../../cat';
@@ -8,7 +9,7 @@ describe('src/features/cat.ts extractCatNameById TestCases', () => {
     expected: CatName;
   };
 
-  it.each`
+  it.each<TestTable>`
     catId     | expected
     ${'moko'} | ${'もこ'}
   `(
@@ -18,7 +19,7 @@ describe('src/features/cat.ts extractCatNameById TestCases', () => {
     },
   );
 
-  it.each`
+  it.each<TestTable>`
     catId
     ${'cat'}
     ${'unknown'}

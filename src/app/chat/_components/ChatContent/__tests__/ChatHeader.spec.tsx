@@ -1,3 +1,4 @@
+import { describe, it, expect } from "@jest/globals";
 import { ChatHeader } from '@/app/chat/_components/ChatContent/ChatHeader';
 import { render, screen } from '@testing-library/react';
 
