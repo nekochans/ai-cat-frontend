@@ -22,6 +22,16 @@ const mockHandlers = [
 
 const mockServer = setupServer(...mockHandlers);
 
+const extractResponseBody = (
+  response: Response,
+): ReadableStream<Uint8Array> => {
+  if (response.body === null) {
+    throw new Error('generatedResponse.body is null');
+  }
+
+  return response.body;
+};
+
 // eslint-disable-next-line
 describe('src/api/client/generateCatMessage.ts generateCatMessage TestCases', () => {
   // TODO これがあるとJestが正常終了しない問題があるので解決するまでコメントアウト
@@ -46,6 +56,9 @@ describe('src/api/client/generateCatMessage.ts generateCatMessage TestCases', ()
 
     expect(generatedResponse.body).toBeInstanceOf(ReadableStream);
 
+    const generatedResponseBody: ReadableStream<Uint8Array> =
+      extractResponseBody(generatedResponse);
+
     const expected = [
       {
         conversationId: '7fe730ac-5ea9-d01d-0629-568b21f72982',
@@ -65,7 +78,7 @@ describe('src/api/client/generateCatMessage.ts generateCatMessage TestCases', ()
       },
     ];
 
-    const reader = generatedResponse.body?.getReader()!;
+    const reader = generatedResponseBody.getReader();
     const decoder = new TextDecoder();
 
     let index = 0;
