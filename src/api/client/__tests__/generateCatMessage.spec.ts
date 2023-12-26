@@ -105,6 +105,9 @@ describe('src/api/client/generateCatMessage.ts generateCatMessage TestCases', ()
         })
         .filter(Boolean) as GenerateCatMessageResponse[];
 
+      // TODO MSWのバージョンを `2.0.11` に上げたらこの部分のアサーションが動作しなくなった
+      // TODO beforeAllのコメントアウトを解除するとアサーションは動作するが以下の警告が発生してテストが正常終了しない
+      // A worker process has failed to exit gracefully and has been force exited. This is likely caused by tests leaking due to improper teardown. Try running with --detectOpenHandles to find leaks. Active timers can also cause this, ensure that .unref() was called on them.
       for (const object of objects) {
         expect(object).toStrictEqual(expected[index]);
         index++;
