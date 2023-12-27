@@ -1,4 +1,5 @@
 import { ChatHeader } from '@/app/chat/_components/ChatContent/ChatHeader';
+import { describe, expect, it } from '@jest/globals';
 import { render, screen } from '@testing-library/react';
 
 describe('src/app/chat/_components/ChatContent/ChatHeader.tsx TestCases', () => {

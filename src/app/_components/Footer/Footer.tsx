@@ -15,7 +15,7 @@ export const Footer = (): JSX.Element => {
               alt="AI Meow Cat"
             />
           </Link>
-          <ul className="mb-6 flex flex-wrap items-center text-sm font-medium text-gray-900 dark:text-gray-800 sm:mb-0">
+          <ul className="mb-6 flex flex-wrap items-center text-sm font-medium text-gray-900 sm:mb-0 dark:text-gray-800">
             <li>
               <Link
                 href="/"
@@ -45,8 +45,8 @@ export const Footer = (): JSX.Element => {
             </li>
           </ul>
         </div>
-        <hr className="my-6 border-amber-200 dark:border-gray-700 sm:mx-auto lg:my-8" />
-        <span className="block text-sm text-gray-900 dark:text-gray-800 sm:text-center">
+        <hr className="my-6 border-amber-200 sm:mx-auto lg:my-8 dark:border-gray-700" />
+        <span className="block text-sm text-gray-900 sm:text-center dark:text-gray-800">
           Copyright (c){' '}
           <a href="https://github.com/nekochans" className="hover:underline">
             nekochans
