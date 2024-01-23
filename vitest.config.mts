@@ -9,7 +9,7 @@ export default defineConfig({
   plugins: [react(), tsconfigPaths()],
   test: {
     globals: true,
-    root: 'src',
+    root: './',
     environment: 'jsdom',
     setupFiles: ['./vitest.setup.mts'],
     testTransformMode: {
