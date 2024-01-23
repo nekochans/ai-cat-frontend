@@ -1,6 +1,3 @@
-/**
- * @jest-environment node
- */
 import { generateCatMessage } from '@/api/client/generateCatMessage';
 import { TooManyRequestsError } from '@/api/errors';
 import {
@@ -12,15 +9,15 @@ import {
   mockGenerateCatMessage,
   mockGenerateCatMessageTooManyRequestsErrorResponseBody,
 } from '@/mocks';
-import { afterAll, afterEach, describe, expect, it } from '@jest/globals';
 import { http } from 'msw';
 import { setupServer } from 'msw/node';
+import { afterAll, afterEach, beforeAll, describe, expect, it } from 'vitest';
 
 const mockHandlers = [
   http.post(createInternalApiUrl('generateCatMessage'), mockGenerateCatMessage),
 ];
 
-const mockServer = setupServer(...mockHandlers);
+const server = setupServer(...mockHandlers);
 
 const extractResponseBody = (
   response: Response,
@@ -34,17 +31,16 @@ const extractResponseBody = (
 
 // eslint-disable-next-line
 describe('src/api/client/generateCatMessage.ts generateCatMessage TestCases', () => {
-  // TODO これがあるとJestが正常終了しない問題があるので解決するまでコメントアウト
-  // beforeAll(() => {
-  //   mockServer.listen();
-  // });
+  beforeAll(() => {
+    server.listen();
+  });
 
   afterEach(() => {
-    mockServer.resetHandlers();
+    server.resetHandlers();
   });
 
   afterAll(() => {
-    mockServer.close();
+    server.close();
   });
 
   it('should be able to generated CatMessage', async () => {
@@ -105,9 +101,6 @@ describe('src/api/client/generateCatMessage.ts generateCatMessage TestCases', ()
         })
         .filter(Boolean) as GenerateCatMessageResponse[];
 
-      // TODO MSWのバージョンを `2.0.11` に上げたらこの部分のアサーションが動作しなくなった
-      // TODO beforeAllのコメントアウトを解除するとアサーションは動作するが以下の警告が発生してテストが正常終了しない
-      // A worker process has failed to exit gracefully and has been force exited. This is likely caused by tests leaking due to improper teardown. Try running with --detectOpenHandles to find leaks. Active timers can also cause this, ensure that .unref() was called on them.
       for (const object of objects) {
         expect(object).toStrictEqual(expected[index]);
         index++;
@@ -121,9 +114,8 @@ describe('src/api/client/generateCatMessage.ts generateCatMessage TestCases', ()
     reader.releaseLock();
   }, 10000);
 
-  // TODO テストが通るがJestが正常終了しない問題があるので解決するまでスキップ
-  it.skip('should TooManyRequestsError Throw, because unexpected response body', async () => {
-    mockServer.use(
+  it('should TooManyRequestsError Throw, because unexpected response body', async () => {
+    server.use(
       http.post(
         createInternalApiUrl('generateCatMessage'),
         mockGenerateCatMessageTooManyRequestsErrorResponseBody,

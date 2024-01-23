@@ -1,6 +1,6 @@
 import { extractCatNameById, type CatId } from '@/features';
 import { ExhaustiveError } from '@/utils';
-import { describe, expect, it } from '@jest/globals';
+import { describe, expect, it } from 'vitest';
 import type { CatName } from '../../cat';
 
 describe('src/features/cat.ts extractCatNameById TestCases', () => {

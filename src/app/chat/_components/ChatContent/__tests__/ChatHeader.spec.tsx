@@ -1,6 +1,6 @@
 import { ChatHeader } from '@/app/chat/_components/ChatContent/ChatHeader';
-import { describe, expect, it } from '@jest/globals';
 import { render, screen } from '@testing-library/react';
+import { describe, expect, it } from 'vitest';
 
 describe('src/app/chat/_components/ChatContent/ChatHeader.tsx TestCases', () => {
   it('should display ChatHeader', () => {
