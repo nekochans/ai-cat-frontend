@@ -1,7 +1,7 @@
 import nextEnv from '@next/env';
 import react from '@vitejs/plugin-react-swc';
 import tsconfigPaths from 'vite-tsconfig-paths';
-import { defineConfig, configDefaults } from 'vitest/config';
+import { configDefaults, defineConfig } from 'vitest/config';
 
 nextEnv.loadEnvConfig(process.cwd());
 
@@ -29,8 +29,6 @@ export default defineConfig({
         './tailwind.config.js',
       ],
     },
-    exclude:[
-      ...configDefaults.exclude,
-    ]
+    exclude: [...configDefaults.exclude],
   },
 });
