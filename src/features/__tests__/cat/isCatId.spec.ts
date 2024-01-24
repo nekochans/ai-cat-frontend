@@ -6,14 +6,14 @@ describe('src/features/cat.ts isCatId TestCases', () => {
     catId: CatId;
   };
 
-  it.each<TestTable>`
+  it.each`
     catId
     ${'moko'}
   `('should return true. catId: $catId', ({ catId }: TestTable) => {
     expect(isCatId(catId)).toBeTruthy();
   });
 
-  it.each<TestTable>`
+  it.each`
     catId
     ${'cat'}
     ${'unknown'}

@@ -9,7 +9,7 @@ describe('src/features/cat.ts extractCatNameById TestCases', () => {
     expected: CatName;
   };
 
-  it.each<TestTable>`
+  it.each`
     catId     | expected
     ${'moko'} | ${'もこ'}
   `(
@@ -19,7 +19,7 @@ describe('src/features/cat.ts extractCatNameById TestCases', () => {
     },
   );
 
-  it.each<TestTable>`
+  it.each`
     catId
     ${'cat'}
     ${'unknown'}
