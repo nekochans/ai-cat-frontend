@@ -1,19 +1,19 @@
 import { isCatId, type CatId } from '@/features';
-import { describe, expect, it } from '@jest/globals';
+import { describe, expect, it } from 'vitest';
 
 describe('src/features/cat.ts isCatId TestCases', () => {
   type TestTable = {
     catId: CatId;
   };
 
-  it.each<TestTable>`
+  it.each`
     catId
     ${'moko'}
   `('should return true. catId: $catId', ({ catId }: TestTable) => {
     expect(isCatId(catId)).toBeTruthy();
   });
 
-  it.each<TestTable>`
+  it.each`
     catId
     ${'cat'}
     ${'unknown'}

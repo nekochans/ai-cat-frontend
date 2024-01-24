@@ -11,7 +11,7 @@
     "plugin:jsx-a11y/recommended",
     "plugin:react/recommended",
     "plugin:react/jsx-runtime",
-    "plugin:jest/recommended",
+    "plugin:vitest/recommended",
     "plugin:storybook/recommended",
     "plugin:tailwindcss/recommended",
     "next/core-web-vitals",

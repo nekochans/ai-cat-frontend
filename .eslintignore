@@ -7,3 +7,5 @@ next-env.d.ts
 *.config.js
 storybook-static/
 public/mockServiceWorker.js
+vitest.config.mts
+vitest.setup.mts
