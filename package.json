@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "test": "vitest",
-    "test:ci": "vitest --collect-coverage",
+    "test:ci": "vitest run --coverage",
     "dev": "next dev -p 22222",
     "build": "next build",
     "start": "next start -p 22222",
@@ -56,6 +56,7 @@
     "@types/uuid": "^9.0.7",
     "@typescript-eslint/eslint-plugin": "^6.15.0",
     "@vitejs/plugin-react-swc": "^3.5.0",
+    "@vitest/coverage-v8": "^1.2.1",
     "chromatic": "^10.2.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-config-standard-with-typescript": "^43.0.0",
