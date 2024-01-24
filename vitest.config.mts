@@ -12,9 +12,6 @@ export default defineConfig({
     root: './',
     environment: 'jsdom',
     setupFiles: ['./vitest.setup.mts'],
-    testTransformMode: {
-      ssr: ['**/*'],
-    },
     reporters: ['default', 'hanging-process'],
     coverage: {
       provider: 'v8',
