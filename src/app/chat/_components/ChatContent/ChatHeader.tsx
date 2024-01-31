@@ -7,7 +7,7 @@ export const ChatHeader = (): JSX.Element => {
       <div className="relative flex items-center space-x-4">
         <div className="relative">
           <Image
-            src="https://lgtm-images.lgtmeow.com/2022/03/23/10/9738095a-f426-48e4-be8d-93f933c42917.webp"
+            src="/cats/moko.webp"
             // TODO width, heightの指定方法をどうするか後で考える
             width={330}
             height={400}

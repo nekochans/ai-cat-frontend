@@ -15,7 +15,7 @@ const chatMessages = [
     message:
       'こんにちはにゃん🐱もことお話しようにゃん！もこはねこだけど、チュールは苦手だにゃ🐱チキン味のカリカリしか食べないにゃん！',
     avatarUrl:
-      'https://lgtm-images.lgtmeow.com/2022/03/23/10/9738095a-f426-48e4-be8d-93f933c42917.webp',
+      '/cats/moko.webp',
   } as const,
   {
     role: 'user',
@@ -30,7 +30,7 @@ const chatMessages = [
     message:
       'そうにゃ🐱もこはウェットフードが苦手だにゃ🐱Userさんの好きな食べ物を教えてにゃー！',
     avatarUrl:
-      'https://lgtm-images.lgtmeow.com/2022/03/23/10/9738095a-f426-48e4-be8d-93f933c42917.webp',
+      '/cats/moko.webp',
   } as const,
   {
     role: 'user',
@@ -44,7 +44,7 @@ const chatMessages = [
     message:
       'こんにちはにゃん🐱もことお話しようにゃん！もこはねこだけど、チュールは苦手だにゃ🐱チキン味のカリカリしか食べないにゃん！',
     avatarUrl:
-      'https://lgtm-images.lgtmeow.com/2022/03/23/10/9738095a-f426-48e4-be8d-93f933c42917.webp',
+      '/cats/moko.webp',
   } as const,
   {
     role: 'user',
@@ -59,7 +59,7 @@ const chatMessages = [
     message:
       'そうにゃ🐱もこはウェットフードが苦手だにゃ🐱Userさんの好きな食べ物を教えてにゃー！',
     avatarUrl:
-      'https://lgtm-images.lgtmeow.com/2022/03/23/10/9738095a-f426-48e4-be8d-93f933c42917.webp',
+      '/cats/moko.webp',
   } as const,
   {
     role: 'user',
@@ -73,7 +73,7 @@ const chatMessages = [
     message:
       'こんにちはにゃん🐱もことお話しようにゃん！もこはねこだけど、チュールは苦手だにゃ🐱チキン味のカリカリしか食べないにゃん！',
     avatarUrl:
-      'https://lgtm-images.lgtmeow.com/2022/03/23/10/9738095a-f426-48e4-be8d-93f933c42917.webp',
+      '/cats/moko.webp',
   } as const,
   {
     role: 'user',
@@ -88,7 +88,7 @@ const chatMessages = [
     message:
       'そうにゃ🐱もこはウェットフードが苦手だにゃ🐱Userさんの好きな食べ物を教えてにゃー！',
     avatarUrl:
-      'https://lgtm-images.lgtmeow.com/2022/03/23/10/9738095a-f426-48e4-be8d-93f933c42917.webp',
+      '/cats/moko.webp',
   } as const,
   {
     role: 'user',
@@ -102,7 +102,7 @@ const chatMessages = [
     message:
       'こんにちはにゃん🐱もことお話しようにゃん！もこはねこだけど、チュールは苦手だにゃ🐱チキン味のカリカリしか食べないにゃん！',
     avatarUrl:
-      'https://lgtm-images.lgtmeow.com/2022/03/23/10/9738095a-f426-48e4-be8d-93f933c42917.webp',
+      '/cats/moko.webp',
   } as const,
   {
     role: 'user',
@@ -117,7 +117,7 @@ const chatMessages = [
     message:
       'そうにゃ🐱もこはウェットフードが苦手だにゃ🐱Userさんの好きな食べ物を教えてにゃー！一番下のメッセージだにゃ！',
     avatarUrl:
-      'https://lgtm-images.lgtmeow.com/2022/03/23/10/9738095a-f426-48e4-be8d-93f933c42917.webp',
+      '/cats/moko.webp',
   } as const,
 ];
 
