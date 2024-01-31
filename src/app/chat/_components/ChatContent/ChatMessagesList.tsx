@@ -45,10 +45,7 @@ export const ChatMessagesList = ({
         );
       })}
       {isLoading ? (
-        <CatLoadingMessage
-          name="もこちゃん"
-          avatarUrl="/cats/moko.webp"
-        />
+        <CatLoadingMessage name="もこちゃん" avatarUrl="/cats/moko.webp" />
       ) : (
         ''
       )}

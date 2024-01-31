@@ -25,12 +25,12 @@ import { StreamingCatMessage } from './StreamingCatMessage';
 
 export type Props = {
   userId: string;
-  initChatMessages: ChatMessages;
+  initChatMessages?: ChatMessages;
 };
 
 export const ChatContent = ({
   userId,
-  initChatMessages,
+  initChatMessages = [],
 }: Props): JSX.Element => {
   const [isLoading, setIsLoading] = useState(false);
 
@@ -146,8 +146,7 @@ export const ChatContent = ({
           role: 'cat',
           name: 'もこちゃん',
           message: newResponseMessage,
-          avatarUrl:
-            '/cats/moko.webp',
+          avatarUrl: '/cats/moko.webp',
         } as const;
 
         const newCatReplyContainedChatMessage = [

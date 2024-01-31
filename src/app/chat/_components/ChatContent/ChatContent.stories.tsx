@@ -37,8 +37,7 @@ const chatMessages = [
     name: 'もこちゃん',
     message:
       'こんにちはにゃん🐱もことお話しようにゃん！もこはねこだけど、チュールは苦手だにゃ🐱チキン味のカリカリしか食べないにゃん！',
-    avatarUrl:
-      '/cats/moko.webp',
+    avatarUrl: '/cats/moko.webp',
   } as const satisfies ChatMessage,
   {
     role: 'user',
@@ -52,8 +51,7 @@ const chatMessages = [
     name: 'もこちゃん',
     message:
       'そうにゃ🐱もこはウェットフードが苦手だにゃ🐱Userさんの好きな食べ物を教えてにゃー！',
-    avatarUrl:
-      '/cats/moko.webp',
+    avatarUrl: '/cats/moko.webp',
   } as const satisfies ChatMessage,
   {
     role: 'user',
@@ -66,8 +64,7 @@ const chatMessages = [
     name: 'もこちゃん',
     message:
       'こんにちはにゃん🐱もことお話しようにゃん！もこはねこだけど、チュールは苦手だにゃ🐱チキン味のカリカリしか食べないにゃん！',
-    avatarUrl:
-      '/cats/moko.webp',
+    avatarUrl: '/cats/moko.webp',
   } as const satisfies ChatMessage,
   {
     role: 'user',
@@ -81,8 +78,7 @@ const chatMessages = [
     name: 'もこちゃん',
     message:
       'そうにゃ🐱もこはウェットフードが苦手だにゃ🐱Userさんの好きな食べ物を教えてにゃー！',
-    avatarUrl:
-      '/cats/moko.webp',
+    avatarUrl: '/cats/moko.webp',
   } as const satisfies ChatMessage,
   {
     role: 'user',
@@ -95,8 +91,7 @@ const chatMessages = [
     name: 'もこちゃん',
     message:
       'こんにちはにゃん🐱もことお話しようにゃん！もこはねこだけど、チュールは苦手だにゃ🐱チキン味のカリカリしか食べないにゃん！',
-    avatarUrl:
-      '/cats/moko.webp',
+    avatarUrl: '/cats/moko.webp',
   } as const satisfies ChatMessage,
   {
     role: 'user',
@@ -110,8 +105,7 @@ const chatMessages = [
     name: 'もこちゃん',
     message:
       'そうにゃ🐱もこはウェットフードが苦手だにゃ🐱Userさんの好きな食べ物を教えてにゃー！',
-    avatarUrl:
-      '/cats/moko.webp',
+    avatarUrl: '/cats/moko.webp',
   } as const satisfies ChatMessage,
   {
     role: 'user',
@@ -124,8 +118,7 @@ const chatMessages = [
     name: 'もこちゃん',
     message:
       'こんにちはにゃん🐱もことお話しようにゃん！もこはねこだけど、チュールは苦手だにゃ🐱チキン味のカリカリしか食べないにゃん！',
-    avatarUrl:
-      '/cats/moko.webp',
+    avatarUrl: '/cats/moko.webp',
   } as const satisfies ChatMessage,
   {
     role: 'user',
@@ -139,8 +132,7 @@ const chatMessages = [
     name: 'もこちゃん',
     message:
       'そうにゃ🐱もこはウェットフードが苦手だにゃ🐱Userさんの好きな食べ物を教えてにゃー！',
-    avatarUrl:
-      '/cats/moko.webp',
+    avatarUrl: '/cats/moko.webp',
   } as const satisfies ChatMessage,
 ];
 
