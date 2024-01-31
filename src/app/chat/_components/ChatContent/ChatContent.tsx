@@ -25,12 +25,12 @@ import { StreamingCatMessage } from './StreamingCatMessage';
 
 export type Props = {
   userId: string;
-  initChatMessages: ChatMessages;
+  initChatMessages?: ChatMessages;
 };
 
 export const ChatContent = ({
   userId,
-  initChatMessages,
+  initChatMessages = [],
 }: Props): JSX.Element => {
   const [isLoading, setIsLoading] = useState(false);
 
@@ -146,8 +146,7 @@ export const ChatContent = ({
           role: 'cat',
           name: 'もこちゃん',
           message: newResponseMessage,
-          avatarUrl:
-            'https://lgtm-images.lgtmeow.com/2022/03/23/10/9738095a-f426-48e4-be8d-93f933c42917.webp',
+          avatarUrl: '/cats/moko.webp',
         } as const;
 
         const newCatReplyContainedChatMessage = [
@@ -198,7 +197,7 @@ export const ChatContent = ({
       {streamingMessage !== '' ? (
         <StreamingCatMessage
           name="もこちゃん"
-          avatarUrl="https://lgtm-images.lgtmeow.com/2022/03/23/10/9738095a-f426-48e4-be8d-93f933c42917.webp"
+          avatarUrl="/cats/moko.webp"
           message={streamingMessage}
         />
       ) : (
