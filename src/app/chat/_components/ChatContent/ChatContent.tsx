@@ -64,7 +64,7 @@ export const ChatContent = ({
         role: 'user',
         name: 'User',
         message,
-        avatarUrl: 'https://avatars.githubusercontent.com/u/11032365?s=96&v=4',
+        avatarUrl: '/no-avatar.webp',
       } as const satisfies ChatMessage;
       const newChatMessages = [...chatMessages, ...[newUserMessage]];
 
