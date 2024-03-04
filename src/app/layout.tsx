@@ -10,8 +10,9 @@ const font = Noto_Sans_JP({
 });
 
 export const metadata = {
-  title: 'AI Cat🐱',
-  description: 'ねこのAIとお話しよう🐱',
+  title: 'AI Meow Cat',
+  description:
+    'ねこの人格を持ったAIとお話ができます🐱分からない事を何でも聞いてみよう！',
 };
 
 type Props = {
