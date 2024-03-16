@@ -47,7 +47,7 @@ export const ChatErrorMessage = ({ type }: Props): JSX.Element => {
           width={330}
           height={400}
           alt="Crying Black Cat"
-          className="h-10 w-10 rounded-full sm:h-16 sm:w-16"
+          className="size-10 rounded-full sm:size-16"
         />
       </div>
     </div>
