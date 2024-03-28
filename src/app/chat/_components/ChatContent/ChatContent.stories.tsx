@@ -2,24 +2,19 @@ import { createInternalApiUrl, type ChatMessage } from '@/features';
 import { mockGenerateCatMessage } from '@/mocks/api';
 import type { Meta, StoryObj } from '@storybook/react';
 import { http } from 'msw';
-import { type JSX } from 'react';
-import { ChatContent, type Props } from './ChatContent';
+import { ChatContent } from './ChatContent';
 import { ChatContentLayout } from './ChatContentLayout';
 
-const ChatContentWithLayout = ({ initChatMessages }: Props): JSX.Element => {
-  return (
-    <ChatContentLayout>
-      <ChatContent
-        userId="userId1234567890"
-        initChatMessages={initChatMessages}
-      />
-    </ChatContentLayout>
-  );
-};
-
 const meta: Meta = {
-  component: ChatContentWithLayout,
-} satisfies Meta<typeof ChatContentWithLayout>;
+  component: ChatContent,
+  decorators: [
+    (Story) => (
+      <ChatContentLayout>
+        <Story />
+      </ChatContentLayout>
+    ),
+  ],
+} satisfies Meta<typeof ChatContent>;
 
 export default meta;
 
@@ -139,6 +134,7 @@ const chatMessages = [
 export const Default: Story = {
   args: {
     initChatMessages: chatMessages,
+    userId: 'userId1234567890',
   },
   parameters: {
     msw: {
