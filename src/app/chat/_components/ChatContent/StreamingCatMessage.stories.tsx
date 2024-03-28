@@ -3,7 +3,7 @@ import { StreamingCatMessage } from './StreamingCatMessage';
 
 const meta: Meta = {
   component: StreamingCatMessage,
-};
+} satisfies Meta<typeof StreamingCatMessage>;
 
 export default meta;
 

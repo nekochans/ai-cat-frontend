@@ -3,7 +3,7 @@ import { TopContents } from './TopContents';
 
 const meta: Meta = {
   component: TopContents,
-};
+} satisfies Meta<typeof TopContents>;
 
 export default meta;
 

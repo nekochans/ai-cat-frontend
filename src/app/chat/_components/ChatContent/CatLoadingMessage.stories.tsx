@@ -3,7 +3,7 @@ import { CatLoadingMessage } from './CatLoadingMessage';
 
 const meta: Meta = {
   component: CatLoadingMessage,
-};
+} satisfies Meta<typeof CatLoadingMessage>;
 
 export default meta;
 

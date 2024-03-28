@@ -19,7 +19,7 @@ const ChatContentWithLayout = ({ initChatMessages }: Props): JSX.Element => {
 
 const meta: Meta = {
   component: ChatContentWithLayout,
-};
+} satisfies Meta<typeof ChatContentWithLayout>;
 
 export default meta;
 

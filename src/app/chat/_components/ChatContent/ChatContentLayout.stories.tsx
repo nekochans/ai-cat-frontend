@@ -3,7 +3,7 @@ import { ChatContentLayout } from './ChatContentLayout';
 
 const meta: Meta = {
   component: ChatContentLayout,
-};
+} satisfies Meta<typeof ChatContentLayout>;
 
 export default meta;
 
