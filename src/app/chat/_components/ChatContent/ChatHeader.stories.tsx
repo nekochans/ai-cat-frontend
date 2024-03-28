@@ -3,7 +3,7 @@ import { ChatHeader } from './ChatHeader';
 
 const meta: Meta = {
   component: ChatHeader,
-};
+} satisfies Meta<typeof ChatHeader>;
 
 export default meta;
 

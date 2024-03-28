@@ -3,7 +3,7 @@ import { Footer } from './Footer';
 
 const meta: Meta = {
   component: Footer,
-};
+} satisfies Meta<typeof Footer>;
 
 export default meta;
 

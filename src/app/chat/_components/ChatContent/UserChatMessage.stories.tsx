@@ -3,7 +3,7 @@ import { UserChatMessage } from './UserChatMessage';
 
 const meta: Meta = {
   component: UserChatMessage,
-};
+} satisfies Meta<typeof UserChatMessage>;
 
 export default meta;
 
