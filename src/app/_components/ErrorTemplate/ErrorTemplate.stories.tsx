@@ -3,7 +3,7 @@ import { ErrorTemplate } from './ErrorTemplate';
 
 const meta: Meta = {
   component: ErrorTemplate,
-};
+} satisfies Meta<typeof ErrorTemplate>;
 
 export default meta;
 
