@@ -140,7 +140,7 @@ export const ChatContent = ({
 
         await readStream();
 
-        // reader.releaseLock();
+        reader.releaseLock();
 
         const newCatMessage = {
           role: 'cat',
