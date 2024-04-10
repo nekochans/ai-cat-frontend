@@ -8,6 +8,7 @@ import {
   type GenerateCatMessageResponse,
 } from '@/features';
 import { type ChatMessage, type ChatMessages } from '@/features/chat';
+import { sleep } from '@/utils';
 import {
   useRef,
   useState,
@@ -132,6 +133,10 @@ export const ChatContent = ({
             }
 
             newResponseMessage += responseMessage;
+
+            // TODO あまり良い方法ではないがレンダリングがスキップされてメッセージが欠落してしまうのでsleepで対応
+            await sleep(0.05);
+
             setStreamingMessage(newResponseMessage);
           }
 
