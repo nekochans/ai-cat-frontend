@@ -8,6 +8,7 @@ import {
   type GenerateCatMessageResponse,
 } from '@/features';
 import { type ChatMessage, type ChatMessages } from '@/features/chat';
+import { sleep } from '@/utils';
 import {
   useRef,
   useState,
@@ -132,6 +133,9 @@ export const ChatContent = ({
             }
 
             newResponseMessage += responseMessage;
+
+            await sleep(0.1);
+
             setStreamingMessage(newResponseMessage);
           }
 
