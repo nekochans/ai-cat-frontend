@@ -134,7 +134,8 @@ export const ChatContent = ({
 
             newResponseMessage += responseMessage;
 
-            await sleep(0.1);
+            // TODO あまり良い方法ではないがレンダリングがスキップされてメッセージが欠落してしまうのでsleepで対応
+            await sleep(0.05);
 
             setStreamingMessage(newResponseMessage);
           }
