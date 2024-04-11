@@ -8,10 +8,10 @@ import {
   type GenerateCatMessageResponse,
 } from '@/features';
 import { type ChatMessage, type ChatMessages } from '@/features/chat';
-import { sleep } from '@/utils';
 import {
   useRef,
   useState,
+  useTransition,
   type FormEvent,
   type JSX,
   type KeyboardEvent,
@@ -46,6 +46,8 @@ export const ChatContent = ({
   >('');
 
   const [conversationId, setConversationId] = useState<string>('');
+
+  const [isPending, startTransition] = useTransition();
 
   const ref = useRef<HTMLTextAreaElement>(null);
 
@@ -134,10 +136,9 @@ export const ChatContent = ({
 
             newResponseMessage += responseMessage;
 
-            // TODO あまり良い方法ではないがレンダリングがスキップされてメッセージが欠落してしまうのでsleepで対応
-            await sleep(0.05);
-
-            setStreamingMessage(newResponseMessage);
+            startTransition(() => {
+              setStreamingMessage(newResponseMessage);
+            });
           }
 
           await readStream();
@@ -199,7 +200,7 @@ export const ChatContent = ({
   return (
     <>
       <ChatMessagesList chatMessages={chatMessages} isLoading={isLoading} />
-      {streamingMessage !== '' ? (
+      {streamingMessage !== '' && !isPending ? (
         <StreamingCatMessage
           name="もこちゃん"
           avatarUrl="/cats/moko.webp"
