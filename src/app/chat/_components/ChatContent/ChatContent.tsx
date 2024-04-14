@@ -115,9 +115,9 @@ export const ChatContent = ({
             .decode(value)
             .split('\n\n')
             .map((line) => {
-              const jsonString = line.trim().split('data: ')[1];
+              console.log(line);
 
-              console.log(jsonString);
+              const jsonString = line.trim().split('data: ')[1];
 
               try {
                 const parsedJson = JSON.parse(jsonString) as unknown;
@@ -137,11 +137,7 @@ export const ChatContent = ({
               setConversationId(object.conversationId);
             }
 
-            console.log(responseMessage);
-
             newResponseMessage += responseMessage;
-
-            console.log(newResponseMessage);
 
             setStreamingMessage(newResponseMessage);
           }
