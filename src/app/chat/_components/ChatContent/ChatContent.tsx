@@ -134,7 +134,11 @@ export const ChatContent = ({
               setConversationId(object.conversationId);
             }
 
+            console.log(responseMessage);
+
             newResponseMessage += responseMessage;
+
+            console.log(newResponseMessage);
 
             setStreamingMessage(newResponseMessage);
           }
