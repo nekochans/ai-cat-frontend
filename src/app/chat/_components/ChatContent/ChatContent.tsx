@@ -111,40 +111,21 @@ export const ChatContent = ({
             return;
           }
 
-          let partialLine = '';
-
           const objects = decoder
             .decode(value)
-            .split('\n')
+            .split('\n\n')
             .map((line) => {
-              line = partialLine + line;
-              if (line.startsWith('data:')) {
-                const jsonString = line.trim().split('data: ')[1];
+              console.log(line);
 
-                try {
-                  const parsedJson = JSON.parse(jsonString) as unknown;
+              const jsonString = line.trim().split('data: ')[1];
 
-                  if (isGenerateCatMessageResponse(parsedJson)) {
-                    // Reset the partial line
-                    partialLine = '';
+              try {
+                const parsedJson = JSON.parse(jsonString) as unknown;
 
-                    return parsedJson;
-                  } else {
-                    // If the JSON object is not complete, add it to the partial line
-                    partialLine = line;
-
-                    return null;
-                  }
-                } catch {
-                  // If parsing fails, add the line to the partial line
-                  partialLine = line;
-
-                  return null;
-                }
-              } else {
-                // If the line does not start with 'data:', add it to the partial line
-                partialLine += line;
-
+                return isGenerateCatMessageResponse(parsedJson)
+                  ? parsedJson
+                  : null;
+              } catch {
                 return null;
               }
             })
