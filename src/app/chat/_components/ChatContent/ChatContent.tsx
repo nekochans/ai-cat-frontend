@@ -116,6 +116,9 @@ export const ChatContent = ({
             .split('\n\n')
             .map((line) => {
               const jsonString = line.trim().split('data: ')[1];
+
+              console.log(jsonString);
+
               try {
                 const parsedJson = JSON.parse(jsonString) as unknown;
 
