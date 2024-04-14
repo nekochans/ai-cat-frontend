@@ -9,9 +9,9 @@ import {
 } from '@/features';
 import { type ChatMessage, type ChatMessages } from '@/features/chat';
 import {
-  useDeferredValue,
   useRef,
   useState,
+  useTransition,
   type FormEvent,
   type JSX,
   type KeyboardEvent,
@@ -40,14 +40,14 @@ export const ChatContent = ({
 
   const [streamingMessage, setStreamingMessage] = useState<string>('');
 
-  const deferredStreamingMessage = useDeferredValue(streamingMessage);
-
   const [chatErrorType, setChatChatErrorType] = useState<
     // eslint-disable-next-line @typescript-eslint/no-redundant-type-constituents
     ChatErrorType | string
   >('');
 
   const [conversationId, setConversationId] = useState<string>('');
+
+  const [isPending, startTransition] = useTransition();
 
   const ref = useRef<HTMLTextAreaElement>(null);
 
@@ -136,7 +136,9 @@ export const ChatContent = ({
 
             newResponseMessage += responseMessage;
 
-            setStreamingMessage(newResponseMessage);
+            startTransition(() => {
+              setStreamingMessage(newResponseMessage);
+            });
           }
 
           await readStream();
@@ -198,11 +200,11 @@ export const ChatContent = ({
   return (
     <>
       <ChatMessagesList chatMessages={chatMessages} isLoading={isLoading} />
-      {deferredStreamingMessage ? (
+      {streamingMessage !== '' && !isPending ? (
         <StreamingCatMessage
           name="もこちゃん"
           avatarUrl="/cats/moko.webp"
-          message={deferredStreamingMessage}
+          message={streamingMessage}
         />
       ) : (
         ''
