@@ -117,24 +117,15 @@ export const ChatContent = ({
             .decode(value)
             .split('\n\n')
             .map((line) => {
+              console.log('LINE');
               console.log(line);
-              // この条件分岐に当てはまる時は完全なJSON文字列
-              if (line.startsWith('data:') && line.includes('}')) {
-                partialLine = line;
-                const jsonString = partialLine.trim().split('data: ')[1];
-                try {
-                  const parsedJson = JSON.parse(jsonString) as unknown;
+              console.log('LINE');
 
-                  return isGenerateCatMessageResponse(parsedJson)
-                    ? parsedJson
-                    : null;
-                } catch {
-                  return null;
-                } finally {
-                  partialLine = '';
-                }
-              }
+              console.log('partialLine');
+              console.log(partialLine);
+              console.log('partialLine');
 
+              // partialLine が完全なJSON文字列の場合はParseを実行する
               if (
                 partialLine.startsWith('data:') &&
                 partialLine.includes('{') &&
@@ -154,6 +145,28 @@ export const ChatContent = ({
                 }
               }
 
+              // この条件分岐に当てはまる時は完全なJSON文字列
+              if (
+                line.startsWith('data:') &&
+                line.includes('{') &&
+                line.includes('}')
+              ) {
+                partialLine = line;
+                const jsonString = partialLine.trim().split('data: ')[1];
+                try {
+                  const parsedJson = JSON.parse(jsonString) as unknown;
+
+                  return isGenerateCatMessageResponse(parsedJson)
+                    ? parsedJson
+                    : null;
+                } catch {
+                  return null;
+                } finally {
+                  partialLine = '';
+                }
+              }
+
+              // ここに到達する場合は line は不完全なJSON文字列なので partialLine に代入する
               if (line.startsWith('data:')) {
                 partialLine = line;
               } else {
