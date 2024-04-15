@@ -125,8 +125,14 @@ export const ChatContent = ({
               if (line.startsWith('data:')) {
                 partialLine = line;
               } else {
+                console.log('if文の中のpartialLine1');
+                console.log(partialLine);
+                console.log('if文の中のpartialLine1');
                 // この条件分岐に当てはまる場合は partialLine に続きのJSON文字列を結合する
                 partialLine = partialLine + line;
+                console.log('if文の中のpartialLine2');
+                console.log(partialLine);
+                console.log('if文の中のpartialLine2');
               }
 
               console.log('partialLine');
