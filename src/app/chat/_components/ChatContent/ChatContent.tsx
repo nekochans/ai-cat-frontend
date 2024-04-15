@@ -123,7 +123,10 @@ export const ChatContent = ({
 
               // ここに到達する場合は line は不完全なJSON文字列なので partialLine に代入する
               if (line.startsWith('data:')) {
+                console.log('欠損データが最初にpartialLineに代入される');
                 partialLine = line;
+                console.log(partialLine);
+                console.log('欠損データが最初にpartialLineに代入される');
               } else {
                 console.log('if文の中のpartialLine1');
                 console.log(partialLine);
@@ -155,6 +158,7 @@ export const ChatContent = ({
                 } catch {
                   return null;
                 } finally {
+                  console.log('partialLineのリセットが呼ばれていないかテスト1');
                   partialLine = '';
                 }
               }
@@ -175,6 +179,9 @@ export const ChatContent = ({
                 } catch {
                   return null;
                 } finally {
+
+                  console.log('partialLineのリセットが呼ばれていないかテスト2');
+
                   partialLine = '';
                 }
               }
