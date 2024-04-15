@@ -179,7 +179,6 @@ export const ChatContent = ({
                 } catch {
                   return null;
                 } finally {
-
                   console.log('partialLineのリセットが呼ばれていないかテスト2');
 
                   partialLine = '';
