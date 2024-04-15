@@ -111,23 +111,57 @@ export const ChatContent = ({
             return;
           }
 
+          let partialLine = '';
+
           const objects = decoder
             .decode(value)
             .split('\n\n')
             .map((line) => {
               console.log(line);
+              // この条件分岐に当てはまる時は完全なJSON文字列
+              if (line.startsWith('data:') && line.includes('}')) {
+                partialLine = line;
+                const jsonString = partialLine.trim().split('data: ')[1];
+                try {
+                  const parsedJson = JSON.parse(jsonString) as unknown;
 
-              const jsonString = line.trim().split('data: ')[1];
-
-              try {
-                const parsedJson = JSON.parse(jsonString) as unknown;
-
-                return isGenerateCatMessageResponse(parsedJson)
-                  ? parsedJson
-                  : null;
-              } catch {
-                return null;
+                  return isGenerateCatMessageResponse(parsedJson)
+                    ? parsedJson
+                    : null;
+                } catch {
+                  return null;
+                } finally {
+                  partialLine = '';
+                }
               }
+
+              if (
+                partialLine.startsWith('data:') &&
+                partialLine.includes('{') &&
+                partialLine.includes('}')
+              ) {
+                const jsonString = partialLine.trim().split('data: ')[1];
+                try {
+                  const parsedJson = JSON.parse(jsonString) as unknown;
+
+                  return isGenerateCatMessageResponse(parsedJson)
+                    ? parsedJson
+                    : null;
+                } catch {
+                  return null;
+                } finally {
+                  partialLine = '';
+                }
+              }
+
+              if (line.startsWith('data:')) {
+                partialLine = line;
+              } else {
+                partialLine += line;
+              }
+
+              // ここには到達しないハズ
+              return null;
             })
             .filter(Boolean) as GenerateCatMessageResponse[];
 
