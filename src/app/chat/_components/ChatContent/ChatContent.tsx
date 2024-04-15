@@ -105,13 +105,13 @@ export const ChatContent = ({
         const reader = body.getReader();
         const decoder = new TextDecoder();
 
+        let partialLine = '';
+
         const readStream = async (): Promise<undefined> => {
           const { done, value } = await reader.read();
           if (done) {
             return;
           }
-
-          let partialLine = '';
 
           const objects = decoder
             .decode(value)
