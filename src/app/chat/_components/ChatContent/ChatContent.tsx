@@ -121,6 +121,16 @@ export const ChatContent = ({
               console.log(line);
               console.log('LINE');
 
+              // ここに到達する場合は line は不完全なJSON文字列なので partialLine に代入する
+              if (line.startsWith('data:') && !partialLine.includes('}')) {
+                partialLine = line;
+              }
+
+              // この条件分岐に当てはまる場合は partialLine に続きのJSON文字列を結合する
+              if (!line.startsWith('data:')) {
+                partialLine = partialLine + line;
+              }
+
               console.log('partialLine');
               console.log(partialLine);
               console.log('partialLine');
@@ -151,8 +161,7 @@ export const ChatContent = ({
                 line.includes('{') &&
                 line.includes('}')
               ) {
-                partialLine = line;
-                const jsonString = partialLine.trim().split('data: ')[1];
+                const jsonString = line.trim().split('data: ')[1];
                 try {
                   const parsedJson = JSON.parse(jsonString) as unknown;
 
@@ -164,13 +173,6 @@ export const ChatContent = ({
                 } finally {
                   partialLine = '';
                 }
-              }
-
-              // ここに到達する場合は line は不完全なJSON文字列なので partialLine に代入する
-              if (line.startsWith('data:')) {
-                partialLine = line;
-              } else {
-                partialLine += line;
               }
 
               // ここには到達しないハズ
