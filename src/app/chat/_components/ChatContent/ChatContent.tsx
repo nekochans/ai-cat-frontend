@@ -117,30 +117,13 @@ export const ChatContent = ({
             .decode(value)
             .split('\n\n')
             .map((line) => {
-              console.log('LINE');
-              console.log(line);
-              console.log('LINE');
-
               // ここに到達する場合は line は不完全なJSON文字列なので partialLine に代入する
               if (line.startsWith('data:')) {
-                console.log('欠損データが最初にpartialLineに代入される');
                 partialLine = line;
-                console.log(partialLine);
-                console.log('欠損データが最初にpartialLineに代入される');
               } else {
-                console.log('if文の中のpartialLine1');
-                console.log(partialLine);
-                console.log('if文の中のpartialLine1');
                 // この条件分岐に当てはまる場合は partialLine に続きのJSON文字列を結合する
                 partialLine = partialLine + line;
-                console.log('if文の中のpartialLine2');
-                console.log(partialLine);
-                console.log('if文の中のpartialLine2');
               }
-
-              console.log('partialLine');
-              console.log(partialLine);
-              console.log('partialLine');
 
               // partialLine が完全なJSON文字列の場合はParseを実行する
               if (
@@ -158,7 +141,6 @@ export const ChatContent = ({
                 } catch {
                   return null;
                 } finally {
-                  console.log('partialLineのリセットが呼ばれていないかテスト1');
                   partialLine = '';
                 }
               }
@@ -179,8 +161,6 @@ export const ChatContent = ({
                 } catch {
                   return null;
                 } finally {
-                  console.log('partialLineのリセットが呼ばれていないかテスト2');
-
                   partialLine = '';
                 }
               }
