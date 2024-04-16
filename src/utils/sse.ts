@@ -10,12 +10,11 @@ export const mightExtractJsonFromSsePayload = (payload: unknown): string => {
   }
 
   const list = payload.trim().split('data: ');
-  if (list.length > 1) {
-    return '';
-  }
 
-  if (isValidJson(list[1])) {
-    return list[1];
+  if (list.length <= 2) {
+    if (isValidJson(list[1])) {
+      return list[1];
+    }
   }
 
   return '';
