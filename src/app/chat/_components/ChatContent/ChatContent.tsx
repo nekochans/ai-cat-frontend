@@ -125,6 +125,8 @@ export const ChatContent = ({
                 partialLine = partialLine + line;
               }
 
+              console.log(partialLine);
+
               // partialLine が完全なJSON文字列の場合はParseを実行する
               if (
                 partialLine.startsWith('data:') &&
@@ -145,27 +147,6 @@ export const ChatContent = ({
                 }
               }
 
-              // この条件分岐に当てはまる時は完全なJSON文字列
-              if (
-                line.startsWith('data:') &&
-                line.includes('{') &&
-                line.includes('}')
-              ) {
-                const jsonString = line.trim().split('data: ')[1];
-                try {
-                  const parsedJson = JSON.parse(jsonString) as unknown;
-
-                  return isGenerateCatMessageResponse(parsedJson)
-                    ? parsedJson
-                    : null;
-                } catch {
-                  return null;
-                } finally {
-                  partialLine = '';
-                }
-              }
-
-              // ここには到達しないハズ
               return null;
             })
             .filter(Boolean) as GenerateCatMessageResponse[];
