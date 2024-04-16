@@ -125,8 +125,6 @@ export const ChatContent = ({
                 partialLine = partialLine + line;
               }
 
-              console.log(partialLine);
-
               // partialLine が完全なJSON文字列の場合はParseを実行する
               if (
                 partialLine.startsWith('data:') &&
