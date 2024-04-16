@@ -117,8 +117,8 @@ export const ChatContent = ({
             .decode(value)
             .split('\n\n')
             .map((line) => {
-              // ここに到達する場合は line は不完全なJSON文字列なので partialLine に代入する
               if (line.startsWith('data:')) {
+                // この条件分岐に当てはまる場合は line はデータの開始位置なので partialLine に代入する
                 partialLine = line;
               } else {
                 // この条件分岐に当てはまる場合は partialLine に続きのJSON文字列を結合する
