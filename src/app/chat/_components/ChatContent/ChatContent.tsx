@@ -8,6 +8,7 @@ import {
   type GenerateCatMessageResponse,
 } from '@/features';
 import { type ChatMessage, type ChatMessages } from '@/features/chat';
+import { mightExtractJsonFromSsePayload } from '@/utils';
 import {
   useDeferredValue,
   useRef,
@@ -126,12 +127,8 @@ export const ChatContent = ({
               }
 
               // partialLine が完全なJSON文字列の場合はParseを実行する
-              if (
-                partialLine.startsWith('data:') &&
-                partialLine.includes('{') &&
-                partialLine.includes('}')
-              ) {
-                const jsonString = partialLine.trim().split('data: ')[1];
+              const jsonString = mightExtractJsonFromSsePayload(partialLine);
+              if (jsonString) {
                 try {
                   const parsedJson = JSON.parse(jsonString) as unknown;
 
