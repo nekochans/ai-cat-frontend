@@ -106,7 +106,8 @@ export const ChatContent = ({
         const reader = body.getReader();
         const decoder = new TextDecoder();
 
-        let partialLine = '';
+        // ServerSentEvents(SSE)のpayloadが完全なJSONでない場合があるので一時保存用の変数を用意
+        let partialPayload = '';
 
         const readStream = async (): Promise<undefined> => {
           const { done, value } = await reader.read();
@@ -117,17 +118,17 @@ export const ChatContent = ({
           const objects = decoder
             .decode(value)
             .split('\n\n')
-            .map((line) => {
-              if (line.startsWith('data:')) {
-                // この条件分岐に当てはまる場合は line はデータの開始位置なので partialLine に代入する
-                partialLine = line;
+            .map((payload) => {
+              if (payload.startsWith('data:')) {
+                // この条件分岐に当てはまる場合は payload はデータの開始位置なので partialPayload に代入する
+                partialPayload = payload;
               } else {
-                // この条件分岐に当てはまる場合は partialLine に続きのJSON文字列を結合する
-                partialLine = partialLine + line;
+                // この条件分岐に当てはまる場合は partialPayload に続きのJSON文字列を結合する
+                partialPayload = partialPayload + payload;
               }
 
-              // partialLine が完全なJSON文字列の場合はParseを実行する
-              const jsonString = mightExtractJsonFromSsePayload(partialLine);
+              // partialPayload が完全なJSON文字列の場合はParseを実行する
+              const jsonString = mightExtractJsonFromSsePayload(partialPayload);
               if (jsonString) {
                 try {
                   const parsedJson = JSON.parse(jsonString) as unknown;
@@ -138,7 +139,7 @@ export const ChatContent = ({
                 } catch {
                   return null;
                 } finally {
-                  partialLine = '';
+                  partialPayload = '';
                 }
               }
 
