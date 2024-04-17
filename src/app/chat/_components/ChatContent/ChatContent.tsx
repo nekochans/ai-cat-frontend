@@ -8,6 +8,7 @@ import {
   type GenerateCatMessageResponse,
 } from '@/features';
 import { type ChatMessage, type ChatMessages } from '@/features/chat';
+import { mightExtractJsonFromSsePayload } from '@/utils';
 import {
   useDeferredValue,
   useRef,
@@ -105,6 +106,9 @@ export const ChatContent = ({
         const reader = body.getReader();
         const decoder = new TextDecoder();
 
+        // ServerSentEvents(SSE)のpayloadが完全なJSONでない場合があるので一時保存用の変数を用意
+        let partialPayload = '';
+
         const readStream = async (): Promise<undefined> => {
           const { done, value } = await reader.read();
           if (done) {
@@ -114,20 +118,32 @@ export const ChatContent = ({
           const objects = decoder
             .decode(value)
             .split('\n\n')
-            .map((line) => {
-              console.log(line);
-
-              const jsonString = line.trim().split('data: ')[1];
-
-              try {
-                const parsedJson = JSON.parse(jsonString) as unknown;
-
-                return isGenerateCatMessageResponse(parsedJson)
-                  ? parsedJson
-                  : null;
-              } catch {
-                return null;
+            .map((payload) => {
+              if (payload.startsWith('data:')) {
+                // この条件分岐に当てはまる場合は payload はデータの開始位置なので partialPayload に代入する
+                partialPayload = payload;
+              } else {
+                // この条件分岐に当てはまる場合は partialPayload に続きのJSON文字列を結合する
+                partialPayload = partialPayload + payload;
               }
+
+              // partialPayload が完全なJSON文字列の場合はParseを実行する
+              const jsonString = mightExtractJsonFromSsePayload(partialPayload);
+              if (jsonString) {
+                try {
+                  const parsedJson = JSON.parse(jsonString) as unknown;
+
+                  return isGenerateCatMessageResponse(parsedJson)
+                    ? parsedJson
+                    : null;
+                } catch {
+                  return null;
+                } finally {
+                  partialPayload = '';
+                }
+              }
+
+              return null;
             })
             .filter(Boolean) as GenerateCatMessageResponse[];
 
