@@ -165,6 +165,10 @@ export const ChatContent = ({
 
         reader.releaseLock();
 
+        if (!newResponseMessage) {
+          throw new Error('streamingMessage is empty');
+        }
+
         const newCatMessage = {
           role: 'cat',
           name: 'もこちゃん',
