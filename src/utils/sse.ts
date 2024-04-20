@@ -1,4 +1,5 @@
 import { isValidJson } from '@/utils/isValidJson';
+import { z } from 'zod';
 
 export const mightExtractJsonFromSsePayload = (payload: unknown): string => {
   if (typeof payload !== 'string') {
@@ -18,4 +19,43 @@ export const mightExtractJsonFromSsePayload = (payload: unknown): string => {
   }
 
   return '';
+};
+
+const errorPayloadSchema = z.object({
+  type: z.string().min(1),
+  title: z.string().min(1),
+});
+
+type ErrorPayload = {
+  type: string;
+  title: string;
+};
+
+const isErrorPayload = (value: unknown): value is ErrorPayload => {
+  return errorPayloadSchema.safeParse(value).success;
+};
+
+export const isSseErrorPayload = (payload: unknown): boolean => {
+  if (typeof payload !== 'string') {
+    return false;
+  }
+
+  if (
+    payload.includes('A server error has occurred') ||
+    payload.includes('INTERNAL_SERVER_ERROR')
+  ) {
+    return true;
+  }
+
+  if (payload.startsWith('data: ')) {
+    const list = payload.trim().split('data: ');
+
+    if (list.length <= 2) {
+      if (isValidJson(list[1])) {
+        return isErrorPayload(list[1]);
+      }
+    }
+  }
+
+  return false;
 };

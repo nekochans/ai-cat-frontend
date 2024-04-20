@@ -1,3 +1,3 @@
 export { sleep } from './sleep';
 export { ExhaustiveError } from './errors';
-export { mightExtractJsonFromSsePayload } from './sse';
+export { mightExtractJsonFromSsePayload, isSseErrorPayload } from './sse';

@@ -8,7 +8,7 @@ import {
   type GenerateCatMessageResponse,
 } from '@/features';
 import { type ChatMessage, type ChatMessages } from '@/features/chat';
-import { mightExtractJsonFromSsePayload } from '@/utils';
+import { isSseErrorPayload, mightExtractJsonFromSsePayload } from '@/utils';
 import {
   useDeferredValue,
   useRef,
@@ -141,6 +141,10 @@ export const ChatContent = ({
                 } finally {
                   partialPayload = '';
                 }
+              }
+
+              if (isSseErrorPayload(partialPayload)) {
+                throw new Error('partialPayload is ErrorPayload');
               }
 
               return null;
