@@ -8,7 +8,7 @@ import {
   type GenerateCatMessageResponse,
 } from '@/features';
 import { type ChatMessage, type ChatMessages } from '@/features/chat';
-import { mightExtractJsonFromSsePayload } from '@/utils';
+import { isSseErrorPayload, mightExtractJsonFromSsePayload } from '@/utils';
 import {
   useDeferredValue,
   useRef,
@@ -143,6 +143,10 @@ export const ChatContent = ({
                 }
               }
 
+              if (isSseErrorPayload(partialPayload)) {
+                throw new Error('partialPayload is ErrorPayload');
+              }
+
               return null;
             })
             .filter(Boolean) as GenerateCatMessageResponse[];
@@ -164,6 +168,10 @@ export const ChatContent = ({
         await readStream();
 
         reader.releaseLock();
+
+        if (!newResponseMessage) {
+          throw new Error('streamingMessage is empty');
+        }
 
         const newCatMessage = {
           role: 'cat',
