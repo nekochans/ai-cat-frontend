@@ -43,3 +43,6 @@ storybook-static
 
 # direnv
 .envrc
+
+# Sentry Config File
+.env.sentry-build-plugin
