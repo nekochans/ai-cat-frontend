@@ -9,6 +9,7 @@ import {
 } from '@/features';
 import { type ChatMessage, type ChatMessages } from '@/features/chat';
 import { isSseErrorPayload, mightExtractJsonFromSsePayload } from '@/utils';
+import { Button, Textarea } from '@headlessui/react';
 import {
   useDeferredValue,
   useRef,
@@ -248,7 +249,7 @@ export const ChatContent = ({
           aria-label="send to message"
         >
           <div className="relative flex">
-            <textarea
+            <Textarea
               id="message-input"
               name="message-input"
               placeholder="Type your message here. Press Command + Enter or Control + Enter to send."
@@ -258,13 +259,13 @@ export const ChatContent = ({
             />
           </div>
           <div className="mt-1 flex flex-row-reverse">
-            <button
+            <Button
               type="submit"
               className={`${submitButtonBgColor} ${submitButtonHoverColor} rounded-md px-4 py-3.5 text-sm font-semibold text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600`}
               disabled={isLoading}
             >
               Send
-            </button>
+            </Button>
           </div>
         </form>
       </div>
