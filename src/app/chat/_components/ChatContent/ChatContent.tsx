@@ -89,6 +89,13 @@ export const ChatContent = ({
       return;
     }
 
+    setInputText('');
+
+    if (isRecording && recognition != null) {
+      recognition.stop();
+      setIsRecording(false);
+    }
+
     if (ref.current?.value != null && ref.current?.value !== '') {
       const message = ref.current.value;
 
