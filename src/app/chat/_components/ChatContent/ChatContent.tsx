@@ -12,11 +12,14 @@ import { isSseErrorPayload, mightExtractJsonFromSsePayload } from '@/utils';
 import { Button, Textarea } from '@headlessui/react';
 import {
   useDeferredValue,
+  useEffect,
   useRef,
   useState,
+  type ChangeEvent,
   type FormEvent,
   type JSX,
   type KeyboardEvent,
+  type ReactEventHandler,
 } from 'react';
 import {
   ChatErrorMessage,
@@ -25,6 +28,7 @@ import {
 } from './ChatErrorMessage';
 import { ChatMessagesList } from './ChatMessagesList';
 import { StreamingCatMessage } from './StreamingCatMessage';
+import { VoiceInputButton } from './VoiceInputButton';
 
 export type Props = {
   userId: string;
@@ -51,6 +55,31 @@ export const ChatContent = ({
 
   const [conversationId, setConversationId] = useState<string>('');
 
+  const [inputText, setInputText] = useState<string>('');
+  // const [transcript, setTranscript] = useState<string>('');
+  const [recognition, setRecognition] = useState<SpeechRecognition>();
+  const [isRecording, setIsRecording] = useState(false);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      // eslint-disable-next-line new-cap
+      const recognition = new webkitSpeechRecognition();
+      recognition.lang = 'ja-JP';
+      recognition.continuous = true;
+      recognition.interimResults = true;
+      setRecognition(recognition);
+
+      recognition.onresult = (event) => {
+        const results = event.results;
+        for (let i = event.resultIndex; i < results.length; i++) {
+          if (results[i].isFinal) {
+            setInputText((prevText) => prevText + results[i][0].transcript);
+          }
+        }
+      };
+    }
+  }, []);
+
   const ref = useRef<HTMLTextAreaElement>(null);
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
@@ -58,6 +87,13 @@ export const ChatContent = ({
 
     if (isLoading) {
       return;
+    }
+
+    setInputText('');
+
+    if (isRecording && recognition != null) {
+      recognition.stop();
+      setIsRecording(false);
     }
 
     if (ref.current?.value != null && ref.current?.value !== '') {
@@ -217,6 +253,28 @@ export const ChatContent = ({
     }
   };
 
+  const handleClickVoiceInputButton: ReactEventHandler<
+    HTMLButtonElement
+  > = () => {
+    if (recognition == null) {
+      return;
+    }
+
+    if (isRecording) {
+      recognition.stop();
+      setIsRecording(false);
+    } else {
+      recognition.start();
+      setIsRecording(true);
+    }
+  };
+
+  const handleChangeTextarea: ReactEventHandler<HTMLTextAreaElement> = (
+    event: ChangeEvent<HTMLTextAreaElement>,
+  ) => {
+    setInputText(event.target.value);
+  };
+
   const submitButtonBgColor = isLoading ? 'bg-orange-300' : 'bg-orange-500';
 
   const submitButtonHoverColor = isLoading
@@ -249,13 +307,21 @@ export const ChatContent = ({
           aria-label="send to message"
         >
           <div className="relative flex">
+            <span className="absolute inset-y-0 flex items-center">
+              <VoiceInputButton
+                onClick={handleClickVoiceInputButton}
+                recording={isRecording}
+              />
+            </span>
             <Textarea
               id="message-input"
               name="message-input"
               placeholder="Type your message here. Press Command + Enter or Control + Enter to send."
-              className="w-full rounded-md py-3 pl-4 text-gray-600 placeholder:text-gray-600  focus:outline-none focus:placeholder:text-gray-400"
+              className="w-full rounded-md py-3 pl-14 text-gray-600 placeholder:text-gray-600  focus:outline-none focus:placeholder:text-gray-400"
               ref={ref}
               onKeyDown={handleKeyDown}
+              value={inputText}
+              onChange={handleChangeTextarea}
             />
           </div>
           <div className="mt-1 flex flex-row-reverse">
