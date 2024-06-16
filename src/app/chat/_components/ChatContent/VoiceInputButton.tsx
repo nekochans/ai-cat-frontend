@@ -1,13 +1,22 @@
 import { Button } from '@headlessui/react';
 import type { ComponentProps, JSX } from 'react';
 
-type Props = ComponentProps<'button'>;
+type Props = ComponentProps<'button'> & {
+  recording: boolean;
+};
 
-export const VoiceInputButton = ({ onClick }: Props): JSX.Element => {
+export const VoiceInputButton = ({
+  onClick,
+  recording,
+}: Props): JSX.Element => {
+  const effectClassName = recording
+    ? 'bg-red-500 hover:bg-red-300 animate-pulse'
+    : 'hover:bg-gray-300';
+
   return (
     <Button
       type="button"
-      className="inline-flex size-12 items-center justify-center rounded-full text-gray-500 transition duration-500 ease-in-out hover:bg-gray-300 focus:outline-none"
+      className={`${effectClassName} inline-flex size-12 items-center justify-center rounded-full text-gray-500 transition duration-500 ease-in-out focus:outline-none`}
       onClick={onClick}
       aria-label="voice input"
     >

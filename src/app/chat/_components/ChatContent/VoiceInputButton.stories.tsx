@@ -9,4 +9,14 @@ export default meta;
 
 type Story = StoryObj<typeof VoiceInputButton>;
 
-export const Default: Story = {};
+export const Default: Story = {
+  args: {
+    recording: false,
+  },
+};
+
+export const IsRecording: Story = {
+  args: {
+    recording: true,
+  },
+};

@@ -308,7 +308,10 @@ export const ChatContent = ({
         >
           <div className="relative flex">
             <span className="absolute inset-y-0 flex items-center">
-              <VoiceInputButton onClick={handleClickVoiceInputButton} />
+              <VoiceInputButton
+                onClick={handleClickVoiceInputButton}
+                recording={isRecording}
+              />
             </span>
             <Textarea
               id="message-input"
