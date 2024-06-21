@@ -69,7 +69,7 @@ nekochans（以下，「運営チーム」といいます。）は「AI Meow Cat
 
 本サービスは、Googleによるアクセス解析ツール「Googleアナリティクス」を使用しています。このGoogleアナリティクスはデータ収集のためにCookieを使用しています。このデータは匿名で収集されており、個人を特定するものではございません。
 
-この機能は、Cookieを無効にすることで収集を拒否することが出来ますので、お使いのブラウザの設定をご確認ください。この規約に関しての詳細は[Googleアナリティクスサービス利用規約](https://marketingplatform.google.com/about/analytics/terms/jp/)及び[Googleポリシーと規約](https://policies.google.com/technologies/partner-sites)をご覧ください。
+この機能は、Cookieを無効にすることで収集を拒否することが出来ますので、お使いのブラウザの設定をご確認ください。この規約に関しての詳細は [Googleアナリティクスサービス利用規約](https://marketingplatform.google.com/about/analytics/terms/jp/) 及び [Googleポリシーと規約](https://policies.google.com/technologies/partner-sites) をご覧ください。
 
 ## 8. お問い合わせ窓口
 
