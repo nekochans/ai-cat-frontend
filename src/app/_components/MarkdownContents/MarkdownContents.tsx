@@ -5,5 +5,9 @@ type Props = {
 };
 
 export const MarkdownContents = ({ markdown }: Props): JSX.Element => {
-  return <ReactMarkdown>{markdown}</ReactMarkdown>;
+  return (
+    <div className="markdown">
+      <ReactMarkdown>{markdown}</ReactMarkdown>
+    </div>
+  );
 };
