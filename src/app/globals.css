@@ -7,15 +7,15 @@
 }
 
 .markdown h1 {
-  @apply text-3xl text-gray-900;
+  @apply text-4xl text-gray-900;
 }
 
 .markdown h2 {
-  @apply text-2xl text-gray-900;
+  @apply text-3xl text-gray-900;
 }
 
 .markdown h3 {
-  @apply text-xl border-b border-b-gray-400;
+  @apply text-xl text-gray-900;
 }
 
 .markdown ul {
