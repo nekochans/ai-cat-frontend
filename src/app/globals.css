@@ -1,3 +1,35 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.markdown {
+  @apply grid gap-5 p-4 mt-28;
+}
+
+.markdown h1 {
+  @apply text-4xl text-gray-900;
+}
+
+.markdown h2 {
+  @apply text-3xl text-gray-900;
+}
+
+.markdown h3 {
+  @apply text-xl text-gray-900;
+}
+
+.markdown ul {
+  @apply list-disc list-inside p-1.5;
+}
+
+.markdown ul li {
+  @apply p-1;
+}
+
+.markdown a {
+  @apply text-blue-300 hover:text-blue-600;
+}
+
+.markdown h6 {
+  @apply text-blue-300 text-center text-xl hover:text-blue-600;
+}

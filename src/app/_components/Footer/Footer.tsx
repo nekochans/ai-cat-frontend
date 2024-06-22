@@ -43,6 +43,15 @@ export const Footer = (): JSX.Element => {
                 Privacy Policy
               </Link>
             </li>
+            <li>
+              <Link
+                href="/external-transmission-policy"
+                prefetch={false}
+                className="mr-4 hover:underline md:mr-6"
+              >
+                External Transmission Policy
+              </Link>
+            </li>
           </ul>
         </div>
         <hr className="my-6 border-amber-200 sm:mx-auto lg:my-8 dark:border-gray-700" />
