@@ -9,6 +9,7 @@ import { useState, type JSX } from 'react';
 const navigation = [
   { name: 'terms', href: '/terms' },
   { name: 'privacy', href: '/privacy' },
+  { name: 'external transmission', href: '/external-transmission-policy' },
 ];
 
 type Props = {
