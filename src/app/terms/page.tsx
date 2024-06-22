@@ -8,8 +8,8 @@ import {
 import type { Metadata, NextPage } from 'next';
 
 export const metadata: Metadata = {
-  title: 'AI Meow Cat プライバシーポリシー',
-  description: 'AI Meow Cat のプライバシーポリシーです。',
+  title: 'AI Meow Cat 利用規約',
+  description: 'AI Meow Cat の利用規約です。',
 };
 
 const TermsPage: NextPage = async () => {
