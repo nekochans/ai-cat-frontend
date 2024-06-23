@@ -1,0 +1,2 @@
+User-agent: *
+Sitemap: https://www.ai-meow-cat.com/sitemap.xml
