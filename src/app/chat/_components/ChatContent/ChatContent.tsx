@@ -68,6 +68,17 @@ export const ChatContent = ({
       recognition.continuous = true;
       recognition.interimResults = true;
       setRecognition(recognition);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (recognition != null) {
+      // 録音中に音声入力が停止した場合は再開する
+      recognition.onend = () => {
+        if (isRecording) {
+          recognition.start();
+        }
+      };
 
       recognition.onresult = (event) => {
         const results = event.results;
@@ -78,7 +89,7 @@ export const ChatContent = ({
         }
       };
     }
-  }, []);
+  }, [recognition, isRecording]);
 
   const ref = useRef<HTMLTextAreaElement>(null);
 
