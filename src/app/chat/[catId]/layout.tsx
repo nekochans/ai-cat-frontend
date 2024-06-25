@@ -34,11 +34,7 @@ export const generateMetadata = async (
 };
 
 const ChatLayout = ({ children }: Props): JSX.Element => {
-  return (
-    <html lang="ja">
-      <body className={font.className}>{children}</body>
-    </html>
-  );
+  return <main className={font.className}>{children}</main>;
 };
 
 export default ChatLayout;
