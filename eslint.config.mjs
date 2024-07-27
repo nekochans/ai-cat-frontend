@@ -134,6 +134,7 @@ export default [
         },
       ],
       'react/display-name': 'off',
+      'tailwindcss/classnames-order': 'error',
     },
   },
   {
