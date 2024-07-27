@@ -16,7 +16,6 @@ type Props = {
 };
 
 export const generateMetadata = async (
-  // eslint-disable-next-line
   { params }: Props,
   // eslint-disable-next-line
   parent: ResolvingMetadata,

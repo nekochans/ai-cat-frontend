@@ -29,7 +29,6 @@ const extractResponseBody = (
   return response.body;
 };
 
-// eslint-disable-next-line
 describe('src/api/client/generateCatMessage.ts generateCatMessage TestCases', () => {
   beforeAll(() => {
     server.listen();
