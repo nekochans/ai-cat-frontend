@@ -9,6 +9,14 @@ export default antfu(
       html: true,
       markdown: 'prettier'
     },
+    stylistic: {
+      semi: true,
+    },
+    typescript: {
+      overrides: {
+        'ts/consistent-type-definitions': ['error', 'type'],
+      },
+    },
     ignores: [
       '**/node_modules/',
       '**/.next/',
@@ -24,16 +32,6 @@ export default antfu(
       'next.config.mjs',
       'eslint.config.mjs',
     ],
-  },
-  {
-    rules: {
-      'semi': ['error', 'always'],
-      'semi-spacing': ['error', {'after': true, 'before': false}],
-      'semi-style': ['error', 'last'],
-      'no-extra-semi': 'error',
-      'no-unexpected-multiline': 'error',
-      'no-unreachable': 'error'
-    },
   },
   ...tailwindcss.configs['flat/recommended'],
 );
