@@ -40,5 +40,10 @@ export default antfu(
       'next.config.mjs',
     ],
   },
+  {
+    rules: {
+      'node/prefer-global/process': 'off',
+    },
+  },
   ...tailwindcss.configs['flat/recommended'],
 );
