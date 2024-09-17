@@ -1,8 +1,8 @@
 import { generateCatMessage } from '@/api/client/generateCatMessage';
 import { TooManyRequestsError } from '@/api/errors';
 import {
-  isGenerateCatMessageResponse,
   type GenerateCatMessageResponse,
+  isGenerateCatMessageResponse,
 } from '@/features';
 import { createInternalApiUrl } from '@/features/url';
 import {
@@ -19,15 +19,13 @@ const mockHandlers = [
 
 const server = setupServer(...mockHandlers);
 
-const extractResponseBody = (
-  response: Response,
-): ReadableStream<Uint8Array> => {
+function extractResponseBody(response: Response): ReadableStream<Uint8Array> {
   if (response.body === null) {
     throw new Error('generatedResponse.body is null');
   }
 
   return response.body;
-};
+}
 
 describe('src/api/client/generateCatMessage.ts generateCatMessage TestCases', () => {
   beforeAll(() => {
@@ -51,8 +49,8 @@ describe('src/api/client/generateCatMessage.ts generateCatMessage TestCases', ()
 
     expect(generatedResponse.body).toBeInstanceOf(ReadableStream);
 
-    const generatedResponseBody: ReadableStream<Uint8Array> =
-      extractResponseBody(generatedResponse);
+    const generatedResponseBody: ReadableStream<Uint8Array>
+      = extractResponseBody(generatedResponse);
 
     const expected = [
       {
@@ -94,7 +92,8 @@ describe('src/api/client/generateCatMessage.ts generateCatMessage TestCases', ()
             const parsedJson = JSON.parse(jsonString) as unknown;
 
             return isGenerateCatMessageResponse(parsedJson) ? parsedJson : null;
-          } catch {
+          }
+          catch {
             return null;
           }
         })

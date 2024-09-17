@@ -1,16 +1,16 @@
-import Image from 'next/image';
 import type { JSX } from 'react';
+import Image from 'next/image';
 
 type Props = {
   message: string;
   avatarUrl: string;
   name: string;
 };
-export const CatChatMessage = ({
+export function CatChatMessage({
   message,
   avatarUrl,
   name,
-}: Props): JSX.Element => {
+}: Props): JSX.Element {
   return (
     <div className="flex items-end">
       <div className="order-2 mx-2 flex max-w-xs flex-col items-start space-y-2 text-xs">
@@ -30,4 +30,4 @@ export const CatChatMessage = ({
       />
     </div>
   );
-};
+}

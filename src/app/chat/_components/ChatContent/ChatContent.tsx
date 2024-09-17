@@ -1,30 +1,30 @@
 'use client';
 
+import type { ChatMessage, ChatMessages } from '@/features/chat';
 import { generateCatMessage } from '@/api/client/generateCatMessage';
 import { TooManyRequestsError } from '@/api/errors';
 import { InvalidResponseBodyError } from '@/errors';
 import {
-  isGenerateCatMessageResponse,
   type GenerateCatMessageResponse,
+  isGenerateCatMessageResponse,
 } from '@/features';
-import { type ChatMessage, type ChatMessages } from '@/features/chat';
 import { isSseErrorPayload, mightExtractJsonFromSsePayload } from '@/utils';
 import { Button, Textarea } from '@headlessui/react';
 import {
-  useDeferredValue,
-  useEffect,
-  useRef,
-  useState,
   type ChangeEvent,
   type FormEvent,
   type JSX,
   type KeyboardEvent,
   type ReactEventHandler,
+  useDeferredValue,
+  useEffect,
+  useRef,
+  useState,
 } from 'react';
 import {
   ChatErrorMessage,
-  isChatErrorType,
   type ChatErrorType,
+  isChatErrorType,
 } from './ChatErrorMessage';
 import { ChatMessagesList } from './ChatMessagesList';
 import { StreamingCatMessage } from './StreamingCatMessage';
@@ -35,14 +35,14 @@ export type Props = {
   initChatMessages?: ChatMessages;
 };
 
-export const ChatContent = ({
+export function ChatContent({
   userId,
   initChatMessages = [],
-}: Props): JSX.Element => {
+}: Props): JSX.Element {
   const [isLoading, setIsLoading] = useState(false);
 
-  const [chatMessages, setChatMessages] =
-    useState<ChatMessages>(initChatMessages);
+  const [chatMessages, setChatMessages]
+    = useState<ChatMessages>(initChatMessages);
 
   const [streamingMessage, setStreamingMessage] = useState<string>('');
 
@@ -84,7 +84,7 @@ export const ChatContent = ({
         const results = event.results;
         for (let i = event.resultIndex; i < results.length; i++) {
           if (results[i].isFinal) {
-            setInputText((prevText) => prevText + results[i][0].transcript);
+            setInputText(prevText => prevText + results[i][0].transcript);
           }
         }
       };
@@ -128,8 +128,8 @@ export const ChatContent = ({
       let newResponseMessage = '';
 
       try {
-        const generateCatMessageRequest =
-          conversationId === ''
+        const generateCatMessageRequest
+          = conversationId === ''
             ? ({
                 catId: 'moko',
                 userId,
@@ -170,7 +170,8 @@ export const ChatContent = ({
               if (payload.startsWith('data:')) {
                 // この条件分岐に当てはまる場合は payload はデータの開始位置なので partialPayload に代入する
                 partialPayload = payload;
-              } else {
+              }
+              else {
                 // この条件分岐に当てはまる場合は partialPayload に続きのJSON文字列を結合する
                 partialPayload = partialPayload + payload;
               }
@@ -184,9 +185,11 @@ export const ChatContent = ({
                   return isGenerateCatMessageResponse(parsedJson)
                     ? parsedJson
                     : null;
-                } catch {
+                }
+                catch {
                   return null;
-                } finally {
+                }
+                finally {
                   partialPayload = '';
                 }
               }
@@ -233,7 +236,8 @@ export const ChatContent = ({
           ...[newCatMessage],
         ];
         setChatMessages(newCatReplyContainedChatMessage);
-      } catch (error) {
+      }
+      catch (error) {
         if (error instanceof TooManyRequestsError) {
           setChatChatErrorType('TOO_MANY_REQUESTS');
 
@@ -241,7 +245,8 @@ export const ChatContent = ({
         }
 
         setChatChatErrorType('INTERNAL_SERVER_ERROR');
-      } finally {
+      }
+      finally {
         setIsLoading(false);
         newResponseMessage = '';
         setStreamingMessage('');
@@ -274,7 +279,8 @@ export const ChatContent = ({
     if (isRecording) {
       recognition.stop();
       setIsRecording(false);
-    } else {
+    }
+    else {
       recognition.start();
       setIsRecording(true);
     }
@@ -295,20 +301,24 @@ export const ChatContent = ({
   return (
     <>
       <ChatMessagesList chatMessages={chatMessages} isLoading={isLoading} />
-      {deferredStreamingMessage ? (
-        <StreamingCatMessage
-          name="もこちゃん"
-          avatarUrl="/cats/moko.webp"
-          message={deferredStreamingMessage}
-        />
-      ) : (
-        ''
-      )}
-      {isChatErrorType(chatErrorType) ? (
-        <ChatErrorMessage type={chatErrorType} />
-      ) : (
-        ''
-      )}
+      {deferredStreamingMessage
+        ? (
+            <StreamingCatMessage
+              name="もこちゃん"
+              avatarUrl="/cats/moko.webp"
+              message={deferredStreamingMessage}
+            />
+          )
+        : (
+            ''
+          )}
+      {isChatErrorType(chatErrorType)
+        ? (
+            <ChatErrorMessage type={chatErrorType} />
+          )
+        : (
+            ''
+          )}
       <div className="mb-2 border-t-2 border-amber-200 bg-yellow-100 px-4 pt-4 sm:mb-0">
         <form
           id="send-message"
@@ -348,4 +358,4 @@ export const ChatContent = ({
       </div>
     </>
   );
-};
+}

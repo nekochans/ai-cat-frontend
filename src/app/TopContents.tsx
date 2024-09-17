@@ -1,8 +1,8 @@
+import type { JSX } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import type { JSX } from 'react';
 
-export const TopContents = (): JSX.Element => {
+export function TopContents(): JSX.Element {
   return (
     <div className="relative isolate bg-yellow-100 pt-14">
       <div className="py-24 sm:py-32 lg:pb-40">
@@ -39,4 +39,4 @@ export const TopContents = (): JSX.Element => {
       </div>
     </div>
   );
-};
+}

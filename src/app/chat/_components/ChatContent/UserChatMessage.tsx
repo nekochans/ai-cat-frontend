@@ -1,5 +1,5 @@
-import Image from 'next/image';
 import type { JSX } from 'react';
+import Image from 'next/image';
 
 type Props = {
   message: string;
@@ -7,11 +7,11 @@ type Props = {
   name: string;
 };
 
-export const UserChatMessage = ({
+export function UserChatMessage({
   message,
   avatarUrl,
   name,
-}: Props): JSX.Element => {
+}: Props): JSX.Element {
   return (
     <div className="flex items-end justify-end">
       <div className="order-1 mx-2 flex max-w-xs flex-col items-end space-y-2 text-xs">
@@ -31,4 +31,4 @@ export const UserChatMessage = ({
       />
     </div>
   );
-};
+}

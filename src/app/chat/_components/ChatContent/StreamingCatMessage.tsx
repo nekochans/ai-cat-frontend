@@ -6,14 +6,14 @@ type Props = {
   message: string;
 };
 
-export const StreamingCatMessage = ({
+export function StreamingCatMessage({
   name,
   avatarUrl,
   message,
-}: Props): JSX.Element => {
+}: Props): JSX.Element {
   return (
     <div id="streaming-cat-message" className="flex flex-col space-y-4 p-3">
       <CatChatMessage name={name} message={message} avatarUrl={avatarUrl} />
     </div>
   );
-};
+}

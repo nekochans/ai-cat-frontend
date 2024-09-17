@@ -7,8 +7,8 @@ type Props = {
   reset: () => void;
 };
 
-const Error = ({ reset }: Props): JSX.Element => {
+function Error({ reset }: Props): JSX.Element {
   return <ErrorTemplate errorCode={500} resetFunc={reset} />;
-};
+}
 
 export default Error;

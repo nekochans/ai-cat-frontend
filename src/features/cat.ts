@@ -9,20 +9,20 @@ const catNames = ['もこ'] as const;
 
 export type CatName = (typeof catNames)[number];
 
-export const extractCatNameById = (catId: CatId): CatName => {
+export function extractCatNameById(catId: CatId): CatName {
   switch (catId) {
     case 'moko':
       return 'もこ';
     default:
       throw new ExhaustiveError(catId);
   }
-};
+}
 
-export const isCatId = (value: unknown): value is CatId => {
-  const result = catIds.find((element) => element === value);
+export function isCatId(value: unknown): value is CatId {
+  const result = catIds.find(element => element === value);
 
   return result !== undefined;
-};
+}
 
 export type GenerateCatMessageDto = {
   catId: CatId;
@@ -41,11 +41,9 @@ export type GenerateCatMessageResponse = {
   message: string;
 };
 
-export const isGenerateCatMessageResponse = (
-  value: unknown,
-): value is GenerateCatMessageResponse => {
+export function isGenerateCatMessageResponse(value: unknown): value is GenerateCatMessageResponse {
   return generateCatMessageResponseSchema.safeParse(value).success;
-};
+}
 
 export type GenerateCatMessage = (
   dto: GenerateCatMessageDto,

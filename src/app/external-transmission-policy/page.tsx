@@ -1,11 +1,11 @@
-import fs from 'fs';
+import type { Metadata, NextPage } from 'next';
+import fs from 'node:fs';
 import {
   Footer,
   Header,
   MarkdownContents,
   MarkdownContentsLayout,
 } from '@/app/_components';
-import type { Metadata, NextPage } from 'next';
 
 export const metadata: Metadata = {
   title: 'AI Meow Cat 外部送信ポリシー',

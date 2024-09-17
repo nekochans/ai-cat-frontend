@@ -1,16 +1,15 @@
-import { ChatContent, ChatContentLayout } from '@/app/chat/_components';
-import { extractCatNameById, type CatId } from '@/features';
 import type { Metadata, NextPage } from 'next';
+import { ChatContent, ChatContentLayout } from '@/app/chat/_components';
+import { type CatId, extractCatNameById } from '@/features';
 import { v4 } from 'uuid';
 
 type Props = {
   params: { catId: CatId };
 };
 
-export const generateMetadata = async ({
+export async function generateMetadata({
   params,
-  // eslint-disable-next-line @typescript-eslint/require-await
-}: Props): Promise<Metadata> => {
+}: Props): Promise<Metadata> {
   const catId = params.catId;
 
   return {
@@ -19,7 +18,7 @@ export const generateMetadata = async ({
       catId,
     )}ちゃん」とお話ができます🐱分からない事を何でも聞いてみよう！`,
   };
-};
+}
 
 const ChatPage: NextPage<Props> = () => {
   const anonymousUserId = v4();

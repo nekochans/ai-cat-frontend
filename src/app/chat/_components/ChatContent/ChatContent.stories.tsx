@@ -1,6 +1,6 @@
-import { createInternalApiUrl, type ChatMessage } from '@/features';
-import { mockGenerateCatMessage } from '@/mocks/api';
 import type { Meta, StoryObj } from '@storybook/react';
+import { type ChatMessage, createInternalApiUrl } from '@/features';
+import { mockGenerateCatMessage } from '@/mocks/api';
 import { http } from 'msw';
 import { ChatContent } from './ChatContent';
 import { ChatContentLayout } from './ChatContentLayout';
@@ -8,7 +8,7 @@ import { ChatContentLayout } from './ChatContentLayout';
 const meta: Meta = {
   component: ChatContent,
   decorators: [
-    (Story) => (
+    Story => (
       <ChatContentLayout>
         <Story />
       </ChatContentLayout>

@@ -2,8 +2,8 @@ import { TooManyRequestsError } from '@/api/errors';
 import { createInternalApiUrl, type GenerateCatMessage } from '@/features';
 
 export const generateCatMessage: GenerateCatMessage = async (dto) => {
-  const requestBody =
-    dto.conversationId != null
+  const requestBody
+    = dto.conversationId != null
       ? {
           catId: dto.catId,
           userId: dto.userId,

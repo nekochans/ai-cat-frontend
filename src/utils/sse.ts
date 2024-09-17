@@ -1,7 +1,7 @@
 import { isValidJson } from '@/utils/isValidJson';
 import { z } from 'zod';
 
-export const mightExtractJsonFromSsePayload = (payload: unknown): string => {
+export function mightExtractJsonFromSsePayload(payload: unknown): string {
   if (typeof payload !== 'string') {
     return '';
   }
@@ -19,7 +19,7 @@ export const mightExtractJsonFromSsePayload = (payload: unknown): string => {
   }
 
   return '';
-};
+}
 
 const errorPayloadSchema = z.object({
   type: z.string().min(1),
@@ -31,18 +31,18 @@ type ErrorPayload = {
   title: string;
 };
 
-const isErrorPayload = (value: unknown): value is ErrorPayload => {
+function isErrorPayload(value: unknown): value is ErrorPayload {
   return errorPayloadSchema.safeParse(value).success;
-};
+}
 
-export const isSseErrorPayload = (payload: unknown): boolean => {
+export function isSseErrorPayload(payload: unknown): boolean {
   if (typeof payload !== 'string') {
     return false;
   }
 
   if (
-    payload.includes('A server error has occurred') ||
-    payload.includes('INTERNAL_SERVER_ERROR')
+    payload.includes('A server error has occurred')
+    || payload.includes('INTERNAL_SERVER_ERROR')
   ) {
     return true;
   }
@@ -58,4 +58,4 @@ export const isSseErrorPayload = (payload: unknown): boolean => {
   }
 
   return false;
-};
+}
