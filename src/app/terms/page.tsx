@@ -23,13 +23,11 @@ const TermsPage: NextPage = async () => {
   );
 
   return (
-    <>
-      <MarkdownContentsLayout>
-        <Header enableLoginLink={false} />
-        <MarkdownContents markdown={markdown} />
-        <Footer />
-      </MarkdownContentsLayout>
-    </>
+    <MarkdownContentsLayout>
+      <Header enableLoginLink={false} />
+      <MarkdownContents markdown={markdown} />
+      <Footer />
+    </MarkdownContentsLayout>
   );
 };
 

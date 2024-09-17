@@ -1,20 +1,6 @@
+import type { ChatErrorType } from '@/features/chat';
 import { ExhaustiveError } from '@/utils';
 import Image from 'next/image';
-
-const chatErrorTypeList = [
-  'TOO_MANY_REQUESTS',
-  'INTERNAL_SERVER_ERROR',
-] as const;
-
-export type ChatErrorType = (typeof chatErrorTypeList)[number];
-
-export function isChatErrorType(value: unknown): value is ChatErrorType {
-  if (typeof value !== 'string') {
-    return false;
-  }
-
-  return chatErrorTypeList.includes(value as ChatErrorType);
-}
 
 type Props = {
   type: ChatErrorType;

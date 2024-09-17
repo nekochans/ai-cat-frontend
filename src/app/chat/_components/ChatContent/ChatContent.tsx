@@ -1,6 +1,5 @@
 'use client';
 
-import type { ChatMessage, ChatMessages } from '@/features/chat';
 import { generateCatMessage } from '@/api/client/generateCatMessage';
 import { TooManyRequestsError } from '@/api/errors';
 import { InvalidResponseBodyError } from '@/errors';
@@ -8,6 +7,7 @@ import {
   type GenerateCatMessageResponse,
   isGenerateCatMessageResponse,
 } from '@/features';
+import { type ChatErrorType, type ChatMessage, type ChatMessages, isChatErrorType } from '@/features/chat';
 import { isSseErrorPayload, mightExtractJsonFromSsePayload } from '@/utils';
 import { Button, Textarea } from '@headlessui/react';
 import {
@@ -23,8 +23,6 @@ import {
 } from 'react';
 import {
   ChatErrorMessage,
-  type ChatErrorType,
-  isChatErrorType,
 } from './ChatErrorMessage';
 import { ChatMessagesList } from './ChatMessagesList';
 import { StreamingCatMessage } from './StreamingCatMessage';

@@ -10,13 +10,11 @@ const meta = {
   component: MarkdownContents,
   decorators: [
     Story => (
-      <>
-        <MarkdownContentsLayout>
-          <Header enableLoginLink={false} />
-          <Story />
-          <Footer />
-        </MarkdownContentsLayout>
-      </>
+      <MarkdownContentsLayout>
+        <Header enableLoginLink={false} />
+        <Story />
+        <Footer />
+      </MarkdownContentsLayout>
     ),
   ],
 } satisfies Meta<typeof MarkdownContents>;

@@ -4,6 +4,7 @@ import { googleTagManagerId } from './googleTagManagerId';
 
 export function GoogleTagManager(): JSX.Element {
   return (
+    // eslint-disable-next-line react-dom/no-dangerously-set-innerhtml
     <Script
       id="gtm"
       strategy="afterInteractive"
