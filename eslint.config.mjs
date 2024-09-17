@@ -7,13 +7,13 @@ export default antfu(
     formatters: {
       css: true,
       html: true,
-      markdown: 'prettier'
+      markdown: 'prettier',
     },
     stylistic: {
       semi: true,
       overrides: {
         'semi': ['error', 'always'],
-        'semi-spacing': ['error', {'after': true, 'before': false}],
+        'semi-spacing': ['error', { after: true, before: false }],
         'semi-style': ['error', 'last'],
         'no-extra-semi': 'error',
         'no-unexpected-multiline': 'error',
@@ -38,7 +38,6 @@ export default antfu(
       '**/vitest.config.mts',
       '**/vitest.setup.mts',
       'next.config.mjs',
-      'eslint.config.mjs',
     ],
   },
   ...tailwindcss.configs['flat/recommended'],
