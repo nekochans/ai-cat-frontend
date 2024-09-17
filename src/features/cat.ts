@@ -5,6 +5,7 @@ const catIds = ['moko'] as const;
 
 export type CatId = (typeof catIds)[number];
 
+// eslint-disable-next-line unused-imports/no-unused-vars
 const catNames = ['もこ'] as const;
 
 export type CatName = (typeof catNames)[number];

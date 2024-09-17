@@ -1,3 +1,4 @@
+// eslint-disable-next-line unused-imports/no-unused-vars
 const productionAppUrl = 'https://www.ai-meow-cat.com';
 
 const internalApiPathList = {

@@ -35,8 +35,8 @@ export const NotFoundWithChildren: Story = {
 export const DefaultInternalServerError = {
   args: {
     errorCode: 500,
-    // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
     resetFunc: () => {
+      // eslint-disable-next-line no-console
       console.log('reset error');
     },
   },
@@ -45,8 +45,8 @@ export const DefaultInternalServerError = {
 export const InternalServerErrorWithChildren = {
   args: {
     errorCode: 500,
-    // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
     resetFunc: () => {
+      // eslint-disable-next-line no-console
       console.log('reset error');
     },
     children: <TestComponent />,

@@ -1,4 +1,4 @@
-import type { Metadata, ResolvingMetadata } from 'next';
+import type { Metadata } from 'next';
 import type { JSX, ReactNode } from 'react';
 import { type CatId, extractCatNameById, isCatId } from '@/features';
 import { Noto_Sans_JP } from 'next/font/google';
@@ -15,9 +15,7 @@ type Props = {
   children: ReactNode;
 };
 
-export async function generateMetadata({ params }: Props,
-  // eslint-disable-next-line
-  parent: ResolvingMetadata): Promise<Metadata> {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!isCatId(params.catId)) {
     notFound();
   }

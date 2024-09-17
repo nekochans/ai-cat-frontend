@@ -37,19 +37,18 @@ export type Props = {
 
 export function ChatContent({
   userId,
-  initChatMessages = [],
+  initChatMessages,
 }: Props): JSX.Element {
   const [isLoading, setIsLoading] = useState(false);
 
   const [chatMessages, setChatMessages]
-    = useState<ChatMessages>(initChatMessages);
+    = useState<ChatMessages>(initChatMessages != null ? initChatMessages : []);
 
   const [streamingMessage, setStreamingMessage] = useState<string>('');
 
   const deferredStreamingMessage = useDeferredValue(streamingMessage);
 
   const [chatErrorType, setChatChatErrorType] = useState<
-    // eslint-disable-next-line @typescript-eslint/no-redundant-type-constituents
     ChatErrorType | string
   >('');
 
