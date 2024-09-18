@@ -1,22 +1,20 @@
+import type { Meta, StoryObj } from '@storybook/react';
 import {
   Footer,
   Header,
   MarkdownContents,
   MarkdownContentsLayout,
 } from '@/app/_components';
-import type { Meta, StoryObj } from '@storybook/react';
 
 const meta = {
   component: MarkdownContents,
   decorators: [
-    (Story) => (
-      <>
-        <MarkdownContentsLayout>
-          <Header enableLoginLink={false} />
-          <Story />
-          <Footer />
-        </MarkdownContentsLayout>
-      </>
+    Story => (
+      <MarkdownContentsLayout>
+        <Header enableLoginLink={false} />
+        <Story />
+        <Footer />
+      </MarkdownContentsLayout>
     ),
   ],
 } satisfies Meta<typeof MarkdownContents>;

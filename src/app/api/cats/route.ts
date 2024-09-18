@@ -1,6 +1,6 @@
 import { Ratelimit } from '@upstash/ratelimit';
 import { Redis } from '@upstash/redis';
-import { NextResponse, type NextRequest } from 'next/server';
+import { type NextRequest, NextResponse } from 'next/server';
 
 type RequestBody = {
   catId: string;
@@ -31,7 +31,7 @@ export async function POST(
   const { success } = await rateLimit.limit(request.ip ?? 'anonymous');
 
   const headers = {
-    Connection: 'keep-alive',
+    'Connection': 'keep-alive',
     'Cache-Control': 'no-cache',
     'Content-Type': 'text/event-stream; charset=utf-8',
   };
@@ -51,8 +51,8 @@ export async function POST(
 
   const requestBody = (await request.json()) as RequestBody;
 
-  const sendRequestBody =
-    requestBody.conversationId != null
+  const sendRequestBody
+    = requestBody.conversationId != null
       ? {
           userId: requestBody.userId,
           message: requestBody.message,
@@ -71,7 +71,7 @@ export async function POST(
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Basic ${String(
+        'Authorization': `Basic ${String(
           process.env.API_BASIC_AUTH_CREDENTIALS,
         )}`,
       },

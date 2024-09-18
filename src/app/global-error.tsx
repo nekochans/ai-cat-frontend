@@ -9,7 +9,7 @@ type Props = {
   reset: () => void;
 };
 
-const GlobalError = ({ error }: Props): JSX.Element => {
+function GlobalError({ error }: Props): JSX.Element {
   useEffect(() => {
     Sentry.captureException(error);
   }, [error]);
@@ -21,6 +21,6 @@ const GlobalError = ({ error }: Props): JSX.Element => {
       </body>
     </html>
   );
-};
+}
 
 export default GlobalError;

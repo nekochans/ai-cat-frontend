@@ -1,11 +1,11 @@
-import fs from 'fs';
+import type { Metadata, NextPage } from 'next';
+import fs from 'node:fs';
 import {
   Footer,
   Header,
   MarkdownContents,
   MarkdownContentsLayout,
 } from '@/app/_components';
-import type { Metadata, NextPage } from 'next';
 
 export const metadata: Metadata = {
   title: 'AI Meow Cat プライバシーポリシー',
@@ -23,13 +23,11 @@ const PrivacyPage: NextPage = async () => {
   );
 
   return (
-    <>
-      <MarkdownContentsLayout>
-        <Header enableLoginLink={false} />
-        <MarkdownContents markdown={markdown} />
-        <Footer />
-      </MarkdownContentsLayout>
-    </>
+    <MarkdownContentsLayout>
+      <Header enableLoginLink={false} />
+      <MarkdownContents markdown={markdown} />
+      <Footer />
+    </MarkdownContentsLayout>
   );
 };
 

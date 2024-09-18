@@ -1,7 +1,7 @@
-import Image from 'next/image';
 import type { JSX } from 'react';
+import Image from 'next/image';
 
-export const ChatHeader = (): JSX.Element => {
+export function ChatHeader(): JSX.Element {
   return (
     <div className="flex justify-between border-b-2 border-amber-200 bg-yellow-200 py-3 sm:items-center">
       <div className="relative flex items-center space-x-4">
@@ -27,4 +27,4 @@ export const ChatHeader = (): JSX.Element => {
       </div>
     </div>
   );
-};
+}

@@ -1,7 +1,7 @@
-import { extractCatNameById, type CatId } from '@/features';
+import type { CatName } from '../../cat';
+import { type CatId, extractCatNameById } from '@/features';
 import { ExhaustiveError } from '@/utils';
 import { describe, expect, it } from 'vitest';
-import type { CatName } from '../../cat';
 
 describe('src/features/cat.ts extractCatNameById TestCases', () => {
   type TestTable = {

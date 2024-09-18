@@ -1,26 +1,12 @@
+import type { ChatErrorType } from '@/features/chat';
 import { ExhaustiveError } from '@/utils';
 import Image from 'next/image';
-
-const chatErrorTypeList = [
-  'TOO_MANY_REQUESTS',
-  'INTERNAL_SERVER_ERROR',
-] as const;
-
-export type ChatErrorType = (typeof chatErrorTypeList)[number];
-
-export const isChatErrorType = (value: unknown): value is ChatErrorType => {
-  if (typeof value !== 'string') {
-    return false;
-  }
-
-  return chatErrorTypeList.includes(value as ChatErrorType);
-};
 
 type Props = {
   type: ChatErrorType;
 };
 
-const getErrorMessage = (type: ChatErrorType) => {
+function getErrorMessage(type: ChatErrorType) {
   switch (type) {
     case 'TOO_MANY_REQUESTS':
       return 'Too many requests from this IP. Please try again after some time😿';
@@ -29,9 +15,9 @@ const getErrorMessage = (type: ChatErrorType) => {
     default:
       throw new ExhaustiveError();
   }
-};
+}
 
-export const ChatErrorMessage = ({ type }: Props): JSX.Element => {
+export function ChatErrorMessage({ type }: Props): JSX.Element {
   return (
     <div id="streaming-cat-message" className="flex flex-col space-y-4 p-3">
       <div className="flex items-end">
@@ -52,4 +38,4 @@ export const ChatErrorMessage = ({ type }: Props): JSX.Element => {
       </div>
     </div>
   );
-};
+}

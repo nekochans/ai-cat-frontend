@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-export const BackToTopLink = (): JSX.Element => {
+export function BackToTopLink(): JSX.Element {
   return (
     <Link
       href="/"
@@ -10,4 +10,4 @@ export const BackToTopLink = (): JSX.Element => {
       <span aria-hidden="true">&larr;Back to Top</span>
     </Link>
   );
-};
+}

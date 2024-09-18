@@ -1,17 +1,18 @@
-import Image from 'next/image';
 import type { JSX } from 'react';
+import Image from 'next/image';
 
 type Props = {
   avatarUrl: string;
   name: string;
 };
-export const CatLoadingMessage = ({ avatarUrl, name }: Props): JSX.Element => {
+export function CatLoadingMessage({ avatarUrl, name }: Props): JSX.Element {
   return (
     <div className="flex items-end">
       <div className="order-2 mx-2 flex max-w-xs flex-col items-start space-y-2 text-xs">
         <div>
           <span className="inline-block animate-pulse rounded-lg rounded-bl-none bg-white px-4 py-2">
-            {name}が入力中・・・🐱
+            {name}
+            が入力中・・・🐱
           </span>
         </div>
       </div>
@@ -25,4 +26,4 @@ export const CatLoadingMessage = ({ avatarUrl, name }: Props): JSX.Element => {
       />
     </div>
   );
-};
+}

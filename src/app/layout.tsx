@@ -1,7 +1,7 @@
-import './globals.css';
+import type { JSX, ReactNode } from 'react';
 import { GoogleTagManager } from '@/app/_components';
 import { Noto_Sans_JP } from 'next/font/google';
-import type { JSX, ReactNode } from 'react';
+import './globals.css';
 
 const font = Noto_Sans_JP({
   weight: '400',
@@ -19,13 +19,13 @@ type Props = {
   children: ReactNode;
 };
 
-const RootLayout = ({ children }: Props): JSX.Element => {
+function RootLayout({ children }: Props): JSX.Element {
   return (
     <html lang="ja">
       <GoogleTagManager />
       <body className={font.className}>{children}</body>
     </html>
   );
-};
+}
 
 export default RootLayout;

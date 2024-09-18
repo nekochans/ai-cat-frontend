@@ -1,16 +1,16 @@
 export type {
   CatId,
+  GenerateCatMessage,
   GenerateCatMessageDto,
   GenerateCatMessageResponse,
-  GenerateCatMessage,
 } from './cat';
-
-export type { ChatMessage, ChatMessages } from './chat';
 
 export {
   extractCatNameById,
   isCatId,
   isGenerateCatMessageResponse,
 } from './cat';
+
+export type { ChatMessage, ChatMessages } from './chat';
 
 export { createInternalApiUrl } from './url';

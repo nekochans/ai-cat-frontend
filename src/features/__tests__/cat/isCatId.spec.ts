@@ -1,4 +1,4 @@
-import { isCatId, type CatId } from '@/features';
+import { type CatId, isCatId } from '@/features';
 import { describe, expect, it } from 'vitest';
 
 describe('src/features/cat.ts isCatId TestCases', () => {

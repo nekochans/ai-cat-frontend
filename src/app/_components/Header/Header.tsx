@@ -4,7 +4,7 @@ import { Dialog } from '@headlessui/react';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useState, type JSX } from 'react';
+import { type JSX, useState } from 'react';
 
 const navigation = [
   { name: 'terms', href: '/terms' },
@@ -16,7 +16,7 @@ type Props = {
   enableLoginLink: boolean;
 };
 
-export const Header = ({ enableLoginLink }: Props): JSX.Element => {
+export function Header({ enableLoginLink }: Props): JSX.Element {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
@@ -49,7 +49,7 @@ export const Header = ({ enableLoginLink }: Props): JSX.Element => {
           </button>
         </div>
         <div className="hidden lg:flex lg:gap-x-12">
-          {navigation.map((item) => (
+          {navigation.map(item => (
             <Link
               key={item.name}
               href={item.href}
@@ -61,17 +61,21 @@ export const Header = ({ enableLoginLink }: Props): JSX.Element => {
           ))}
         </div>
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-          {enableLoginLink ? (
-            <Link
-              href="/login"
-              prefetch={false}
-              className="text-sm font-semibold leading-6 text-gray-900"
-            >
-              Log in <span aria-hidden="true">&rarr;</span>
-            </Link>
-          ) : (
-            ''
-          )}
+          {enableLoginLink
+            ? (
+                <Link
+                  href="/login"
+                  prefetch={false}
+                  className="text-sm font-semibold leading-6 text-gray-900"
+                >
+                  Log in
+                  {' '}
+                  <span aria-hidden="true">&rarr;</span>
+                </Link>
+              )
+            : (
+                ''
+              )}
         </div>
       </nav>
       <Dialog
@@ -106,7 +110,7 @@ export const Header = ({ enableLoginLink }: Props): JSX.Element => {
           <div className="mt-6 flow-root">
             <div className="-my-6 divide-y divide-gray-500/10">
               <div className="space-y-2 py-6">
-                {navigation.map((item) => (
+                {navigation.map(item => (
                   <Link
                     key={item.name}
                     href={item.href}
@@ -117,23 +121,25 @@ export const Header = ({ enableLoginLink }: Props): JSX.Element => {
                   </Link>
                 ))}
               </div>
-              {enableLoginLink ? (
-                <div className="py-6">
-                  <Link
-                    href="/login"
-                    prefetch={false}
-                    className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-yellow-50"
-                  >
-                    Log in
-                  </Link>
-                </div>
-              ) : (
-                ''
-              )}
+              {enableLoginLink
+                ? (
+                    <div className="py-6">
+                      <Link
+                        href="/login"
+                        prefetch={false}
+                        className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-yellow-50"
+                      >
+                        Log in
+                      </Link>
+                    </div>
+                  )
+                : (
+                    ''
+                  )}
             </div>
           </div>
         </Dialog.Panel>
       </Dialog>
     </header>
   );
-};
+}

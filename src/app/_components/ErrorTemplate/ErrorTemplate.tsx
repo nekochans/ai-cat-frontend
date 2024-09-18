@@ -1,9 +1,9 @@
+import type { JSX, ReactNode } from 'react';
 import { Footer, Header } from '@/app/_components';
 import { BackToTopLink } from '@/app/_components/ErrorTemplate/BackToTopLink';
 import { ErrorResetButton } from '@/app/_components/ErrorTemplate/ErrorResetButton';
 import { ExhaustiveError } from '@/utils';
 import Image from 'next/image';
-import type { JSX, ReactNode } from 'react';
 
 type ErrorCode = 404 | 500;
 
@@ -13,7 +13,7 @@ type Props = {
   children?: ReactNode;
 };
 
-const showErrorImage = (errorCode: ErrorCode): JSX.Element => {
+function showErrorImage(errorCode: ErrorCode): JSX.Element {
   switch (errorCode) {
     case 404:
       return (
@@ -38,9 +38,9 @@ const showErrorImage = (errorCode: ErrorCode): JSX.Element => {
     default:
       throw new ExhaustiveError(errorCode);
   }
-};
+}
 
-const showErrorMessage = (errorCode: ErrorCode): string => {
+function showErrorMessage(errorCode: ErrorCode): string {
   switch (errorCode) {
     case 404:
       return 'Page not found';
@@ -49,9 +49,9 @@ const showErrorMessage = (errorCode: ErrorCode): string => {
     default:
       throw new ExhaustiveError(errorCode);
   }
-};
+}
 
-const showErrorDescription = (errorCode: ErrorCode) => {
+function showErrorDescription(errorCode: ErrorCode) {
   switch (errorCode) {
     case 404:
       return 'Sorry, we couldn’t find the page you’re looking for😿';
@@ -60,13 +60,13 @@ const showErrorDescription = (errorCode: ErrorCode) => {
     default:
       throw new ExhaustiveError(errorCode);
   }
-};
+}
 
-export const ErrorTemplate = ({
+export function ErrorTemplate({
   errorCode,
   resetFunc,
   children,
-}: Props): JSX.Element => {
+}: Props): JSX.Element {
   return (
     <div className="flex h-screen flex-col bg-yellow-100">
       <Header enableLoginLink={false} />
@@ -87,11 +87,13 @@ export const ErrorTemplate = ({
           <div className="flex justify-center">{children ?? ''}</div>
           <div className="mt-10 flex justify-center">
             {errorCode === 404 ? <BackToTopLink /> : ''}
-            {errorCode === 500 && resetFunc != null ? (
-              <ErrorResetButton resetFunc={resetFunc} />
-            ) : (
-              ''
-            )}
+            {errorCode === 500 && resetFunc != null
+              ? (
+                  <ErrorResetButton resetFunc={resetFunc} />
+                )
+              : (
+                  ''
+                )}
           </div>
         </div>
       </main>
@@ -100,4 +102,4 @@ export const ErrorTemplate = ({
       </div>
     </div>
   );
-};
+}

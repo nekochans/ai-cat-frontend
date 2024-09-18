@@ -1,8 +1,8 @@
+import type { JSX } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import type { JSX } from 'react';
 
-export const Footer = (): JSX.Element => {
+export function Footer(): JSX.Element {
   return (
     <footer className="m-4 rounded-lg bg-yellow-200 shadow dark:bg-gray-900">
       <div className="mx-auto w-full max-w-screen-xl p-4 md:py-8">
@@ -56,7 +56,8 @@ export const Footer = (): JSX.Element => {
         </div>
         <hr className="my-6 border-amber-200 sm:mx-auto lg:my-8 dark:border-gray-700" />
         <span className="block text-sm text-gray-900 sm:text-center dark:text-gray-800">
-          Copyright (c){' '}
+          Copyright (c)
+          {' '}
           <a href="https://github.com/nekochans" className="hover:underline">
             nekochans
           </a>
@@ -64,4 +65,4 @@ export const Footer = (): JSX.Element => {
       </div>
     </footer>
   );
-};
+}

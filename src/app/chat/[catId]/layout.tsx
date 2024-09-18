@@ -1,8 +1,8 @@
-import { extractCatNameById, isCatId, type CatId } from '@/features';
-import type { Metadata, ResolvingMetadata } from 'next';
+import type { Metadata } from 'next';
+import type { JSX, ReactNode } from 'react';
+import { type CatId, extractCatNameById, isCatId } from '@/features';
 import { Noto_Sans_JP } from 'next/font/google';
 import { notFound } from 'next/navigation';
-import type { JSX, ReactNode } from 'react';
 
 const font = Noto_Sans_JP({
   weight: '400',
@@ -15,11 +15,7 @@ type Props = {
   children: ReactNode;
 };
 
-export const generateMetadata = async (
-  { params }: Props,
-  // eslint-disable-next-line
-  parent: ResolvingMetadata,
-): Promise<Metadata> => {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!isCatId(params.catId)) {
     notFound();
   }
@@ -30,10 +26,10 @@ export const generateMetadata = async (
       params.catId,
     )}）とお話しよう🐱`,
   };
-};
+}
 
-const ChatLayout = ({ children }: Props): JSX.Element => {
+function ChatLayout({ children }: Props): JSX.Element {
   return <main className={font.className}>{children}</main>;
-};
+}
 
 export default ChatLayout;
