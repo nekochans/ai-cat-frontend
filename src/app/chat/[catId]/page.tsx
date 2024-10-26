@@ -4,13 +4,13 @@ import { type CatId, extractCatNameById } from '@/features';
 import { v4 } from 'uuid';
 
 type Props = {
-  params: { catId: CatId };
+  params: Promise<{ catId: CatId }>;
 };
 
 export async function generateMetadata({
   params,
 }: Props): Promise<Metadata> {
-  const catId = params.catId;
+  const catId = (await params).catId;
 
   return {
     title: `AI Meow Cat ${extractCatNameById(catId)}`,
