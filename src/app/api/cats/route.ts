@@ -1,5 +1,6 @@
 import { Ratelimit } from '@upstash/ratelimit';
 import { Redis } from '@upstash/redis';
+import { ipAddress } from '@vercel/functions';
 import { type NextRequest, NextResponse } from 'next/server';
 
 type RequestBody = {
@@ -28,7 +29,9 @@ export const maxDuration = 180;
 export async function POST(
   request: NextRequest,
 ): Promise<Response | NextResponse> {
-  const { success } = await rateLimit.limit(request.ip ?? 'anonymous');
+  const ip = ipAddress(request);
+
+  const { success } = await rateLimit.limit(ip ?? 'anonymous');
 
   const headers = {
     'Connection': 'keep-alive',
