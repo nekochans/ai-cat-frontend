@@ -11,19 +11,21 @@ const font = Noto_Sans_JP({
 });
 
 type Props = {
-  params: { catId: CatId };
+  params: Promise<{ catId: CatId }>;
   children: ReactNode;
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  if (!isCatId(params.catId)) {
+  const catId = (await params).catId;
+
+  if (!isCatId(catId)) {
     notFound();
   }
 
   return {
-    title: `AI Cat ${extractCatNameById(params.catId)}ちゃん🐱`,
+    title: `AI Cat ${extractCatNameById(catId)}ちゃん🐱`,
     description: `ねこのAI（${extractCatNameById(
-      params.catId,
+      catId,
     )}）とお話しよう🐱`,
   };
 }
