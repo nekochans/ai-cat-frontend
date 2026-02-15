@@ -1,16 +1,21 @@
 import type { Metadata, NextPage } from 'next';
 import { ChatContent, ChatContentLayout } from '@/app/chat/_components';
-import { type CatId, extractCatNameById } from '@/features';
+import { extractCatNameById, isCatId } from '@/features';
+import { notFound } from 'next/navigation';
 import { v4 } from 'uuid';
 
 type Props = {
-  params: Promise<{ catId: CatId }>;
+  params: Promise<{ catId: string }>;
 };
 
 export async function generateMetadata({
   params,
 }: Props): Promise<Metadata> {
-  const catId = (await params).catId;
+  const { catId } = await params;
+
+  if (!isCatId(catId)) {
+    notFound();
+  }
 
   return {
     title: `AI Meow Cat ${extractCatNameById(catId)}`,

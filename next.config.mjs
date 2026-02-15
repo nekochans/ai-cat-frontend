@@ -15,6 +15,7 @@ const config = {
       },
     ],
   },
+  turbopack: {},
 };
 
 const nextConfig = withSentryConfig(config, {

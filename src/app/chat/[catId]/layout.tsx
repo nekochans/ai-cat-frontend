@@ -11,7 +11,7 @@ const font = Noto_Sans_JP({
 });
 
 type Props = {
-  params: Promise<{ catId: CatId }>;
+  params: Promise<{ catId: string }>;
   children: ReactNode;
 };
 
