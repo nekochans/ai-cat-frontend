@@ -46,3 +46,13 @@ storybook-static
 
 # Sentry Config File
 .env.sentry-build-plugin
+
+# Claude Code settings
+.claude/settings.json
+.claude/settings.local.json
+
+# MCP config
+.mcp.json
+
+# AIエージェントに渡すpromptファイルの格納場所
+user-prompt/
